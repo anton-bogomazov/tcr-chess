@@ -42,6 +42,8 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(count_figs(board.bishops(), chess_game.Color.BLACK), 2)
         self.assertEqual(count_figs(board.rooks(), chess_game.Color.WHITE), 2)
         self.assertEqual(count_figs(board.rooks(), chess_game.Color.BLACK), 2)
+        self.assertEqual(count_figs(board.pawns(), chess_game.Color.WHITE), 8)
+        self.assertEqual(count_figs(board.pawns(), chess_game.Color.BLACK), 8)
 
 
 if __name__ == '__main__':

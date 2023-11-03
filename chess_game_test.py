@@ -39,26 +39,26 @@ class ChessGameTest(unittest.TestCase):
 
     def test_figures_initially_placed_at_standard_cells(self):
         board = chess_game.ChessGame().get_board()
-        def check_is_positioned_well(color):
-            self.assertEqual(board.cell('a', 1), chess_game.Rook(color))
-            self.assertEqual(board.cell('b', 1), chess_game.Knight(color))
-            self.assertEqual(board.cell('c', 1), chess_game.Bishop(color))
-            self.assertEqual(board.cell('d', 1), chess_game.Queen(color))
-            self.assertEqual(board.cell('e', 1), chess_game.King(color))
-            self.assertEqual(board.cell('f', 1), chess_game.Bishop(color))
-            self.assertEqual(board.cell('g', 1), chess_game.Knight(color))
-            self.assertEqual(board.cell('h', 1), chess_game.Rook(color))
+        def check_is_positioned_well(fig_row, pawn_row, color):
+            self.assertEqual(board.cell('a', fig_row), chess_game.Rook(color))
+            self.assertEqual(board.cell('b', fig_row), chess_game.Knight(color))
+            self.assertEqual(board.cell('c', fig_row), chess_game.Bishop(color))
+            self.assertEqual(board.cell('d', fig_row), chess_game.Queen(color))
+            self.assertEqual(board.cell('e', fig_row), chess_game.King(color))
+            self.assertEqual(board.cell('f', fig_row), chess_game.Bishop(color))
+            self.assertEqual(board.cell('g', fig_row), chess_game.Knight(color))
+            self.assertEqual(board.cell('h', fig_row), chess_game.Rook(color))
 
-            self.assertEqual(board.cell('a', 2), chess_game.Pawn(color))
-            self.assertEqual(board.cell('b', 2), chess_game.Pawn(color))
-            self.assertEqual(board.cell('c', 2), chess_game.Pawn(color))
-            self.assertEqual(board.cell('d', 2), chess_game.Pawn(color))
-            self.assertEqual(board.cell('e', 2), chess_game.Pawn(color))
-            self.assertEqual(board.cell('f', 2), chess_game.Pawn(color))
-            self.assertEqual(board.cell('g', 2), chess_game.Pawn(color))
-            self.assertEqual(board.cell('h', 2), chess_game.Pawn(color))
+            self.assertEqual(board.cell('a', pawn_row), chess_game.Pawn(color))
+            self.assertEqual(board.cell('b', pawn_row), chess_game.Pawn(color))
+            self.assertEqual(board.cell('c', pawn_row), chess_game.Pawn(color))
+            self.assertEqual(board.cell('d', pawn_row), chess_game.Pawn(color))
+            self.assertEqual(board.cell('e', pawn_row), chess_game.Pawn(color))
+            self.assertEqual(board.cell('f', pawn_row), chess_game.Pawn(color))
+            self.assertEqual(board.cell('g', pawn_row), chess_game.Pawn(color))
+            self.assertEqual(board.cell('h', pawn_row), chess_game.Pawn(color))
 
-        check_is_positioned_well(chess_game.Color.WHITE)
+        check_is_positioned_well(1, 2, chess_game.Color.WHITE)
 
 
 if __name__ == '__main__':

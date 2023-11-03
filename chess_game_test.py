@@ -37,6 +37,10 @@ class ChessGameTest(unittest.TestCase):
         whites_eq_blacks(board.rooks(), 2)
         whites_eq_blacks(board.pawns(), 8)
 
+    def test_figures_initially_placed_at_standard_cells(self):
+        board = chess_game.ChessGame().get_board()
+        board.cell('a', 1)
+
 
 if __name__ == '__main__':
     unittest.main()

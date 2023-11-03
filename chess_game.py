@@ -47,6 +47,12 @@ class ChessBoard:
                 Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK),
                 Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK)]
 
+    def cell(self, literal, numeral):
+        map = {
+            'a': 0
+        }
+        return self.board[map[literal]][numeral-1]
+
 
 class ChessFigure:
     def __init__(self, color):

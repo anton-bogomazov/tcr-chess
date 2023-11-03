@@ -1,4 +1,8 @@
 class ChessGame:
+
+    def __init__(self):
+        self.board = [[None] * 8] * 8
+
     def turn(self, fr=None, to=None, figure=None):
         if fr is None:
             raise TypeError('"from" should be a string')
@@ -9,4 +13,4 @@ class ChessGame:
         return True
 
     def get_board(self):
-        return [[None] * 8] * 8
+        return self.board

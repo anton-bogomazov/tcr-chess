@@ -40,6 +40,8 @@ class ChessGameTest(unittest.TestCase):
     def test_figures_initially_placed_at_standard_cells(self):
         board = chess_game.ChessGame().get_board()
         def check_is_positioned_well(fig_row, pawn_row, color):
+            for literal in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'):
+                self.assertEqual(board.cell(literal, pawn_row), chess_game.Pawn(color))
             self.assertEqual(board.cell('a', fig_row), chess_game.Rook(color))
             self.assertEqual(board.cell('b', fig_row), chess_game.Knight(color))
             self.assertEqual(board.cell('c', fig_row), chess_game.Bishop(color))
@@ -48,15 +50,6 @@ class ChessGameTest(unittest.TestCase):
             self.assertEqual(board.cell('f', fig_row), chess_game.Bishop(color))
             self.assertEqual(board.cell('g', fig_row), chess_game.Knight(color))
             self.assertEqual(board.cell('h', fig_row), chess_game.Rook(color))
-
-            self.assertEqual(board.cell('a', pawn_row), chess_game.Pawn(color))
-            self.assertEqual(board.cell('b', pawn_row), chess_game.Pawn(color))
-            self.assertEqual(board.cell('c', pawn_row), chess_game.Pawn(color))
-            self.assertEqual(board.cell('d', pawn_row), chess_game.Pawn(color))
-            self.assertEqual(board.cell('e', pawn_row), chess_game.Pawn(color))
-            self.assertEqual(board.cell('f', pawn_row), chess_game.Pawn(color))
-            self.assertEqual(board.cell('g', pawn_row), chess_game.Pawn(color))
-            self.assertEqual(board.cell('h', pawn_row), chess_game.Pawn(color))
 
         check_is_positioned_well(1, 2, chess_game.Color.WHITE)
 

@@ -86,11 +86,14 @@ class ChessBoard:
             'h': 7,
         }
 
+    def numeral_to_idx(self, numeral):
+        return numeral-1
+
     def cell(self, literal, numeral):
-        return self.board[numeral-1][self.literal_to_idx()[literal]]
+        return self.board[self.numeral_to_idx(numeral)][self.literal_to_idx()[literal]]
 
     def set_cell(self, literal, numeral, figure):
-        self.board[numeral-1][self.literal_to_idx()[literal]] = figure
+        self.board[self.numeral_to_idx(numeral)][self.literal_to_idx()[literal]] = figure
 
 
 @dataclass()

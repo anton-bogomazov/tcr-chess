@@ -20,6 +20,9 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(len(result), 8)
         self.assertEqual(len(result[0]), 8)
 
+    def test_initially_board_has_standard_fingure_set(self):
+        board = chess_game.ChessGame().get_board()
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,7 +1,7 @@
 class ChessGame:
 
     def __init__(self):
-        self.board = [[None] * 8] * 8
+        self.board = ChessBoard()
 
     def turn(self, fr=None, to=None, figure=None):
         if fr is None:
@@ -13,4 +13,9 @@ class ChessGame:
         return True
 
     def get_board(self):
-        return self.board
+        return self.board.board
+
+
+class ChessBoard:
+    def __init__(self):
+        self.board = [[None] * 8] * 8

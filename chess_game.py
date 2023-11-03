@@ -74,7 +74,7 @@ class ChessBoard:
                 Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK),
                 Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK)]
 
-    def literal_to_idx(self):
+    def literal_to_idx(self, literal):
         return {
             'a': 0,
             'b': 1,
@@ -84,16 +84,16 @@ class ChessBoard:
             'f': 5,
             'g': 6,
             'h': 7,
-        }
+        }[literal]
 
     def numeral_to_idx(self, numeral):
         return numeral-1
 
     def cell(self, literal, numeral):
-        return self.board[self.numeral_to_idx(numeral)][self.literal_to_idx()[literal]]
+        return self.board[self.numeral_to_idx(numeral)][self.literal_to_idx(literal)]
 
     def set_cell(self, literal, numeral, figure):
-        self.board[self.numeral_to_idx(numeral)][self.literal_to_idx()[literal]] = figure
+        self.board[self.numeral_to_idx(numeral)][self.literal_to_idx(literal)] = figure
 
 
 @dataclass()

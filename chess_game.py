@@ -23,10 +23,45 @@ class ChessBoard:
     def kings(self):
         return [King(), King()]
 
+    def queens(self):
+        return [Queen(), Queen()]
+
+    def rooks(self):
+        return [Rook(), Rook(), Rook(), Rook()]
+
+    def bishops(self):
+        return [Bishop(), Bishop(), Bishop(), Bishop()]
+
+    def knights(self):
+        return [Knight(), Knight(), Knight(), Knight()]
+
+    def pawns(self):
+        return [Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn()]
+
 
 class ChessFigure:
     ...
 
 
 class King(ChessFigure):
+    ...
+
+
+class Queen(ChessFigure):
+    ...
+
+
+class Rook(ChessFigure):
+    ...
+
+
+class Bishop(ChessFigure):
+    ...
+
+
+class Knight(ChessFigure):
+    ...
+
+
+class Pawn(ChessFigure):
     ...

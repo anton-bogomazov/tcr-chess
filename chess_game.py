@@ -23,7 +23,16 @@ class ChessGame:
 class ChessBoard:
     def __init__(self):
         self.board = [[None] * 8] * 8
-        self.board[7][0] = Rook(Color.WHITE)
+        self.populate_board()
+
+    def populate_board(self):
+        def populate_col(col_idx, cons):
+            self.board[0][col_idx] = cons(Color.BLACK)
+            self.board[1][col_idx] = Pawn(Color.BLACK)
+            self.board[6][col_idx] = Pawn(Color.WHITE)
+            self.board[7][col_idx] = cons(Color.WHITE)
+
+        populate_col(0, lambda color: Rook(color))
 
     def kings(self):
         return [King(Color.WHITE), King(Color.BLACK)]
@@ -50,10 +59,17 @@ class ChessBoard:
                 Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK)]
 
     def cell(self, literal, numeral):
-        map = {
-            'a': 0
+        literal_to_idx = {
+            'a': 0,
+            'b': 1,
+            'c': 2,
+            'd': 3,
+            'e': 4,
+            'f': 5,
+            'g': 6,
+            'h': 7,
         }
-        return self.board[map[literal]][numeral-1]
+        return self.board[literal_to_idx[literal]][numeral-1]
 
 
 @dataclass()

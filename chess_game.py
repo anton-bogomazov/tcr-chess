@@ -41,6 +41,15 @@ class ChessBoard:
         populate_col(6, lambda color: Knight(color))
         populate_col(7, lambda color: Rook(color))
 
+    def move(self, fr, to):
+        from_literal, from_numeral = fr
+        to_literal, to_numeral = to
+        if self.cell(from_literal, from_numeral) is None:
+            raise ValueError('fr references empty cell')
+        figure_to_move = self.cell(from_literal, from_numeral)
+        self.set_cell(to_literal, to_numeral, figure_to_move)
+        self.set_cell(from_literal, from_numeral, None)
+
     def kings(self):
         return [King(Color.WHITE), King(Color.BLACK)]
 
@@ -77,6 +86,19 @@ class ChessBoard:
             'h': 7,
         }
         return self.board[numeral-1][literal_to_idx[literal]]
+
+    def set_cell(self, literal, numeral, figure):
+        literal_to_idx = {
+            'a': 0,
+            'b': 1,
+            'c': 2,
+            'd': 3,
+            'e': 4,
+            'f': 5,
+            'g': 6,
+            'h': 7,
+        }
+        self.board[numeral-1][literal_to_idx[literal]] = figure
 
 
 @dataclass()

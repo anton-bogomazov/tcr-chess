@@ -54,6 +54,12 @@ class ChessGameTest(unittest.TestCase):
         check_if_positioned_well(1, 2, chess_game.Color.WHITE)
         check_if_positioned_well(8, 7, chess_game.Color.BLACK)
 
+    def test_figure_can_be_moved(self):
+        board = chess_game.ChessGame().get_board()
+        self.assertEqual(board.cell('b', 1), chess_game.Knight(chess_game.Color.WHITE))
+        board.move(('b', 1), ('c', 3))
+        self.assertEqual(board.cell('c', 3), chess_game.Knight(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('b', 1), None)
 
 if __name__ == '__main__':
     unittest.main()

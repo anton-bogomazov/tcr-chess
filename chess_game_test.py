@@ -33,6 +33,7 @@ class ChessGameTest(unittest.TestCase):
             return sum(f.color == color for f in figure_set)
 
         self.assertEqual(count_figs(board.kings(), chess_game.Color.WHITE), 1)
+        self.assertEqual(count_figs(board.kings(), chess_game.Color.BLACK), 1)
 
 
 if __name__ == '__main__':

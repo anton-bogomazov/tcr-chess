@@ -30,16 +30,22 @@ class ChessBoard:
         return [Queen(Color.WHITE), Queen(Color.BLACK)]
 
     def rooks(self):
-        return [Rook(Color.WHITE), Rook(Color.WHITE), Rook(Color.BLACK), Rook(Color.BLACK)]
+        return [Rook(Color.WHITE), Rook(Color.WHITE),
+                Rook(Color.BLACK), Rook(Color.BLACK)]
 
     def bishops(self):
-        return [Bishop(Color.WHITE), Bishop(Color.WHITE), Bishop(Color.BLACK), Bishop(Color.BLACK)]
+        return [Bishop(Color.WHITE), Bishop(Color.WHITE),
+                Bishop(Color.BLACK), Bishop(Color.BLACK)]
 
     def knights(self):
-        return [Knight(Color.WHITE), Knight(Color.WHITE), Knight(Color.BLACK), Knight(Color.BLACK)]
+        return [Knight(Color.WHITE), Knight(Color.WHITE),
+                Knight(Color.BLACK), Knight(Color.BLACK)]
 
     def pawns(self):
-        return [Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK)]
+        return [Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE),
+                Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE),
+                Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK),
+                Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK)]
 
 
 class ChessFigure:

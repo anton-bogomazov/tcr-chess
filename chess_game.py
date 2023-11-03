@@ -7,3 +7,6 @@ class ChessGame:
         if figure is None:
             raise TypeError('"figure" should be a string')
         return True
+
+    def get_board(self):
+        return [[None] * 8] * 8

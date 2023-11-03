@@ -15,6 +15,10 @@ class ChessGameTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             chess_game.ChessGame().turn()
 
+    def test_game_has_chess_board(self):
+        result = chess_game.ChessGame().get_board()
+        self.assertEqual(len(result), 8)
+
 
 if __name__ == '__main__':
     unittest.main()

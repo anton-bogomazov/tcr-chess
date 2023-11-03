@@ -49,6 +49,14 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(board.cell('g', 1), chess_game.Knight(chess_game.Color.WHITE))
         self.assertEqual(board.cell('h', 1), chess_game.Rook(chess_game.Color.WHITE))
 
+        self.assertEqual(board.cell('a', 2), chess_game.Pawn(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('b', 2), chess_game.Pawn(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('c', 2), chess_game.Pawn(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('d', 2), chess_game.Pawn(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('e', 2), chess_game.Pawn(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('f', 2), chess_game.Pawn(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('g', 2), chess_game.Pawn(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('h', 2), chess_game.Pawn(chess_game.Color.WHITE))
 
 if __name__ == '__main__':
     unittest.main()

@@ -52,6 +52,7 @@ class ChessGameTest(unittest.TestCase):
             self.assertEqual(board.cell('h', fig_row), chess_game.Rook(color))
 
         check_is_positioned_well(1, 2, chess_game.Color.WHITE)
+        check_is_positioned_well(8, 7, chess_game.Color.BLACK)
 
 
 if __name__ == '__main__':

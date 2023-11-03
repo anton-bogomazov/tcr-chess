@@ -30,6 +30,7 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(len(board.pawns()), 16)
 
         self.assertEqual(board.kings()[0].color, chess_game.Color.WHITE)
+        self.assertEqual(sum(f.color == chess_game.Color.WHITE for f in board.kings()), 1)
 
 
 if __name__ == '__main__':

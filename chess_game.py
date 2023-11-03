@@ -22,6 +22,7 @@ class ChessGame:
 class ChessBoard:
     def __init__(self):
         self.board = [[None] * 8] * 8
+        self.board[7][0] = Rook(Color.WHITE)
 
     def kings(self):
         return [King(Color.WHITE), King(Color.BLACK)]

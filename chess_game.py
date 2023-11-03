@@ -22,7 +22,7 @@ class ChessGame:
 
 class ChessBoard:
     def __init__(self):
-        self.board = [[None] * 8] * 8
+        self.board = [[None for i in range(8)] for j in range(8)]
         self.populate_board()
 
     def populate_board(self):

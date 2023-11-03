@@ -29,8 +29,10 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(len(board.knights()), 4)
         self.assertEqual(len(board.pawns()), 16)
 
-        n_whites = lambda f_set: sum(f.color == chess_game.Color.WHITE for f in f_set)
-        self.assertEqual(n_whites(board.kings()), 1)
+        def count_figs(figure_set, color):
+            return sum(f.color == color for f in figure_set)
+
+        self.assertEqual(count_figs(board.kings(), chess_game.Color.WHITE), 1)
 
 
 if __name__ == '__main__':

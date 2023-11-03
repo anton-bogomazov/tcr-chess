@@ -19,3 +19,14 @@ class ChessGame:
 class ChessBoard:
     def __init__(self):
         self.board = [[None] * 8] * 8
+
+    def kings(self):
+        return [King(), King()]
+
+
+class ChessFigure:
+    ...
+
+
+class King(ChessFigure):
+    ...

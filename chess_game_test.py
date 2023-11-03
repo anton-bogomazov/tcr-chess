@@ -20,8 +20,9 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(len(result.board), 8)
         self.assertEqual(len(result.board[0]), 8)
 
-    def test_initially_board_has_standard_fingure_set(self):
+    def test_initially_board_has_standard_figure_set(self):
         board = chess_game.ChessGame().get_board()
+        self.assertEqual(len(board.kings()), 2)
 
 
 if __name__ == '__main__':

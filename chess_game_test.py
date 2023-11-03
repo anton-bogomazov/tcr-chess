@@ -39,7 +39,8 @@ class ChessGameTest(unittest.TestCase):
 
     def test_figures_initially_placed_at_standard_cells(self):
         board = chess_game.ChessGame().get_board()
-        board.cell('a', 1)
+
+        self.assertEqual(board.cell('a', 1), None)
 
 
 if __name__ == '__main__':

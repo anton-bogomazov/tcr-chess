@@ -10,6 +10,10 @@ class ChessGameTest(unittest.TestCase):
     def test_fail_to_make_turn_if_every_arg_is_not_provided(self):
         with self.assertRaises(TypeError):
             chess_game.ChessGame().turn('f3', 'knight')
+        with self.assertRaises(TypeError):
+            chess_game.ChessGame().turn('f3')
+        with self.assertRaises(TypeError):
+            chess_game.ChessGame().turn()
 
 
 if __name__ == '__main__':

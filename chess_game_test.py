@@ -24,7 +24,11 @@ class ChessGameTest(unittest.TestCase):
         board = chess_game.ChessGame().get_board()
         def count_figs(figure_set, color):
             return sum(f.color == color for f in figure_set)
+        def whites_eq_blacks(figure_set, n):
+            self.assertEqual(count_figs(figure_set, chess_game.Color.WHITE), n)
+            self.assertEqual(count_figs(figure_set, chess_game.Color.BLACK), n)
 
+        whites_eq_blacks(board.kings(), 1)
         self.assertEqual(count_figs(board.kings(), chess_game.Color.WHITE), 1)
         self.assertEqual(count_figs(board.kings(), chess_game.Color.BLACK), 1)
         self.assertEqual(count_figs(board.queens(), chess_game.Color.WHITE), 1)

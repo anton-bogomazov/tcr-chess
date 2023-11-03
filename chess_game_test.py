@@ -18,6 +18,7 @@ class ChessGameTest(unittest.TestCase):
     def test_game_has_chess_board(self):
         result = chess_game.ChessGame().get_board()
         self.assertEqual(len(result), 8)
+        self.assertEqual(len(result[0]), 8)
 
 
 if __name__ == '__main__':

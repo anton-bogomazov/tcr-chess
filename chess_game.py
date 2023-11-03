@@ -76,7 +76,7 @@ class ChessBoard:
             'g': 6,
             'h': 7,
         }
-        return self.board[literal_to_idx[literal]][numeral-1]
+        return self.board[numeral-1][literal_to_idx[literal]]
 
 
 @dataclass()

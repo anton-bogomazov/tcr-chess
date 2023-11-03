@@ -41,6 +41,7 @@ class ChessGameTest(unittest.TestCase):
         board = chess_game.ChessGame().get_board()
 
         self.assertEqual(board.cell('a', 1), chess_game.Rook(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('b', 1), chess_game.Knight(chess_game.Color.WHITE))
 
 
 if __name__ == '__main__':

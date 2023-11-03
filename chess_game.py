@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 class ChessGame:
 
     def __init__(self):
@@ -21,26 +24,27 @@ class ChessBoard:
         self.board = [[None] * 8] * 8
 
     def kings(self):
-        return [King(), King()]
+        return [King(Color.WHITE), King(Color.BLACK)]
 
     def queens(self):
-        return [Queen(), Queen()]
+        return [Queen(Color.WHITE), Queen(Color.BLACK)]
 
     def rooks(self):
-        return [Rook(), Rook(), Rook(), Rook()]
+        return [Rook(Color.WHITE), Rook(Color.WHITE), Rook(Color.BLACK), Rook(Color.BLACK)]
 
     def bishops(self):
-        return [Bishop(), Bishop(), Bishop(), Bishop()]
+        return [Bishop(Color.WHITE), Bishop(Color.WHITE), Bishop(Color.BLACK), Bishop(Color.BLACK)]
 
     def knights(self):
-        return [Knight(), Knight(), Knight(), Knight()]
+        return [Knight(Color.WHITE), Knight(Color.WHITE), Knight(Color.BLACK), Knight(Color.BLACK)]
 
     def pawns(self):
-        return [Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn(), Pawn()]
+        return [Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK)]
 
 
 class ChessFigure:
-    ...
+    def __init__(self, color):
+        self.color = color
 
 
 class King(ChessFigure):
@@ -65,3 +69,8 @@ class Knight(ChessFigure):
 
 class Pawn(ChessFigure):
     ...
+
+
+class Color(Enum):
+    WHITE = 1,
+    BLACK = 2

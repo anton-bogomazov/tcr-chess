@@ -29,6 +29,8 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(len(board.knights()), 4)
         self.assertEqual(len(board.pawns()), 16)
 
+        self.assertEqual(board.kings()[0].color, chess_game.Color.WHITE)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,4 +1,4 @@
 class ChessGame:
-    def turn(selft, fr, to, figure):
+    def turn(self, fr, to, figure):
         return True
 

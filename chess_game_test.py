@@ -29,18 +29,11 @@ class ChessGameTest(unittest.TestCase):
             self.assertEqual(count_figs(figure_set, chess_game.Color.BLACK), n)
 
         whites_eq_blacks(board.kings(), 1)
-        self.assertEqual(count_figs(board.kings(), chess_game.Color.WHITE), 1)
-        self.assertEqual(count_figs(board.kings(), chess_game.Color.BLACK), 1)
-        self.assertEqual(count_figs(board.queens(), chess_game.Color.WHITE), 1)
-        self.assertEqual(count_figs(board.queens(), chess_game.Color.BLACK), 1)
-        self.assertEqual(count_figs(board.knights(), chess_game.Color.WHITE), 2)
-        self.assertEqual(count_figs(board.knights(), chess_game.Color.BLACK), 2)
-        self.assertEqual(count_figs(board.bishops(), chess_game.Color.WHITE), 2)
-        self.assertEqual(count_figs(board.bishops(), chess_game.Color.BLACK), 2)
-        self.assertEqual(count_figs(board.rooks(), chess_game.Color.WHITE), 2)
-        self.assertEqual(count_figs(board.rooks(), chess_game.Color.BLACK), 2)
-        self.assertEqual(count_figs(board.pawns(), chess_game.Color.WHITE), 8)
-        self.assertEqual(count_figs(board.pawns(), chess_game.Color.BLACK), 8)
+        whites_eq_blacks(board.queens(), 1)
+        whites_eq_blacks(board.knights(), 2)
+        whites_eq_blacks(board.bishops(), 2)
+        whites_eq_blacks(board.rooks(), 2)
+        whites_eq_blacks(board.pawns(), 8)
 
 
 if __name__ == '__main__':

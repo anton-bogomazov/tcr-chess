@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 
 
@@ -55,6 +56,7 @@ class ChessBoard:
         return self.board[map[literal]][numeral-1]
 
 
+@dataclass()
 class ChessFigure:
     def __init__(self, color):
         self.color = color

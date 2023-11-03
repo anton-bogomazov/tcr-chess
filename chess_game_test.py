@@ -39,7 +39,7 @@ class ChessGameTest(unittest.TestCase):
 
     def test_figures_initially_placed_at_standard_cells(self):
         board = chess_game.ChessGame().get_board()
-        def check_is_positioned_well(fig_row, pawn_row, color):
+        def check_if_positioned_well(fig_row, pawn_row, color):
             for literal in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'):
                 self.assertEqual(board.cell(literal, pawn_row), chess_game.Pawn(color))
             self.assertEqual(board.cell('a', fig_row), chess_game.Rook(color))
@@ -51,8 +51,8 @@ class ChessGameTest(unittest.TestCase):
             self.assertEqual(board.cell('g', fig_row), chess_game.Knight(color))
             self.assertEqual(board.cell('h', fig_row), chess_game.Rook(color))
 
-        check_is_positioned_well(1, 2, chess_game.Color.WHITE)
-        check_is_positioned_well(8, 7, chess_game.Color.BLACK)
+        check_if_positioned_well(1, 2, chess_game.Color.WHITE)
+        check_if_positioned_well(8, 7, chess_game.Color.BLACK)
 
 
 if __name__ == '__main__':

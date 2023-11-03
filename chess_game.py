@@ -13,7 +13,7 @@ class ChessGame:
         return True
 
     def get_board(self):
-        return self.board.board
+        return self.board
 
 
 class ChessBoard:

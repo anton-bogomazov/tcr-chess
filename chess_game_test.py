@@ -17,8 +17,8 @@ class ChessGameTest(unittest.TestCase):
 
     def test_game_has_chess_board(self):
         result = chess_game.ChessGame().get_board()
-        self.assertEqual(len(result), 8)
-        self.assertEqual(len(result[0]), 8)
+        self.assertEqual(len(result.board), 8)
+        self.assertEqual(len(result.board[0]), 8)
 
     def test_initially_board_has_standard_fingure_set(self):
         board = chess_game.ChessGame().get_board()

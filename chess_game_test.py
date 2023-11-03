@@ -42,6 +42,12 @@ class ChessGameTest(unittest.TestCase):
 
         self.assertEqual(board.cell('a', 1), chess_game.Rook(chess_game.Color.WHITE))
         self.assertEqual(board.cell('b', 1), chess_game.Knight(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('c', 1), chess_game.Bishop(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('d', 1), chess_game.Queen(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('e', 1), chess_game.King(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('f', 1), chess_game.Bishop(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('g', 1), chess_game.Knight(chess_game.Color.WHITE))
+        self.assertEqual(board.cell('h', 1), chess_game.Rook(chess_game.Color.WHITE))
 
 
 if __name__ == '__main__':

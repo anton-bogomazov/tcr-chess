@@ -1,6 +1,7 @@
 import unittest
 import chess_game
 from chess_board import ChessBoard
+from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
 
 
 class ChessGameTest(unittest.TestCase):
@@ -30,12 +31,12 @@ class ChessGameTest(unittest.TestCase):
             self.assertEqual(count_figs(figure_set, chess_game.Color.WHITE), n)
             self.assertEqual(count_figs(figure_set, chess_game.Color.BLACK), n)
 
-        whites_eq_blacks(board.kings(), 1)
-        whites_eq_blacks(board.queens(), 1)
-        whites_eq_blacks(board.knights(), 2)
-        whites_eq_blacks(board.bishops(), 2)
-        whites_eq_blacks(board.rooks(), 2)
-        whites_eq_blacks(board.pawns(), 8)
+        whites_eq_blacks(board.search_board(King), 1)
+        whites_eq_blacks(board.search_board(Queen), 1)
+        whites_eq_blacks(board.search_board(Knight), 2)
+        whites_eq_blacks(board.search_board(Bishop), 2)
+        whites_eq_blacks(board.search_board(Rook), 2)
+        whites_eq_blacks(board.search_board(Pawn), 8)
 
     def test_figures_initially_placed_at_standard_cells(self):
         board = chess_game.ChessGame().get_board()

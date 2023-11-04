@@ -17,10 +17,10 @@ class ChessGame:
         if figure is None:
             raise TypeError('"figure" should be a string')
         
-        self.pass_turn()
+        self.players_move = self.next_player()
         return True
 
-    def pass_turn(self):
+    def next_player(self):
         return Color.BLACK if self.players_move == Color.WHITE else Color.WHITE
 
     def get_board(self):

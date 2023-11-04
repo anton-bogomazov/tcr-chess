@@ -79,6 +79,15 @@ class ChessGameTest(unittest.TestCase):
             chess_game.ChessGame().players_move,
             Color.WHITE
         )
+        
+    def test_pass_turn(self):
+        game = chess_game.ChessGame()
+        game.turn('f3', 'e5', 'knight')
+        self.assertEquals(
+            game.players_move,
+            Color.BLACK
+        )
+
 
 
 if __name__ == '__main__':

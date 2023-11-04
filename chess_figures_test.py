@@ -48,17 +48,17 @@ class ChessFiguresTest(unittest.TestCase):
         })
 
     def test_rook_possible_turns(self):
-        rook = white_rook()
-        self.assertEqual(len(rook.turns()), 14)
-        self.assertEqual(rook.turns(), {
-            ('a', 3), ('c', 1),
-            ('b', 3), ('c', 2),
-            ('d', 3), ('c', 4),
-            ('e', 3), ('c', 5),
-            ('f', 3), ('c', 6),
-            ('g', 3), ('c', 7),
-            ('h', 3), ('c', 8),
-        })
+        self.assertEqual(
+            white_rook().turns(), {
+                ('a', 3), ('c', 1),
+                ('b', 3), ('c', 2),
+                ('d', 3), ('c', 4),
+                ('e', 3), ('c', 5),
+                ('f', 3), ('c', 6),
+                ('g', 3), ('c', 7),
+                ('h', 3), ('c', 8),
+            }
+        )
 
     def test_queen_possible_turns_is_a_combination_of_rook_and_bishop_turns(self):
         rook = white_queen()

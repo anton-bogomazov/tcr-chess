@@ -1,5 +1,6 @@
 from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop, ChessFigure
 
+# Allow to do castling
 
 class ChessBoard:
     def __init__(self, figure_set):
@@ -13,7 +14,7 @@ class ChessBoard:
         dest_cell_cont = self.cell(*to)
         if dest_cell_cont is None:
             figure_to_move.move(to)
-        #castling
+        #castling here
         elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
                 self.figures.remove(dest_cell_cont)

@@ -2,6 +2,9 @@ from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
 from chess_board import ChessBoard
 from Color import Color
 
+# Allow to move piece of players_move color
+# Check condition
+# Checkmate condition
 
 class ChessGame:
 

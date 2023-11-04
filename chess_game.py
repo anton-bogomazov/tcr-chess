@@ -134,43 +134,19 @@ class Color(Enum):
 
 
 def chess_figure_set():
-    whites = (
-        Rook(('a', 1), Color.WHITE),
-        Knight(('b', 1), Color.WHITE),
-        Bishop(('c', 1), Color.WHITE),
-        Queen(('d', 1), Color.WHITE),
-        King(('e', 1), Color.WHITE),
-        Bishop(('f', 1), Color.WHITE),
-        Knight(('g', 1), Color.WHITE),
-        Rook(('h', 1), Color.WHITE),
+    literals = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
 
-        Pawn(('a', 2), Color.WHITE),
-        Pawn(('b', 2), Color.WHITE),
-        Pawn(('c', 2), Color.WHITE),
-        Pawn(('d', 2), Color.WHITE),
-        Pawn(('e', 2), Color.WHITE),
-        Pawn(('f', 2), Color.WHITE),
-        Pawn(('g', 2), Color.WHITE),
-        Pawn(('h', 2), Color.WHITE),
-    )
-    blacks = (
-        Rook(('a', 8), Color.BLACK),
-        Knight(('b', 8), Color.BLACK),
-        Bishop(('c', 8), Color.BLACK),
-        Queen(('d', 8), Color.BLACK),
-        King(('e', 8), Color.BLACK),
-        Bishop(('f', 8), Color.BLACK),
-        Knight(('g', 8), Color.BLACK),
-        Rook(('h', 8), Color.BLACK),
+    def player_set(figures_row, pawns_row, color):
+        rooks = [Rook((lit, figures_row), color) for lit in ('a', 'h')]
+        knights = [Knight((lit, figures_row), color) for lit in ('b', 'g')]
+        bishops = [Bishop((lit, figures_row), color) for lit in ('c', 'f')]
+        figures = [
+            Queen(('d', figures_row), color),
+            King(('e', figures_row), color)
+        ] + rooks + knights + bishops
+        pawns = [Pawn((lit, pawns_row), color) for lit in literals]
 
-        Pawn(('a', 7), Color.BLACK),
-        Pawn(('b', 7), Color.BLACK),
-        Pawn(('c', 7), Color.BLACK),
-        Pawn(('d', 7), Color.BLACK),
-        Pawn(('e', 7), Color.BLACK),
-        Pawn(('f', 7), Color.BLACK),
-        Pawn(('g', 7), Color.BLACK),
-        Pawn(('h', 7), Color.BLACK),
-    )
+        return figures + pawns
     
-    return blacks + whites
+    return player_set(1, 2, Color.WHITE) + \
+        player_set(8, 7, Color.BLACK)

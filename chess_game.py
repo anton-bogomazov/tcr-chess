@@ -123,7 +123,8 @@ class Knight(ChessFigure):
 
 
 class Pawn(ChessFigure):
-    ...
+    def turns(self):
+        return [1, 2]
 
 
 class Color(Enum):

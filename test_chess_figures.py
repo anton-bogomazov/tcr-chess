@@ -5,9 +5,14 @@ from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
 
 class ChessFiguresTest(unittest.TestCase):
     
-    def test_pawn_possible_turns(self):
+    def test_white_pawn_possible_turns(self):
         self.assertEqual(
             white_pawn().turns(), {('a', 3), ('a', 4)}
+        )
+
+    def test_black_pawn_possible_turns(self):
+        self.assertEqual(
+            Pawn(('a', 7), Color.BLACK).turns(), {('a', 6), ('a', 5)}
         )
 
     def test_two_different_pawns_are_not_eq(self):

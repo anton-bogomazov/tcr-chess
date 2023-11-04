@@ -96,7 +96,14 @@ class Knight(ChessFigure):
 class Pawn(ChessFigure):
     def turns(self):
         literal, numeral = self.position
-        short_turn = (literal, numeral + 1)
-        long_turn = (literal, numeral + 2)
+        short_diff = 1
+        long_diff = 2
+
+        if self.color == Color.BLACK:
+            short_diff = -1
+            long_diff = -2
+        
+        short_turn = (literal, numeral + short_diff)
+        long_turn = (literal, numeral + long_diff)
         return {short_turn} if self.touched else {short_turn, long_turn}
      

@@ -83,6 +83,10 @@ class ChessGameTest(unittest.TestCase):
         pawn = chess_game.Knight(('a', 3), chess_game.Color.WHITE)
         self.assertEqual(len(pawn.turns()), 4)
 
+    def test_knight_possible_turns_least_possible_turns_in_the_corner(self):
+        pawn = chess_game.Knight(('a', 8), chess_game.Color.WHITE)
+        self.assertEqual(len(pawn.turns()), 2)
+
 
 if __name__ == '__main__':
     unittest.main()

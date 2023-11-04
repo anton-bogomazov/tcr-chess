@@ -65,6 +65,11 @@ class ChessGameTest(unittest.TestCase):
         pawn = chess_game.Pawn(('a', 2), chess_game.Color.WHITE)
         self.assertEqual(len(pawn.turns()), 2)
 
+    def test_pawn_possible_turns_only_short_turn_after_touch(self):
+        pawn = chess_game.Pawn(('a', 2), chess_game.Color.WHITE)
+        pawn.move(('a', 3))
+        self.assertEqual(len(pawn.turns()), 1)
+
     def test_pawn_move(self):
         pawn = chess_game.Pawn(('a', 2), chess_game.Color.WHITE)
         pawn.move(('a', 3))

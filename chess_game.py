@@ -144,7 +144,7 @@ class Pawn(ChessFigure):
         literal, numeral = self.position
         short_turn = (literal, numeral + 1)
         long_turn = (literal, numeral + 2)
-        return short_turn if self.touched else short_turn, long_turn
+        return {short_turn} if self.touched else {short_turn, long_turn}
         
 
 class Color(Enum):

@@ -129,12 +129,12 @@ class Pawn(ChessFigure):
         self.touched = False
         
     def turns(self):
-        if (self.touched == False):
+        if self.touched == False:
             return (self.position[0], self.position[1] + 1), (self.position[0], self.position[1] + 2)
         else:
             return (self.position[0], self.position[1] + 1)
-
-
+        
+        
 class Color(Enum):
     WHITE = 1,
     BLACK = 2

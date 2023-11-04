@@ -61,7 +61,7 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(board.cell('c', 3), chess_game.Knight(chess_game.Color.WHITE))
         self.assertEqual(board.cell('b', 1), None)
 
-    def pawn_kings_possible_turns(self):
+    def test_pawn_possible_turns(self):
         pawn = chess_game.Pawn(chess_game.Color.WHITE)
         self.assertEqual(len(pawn.turns()), 2)
 

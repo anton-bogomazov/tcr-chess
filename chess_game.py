@@ -126,9 +126,13 @@ class Pawn(ChessFigure):
     def __init__(self, color):
         super(Pawn, self).__init__(color)
         self.position = ('a', 2)
+        self.touched = False
         
     def turns(self):
-        return self.position
+        if (self.touched == False):
+            return (self.position[0], self.position[1] + 1), (self.position[0], self.position[1] + 2)
+        else:
+            return (self.position[0], self.position[1] + 1)
 
 
 class Color(Enum):

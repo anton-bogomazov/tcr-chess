@@ -121,7 +121,7 @@ class Knight(ChessFigure):
             (chr(ord(literal) + 1), numeral - 2),
             (chr(ord(literal) + 1), numeral + 2),
         ]
-        return list(filter(lambda t: not self.is_out_of_board(*t), turns))
+        return set(filter(lambda t: not self.is_out_of_board(*t), turns))
 
     def move(self, to):
         if to in self.turns():

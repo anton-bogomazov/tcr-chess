@@ -78,6 +78,10 @@ class ChessGameTest(unittest.TestCase):
     def test_knight_possible_turns(self):
         pawn = chess_game.Knight(('c', 3), chess_game.Color.WHITE)
         self.assertEqual(len(pawn.turns()), 8)
+        self.assertEqual(pawn.turns(), {
+            ('b', 1), ('d', 1), ('b', 5), ('d', 5),
+            ('a', 2), ('a', 4), ('e', 2), ('e', 4),
+        })
 
     def test_knight_possible_turns_less_moves_on_the_boards_edge(self):
         pawn = chess_game.Knight(('a', 3), chess_game.Color.WHITE)

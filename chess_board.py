@@ -12,24 +12,6 @@ class ChessBoard:
         figure_to_move = self.cell(from_literal, from_numeral)
         figure_to_move.move(to)
 
-    def kings(self):
-        return self.search_board(King)
-
-    def queens(self):
-        return self.search_board(Queen)
-
-    def rooks(self):
-        return self.search_board(Rook)
-
-    def bishops(self):
-        return self.search_board(Bishop)
-
-    def knights(self):
-        return self.search_board(Knight)
-
-    def pawns(self):
-        return self.search_board(Pawn)
-
     def search_board(self, figure_type):
         return [fig for fig in self.figures if isinstance(fig, figure_type)]
 

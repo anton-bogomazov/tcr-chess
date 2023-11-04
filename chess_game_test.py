@@ -100,5 +100,9 @@ class ChessGameTest(unittest.TestCase):
         bishop = chess_game.Bishop(('c', 3), chess_game.Color.WHITE)
         self.assertEqual(len(bishop.turns()), 11)
 
+    def test_rook_possible_turns(self):
+        rook = chess_game.Rook(('c', 3), chess_game.Color.WHITE)
+        self.assertEqual(len(rook.turns()), 14)
+
 if __name__ == '__main__':
     unittest.main()

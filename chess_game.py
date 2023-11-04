@@ -114,7 +114,13 @@ class Queen(ChessFigure):
 
 class Rook(ChessFigure):
     def turns(self):
-        raise NotImplementedError
+        literal, numeral = self.position
+        turns = [(chr(ord(literal) - i), numeral) for i in range(1, 8)] +\
+                [(chr(ord(literal) + i), numeral) for i in range(1, 8)] +\
+                [(chr(ord(literal)), numeral + i) for i in range(1, 8)] +\
+                [(chr(ord(literal)), numeral - i) for i in range(1, 8)]
+
+        return set(filter(lambda t: not self.is_out_of_board(*t), turns)) - {self.position}
 
 
 class Bishop(ChessFigure):

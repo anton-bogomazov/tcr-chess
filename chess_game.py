@@ -123,8 +123,12 @@ class Knight(ChessFigure):
 
 
 class Pawn(ChessFigure):
+    def __init__(self, color):
+        super(Pawn, self).__init__(color)
+        self.position = ('a', 2)
+        
     def turns(self):
-        return [1, 2]
+        return self.position
 
 
 class Color(Enum):

@@ -1,1 +1,1 @@
-python3.11 -m unittest chess_game_test.py && git commit -am "TCR" || git restore .
+python3.11 -m unittest discover && git commit -am "TCR" || git restore .

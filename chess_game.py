@@ -23,23 +23,11 @@ class ChessGame:
 class ChessBoard:
     def __init__(self):
         self.board = [[None for i in range(8)] for j in range(8)]
-        self.populate_board()
+        self.populate_board(chess_figure_set())
 
-    def populate_board(self):
-        def populate_col(col_idx, fig_cons):
-            self.board[0][col_idx] = fig_cons(Color.BLACK)
-            self.board[1][col_idx] = Pawn(Color.BLACK)
-            self.board[6][col_idx] = Pawn(Color.WHITE)
-            self.board[7][col_idx] = fig_cons(Color.WHITE)
-
-        populate_col(0, lambda color: Rook(color))
-        populate_col(1, lambda color: Knight(color))
-        populate_col(2, lambda color: Bishop(color))
-        populate_col(3, lambda color: Queen(color))
-        populate_col(4, lambda color: King(color))
-        populate_col(5, lambda color: Bishop(color))
-        populate_col(6, lambda color: Knight(color))
-        populate_col(7, lambda color: Rook(color))
+    def populate_board(self, figure_set):
+        for figure in figure_set:
+            self.set_cell(*figure.position, figure)
 
     def move(self, fr, to):
         from_literal, from_numeral = fr
@@ -50,29 +38,29 @@ class ChessBoard:
         self.set_cell(to_literal, to_numeral, figure_to_move)
         self.set_cell(from_literal, from_numeral, None)
 
-    def kings(self):
-        return [King(Color.WHITE), King(Color.BLACK)]
-
-    def queens(self):
-        return [Queen(Color.WHITE), Queen(Color.BLACK)]
-
-    def rooks(self):
-        return [Rook(Color.WHITE), Rook(Color.WHITE),
-                Rook(Color.BLACK), Rook(Color.BLACK)]
-
-    def bishops(self):
-        return [Bishop(Color.WHITE), Bishop(Color.WHITE),
-                Bishop(Color.BLACK), Bishop(Color.BLACK)]
-
-    def knights(self):
-        return [Knight(Color.WHITE), Knight(Color.WHITE),
-                Knight(Color.BLACK), Knight(Color.BLACK)]
-
-    def pawns(self):
-        return [Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE),
-                Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE),
-                Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK),
-                Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK)]
+    # def kings(self):
+    #     return [King(Color.WHITE), King(Color.BLACK)]
+    # 
+    # def queens(self):
+    #     return [Queen(Color.WHITE), Queen(Color.BLACK)]
+    # 
+    # def rooks(self):
+    #     return [Rook(Color.WHITE), Rook(Color.WHITE),
+    #             Rook(Color.BLACK), Rook(Color.BLACK)]
+    # 
+    # def bishops(self):
+    #     return [Bishop(Color.WHITE), Bishop(Color.WHITE),
+    #             Bishop(Color.BLACK), Bishop(Color.BLACK)]
+    # 
+    # def knights(self):
+    #     return [Knight(Color.WHITE), Knight(Color.WHITE),
+    #             Knight(Color.BLACK), Knight(Color.BLACK)]
+    # 
+    # def pawns(self):
+    #     return [Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE),
+    #             Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE),
+    #             Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK),
+    #             Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK)]
 
     def literal_to_idx(self, literal):
         return {
@@ -98,8 +86,9 @@ class ChessBoard:
 
 @dataclass()
 class ChessFigure:
-    def __init__(self, color):
+    def __init__(self, position, color):
         self.color = color
+        self.position = position
 
     def is_out_of_board(self, literal, numeral):
         return literal not in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') or numeral > 8 or numeral < 0
@@ -126,9 +115,8 @@ class Knight(ChessFigure):
 
 
 class Pawn(ChessFigure):
-    def __init__(self, color):
-        super(Pawn, self).__init__(color)
-        self.position = ('a', 2)
+    def __init__(self, position, color):
+        super(Pawn, self).__init__(position, color)
         self.touched = False
         
     def turns(self):
@@ -146,3 +134,46 @@ class Pawn(ChessFigure):
 class Color(Enum):
     WHITE = 1,
     BLACK = 2
+
+
+def chess_figure_set():
+    whites = (
+        Rook(('a', 1), Color.WHITE),
+        Knight(('b', 1), Color.WHITE),
+        Bishop(('c', 1), Color.WHITE),
+        Queen(('d', 1), Color.WHITE),
+        King(('e', 1), Color.WHITE),
+        Bishop(('f', 1), Color.WHITE),
+        Knight(('g', 1), Color.WHITE),
+        Rook(('h', 1), Color.WHITE),
+
+        Pawn(('a', 2), Color.WHITE),
+        Pawn(('b', 2), Color.WHITE),
+        Pawn(('c', 2), Color.WHITE),
+        Pawn(('d', 2), Color.WHITE),
+        Pawn(('e', 2), Color.WHITE),
+        Pawn(('f', 2), Color.WHITE),
+        Pawn(('g', 2), Color.WHITE),
+        Pawn(('h', 2), Color.WHITE),
+    )
+    blacks = (
+        Rook(('a', 8), Color.BLACK),
+        Knight(('b', 8), Color.BLACK),
+        Bishop(('c', 8), Color.BLACK),
+        Queen(('d', 8), Color.BLACK),
+        King(('e', 8), Color.BLACK),
+        Bishop(('f', 8), Color.BLACK),
+        Knight(('g', 8), Color.BLACK),
+        Rook(('h', 8), Color.BLACK),
+
+        Pawn(('a', 7), Color.BLACK),
+        Pawn(('b', 7), Color.BLACK),
+        Pawn(('c', 7), Color.BLACK),
+        Pawn(('d', 7), Color.BLACK),
+        Pawn(('e', 7), Color.BLACK),
+        Pawn(('f', 7), Color.BLACK),
+        Pawn(('g', 7), Color.BLACK),
+        Pawn(('h', 7), Color.BLACK),
+    )
+    
+    return blacks + whites

@@ -70,5 +70,10 @@ class ChessGameTest(unittest.TestCase):
         pawn.move(('a', 3))
         self.assertEqual(pawn.position, ('a', 3))
 
+    def test_pawn_invlid_move(self):
+        pawn = chess_game.Pawn(chess_game.Color.WHITE)
+        pawn.move(('b', 3))
+        self.assertEqual(pawn.position, ('a', 2))
+
 if __name__ == '__main__':
     unittest.main()

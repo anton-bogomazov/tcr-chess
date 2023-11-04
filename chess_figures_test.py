@@ -5,8 +5,9 @@ import chess_game
 class ChessFiguresTest(unittest.TestCase):
     
     def test_pawn_possible_turns(self):
-        pawn = white_pawn()
-        self.assertEqual(len(pawn.turns()), 2)
+        self.assertEqual(
+            white_pawn().turns(), {('a', 3), ('a', 4)}
+        )
 
     def test_pawn_possible_turns_only_short_turn_after_touch(self):
         pawn = white_pawn()

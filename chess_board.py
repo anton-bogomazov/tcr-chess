@@ -41,16 +41,7 @@ class ChessBoard:
         return [fig for row in self.board for fig in row if isinstance(fig, figure_type)]
 
     def literal_to_idx(self, literal):
-        return {
-            'a': 0,
-            'b': 1,
-            'c': 2,
-            'd': 3,
-            'e': 4,
-            'f': 5,
-            'g': 6,
-            'h': 7,
-        }[literal]
+        return ord(literal) - ord('a')
 
     def numeral_to_idx(self, numeral):
         return numeral-1

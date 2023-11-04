@@ -1,6 +1,6 @@
-from enum import Enum
 from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
 from chess_board import ChessBoard
+from Color import Color
 
 
 class ChessGame:
@@ -39,7 +39,3 @@ def standard_chess_figure_set():
     return player_set(1, 2, Color.WHITE) + \
            player_set(8, 7, Color.BLACK)
 
-
-class Color(Enum):
-    WHITE = 1,
-    BLACK = 2

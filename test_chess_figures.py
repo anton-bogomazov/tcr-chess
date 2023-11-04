@@ -1,5 +1,6 @@
 import unittest
-import chess_game
+from Color import Color
+from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
 
 
 class ChessFiguresTest(unittest.TestCase):
@@ -7,6 +8,12 @@ class ChessFiguresTest(unittest.TestCase):
     def test_pawn_possible_turns(self):
         self.assertEqual(
             white_pawn().turns(), {('a', 3), ('a', 4)}
+        )
+
+    def test_two_different_pawns_are_not_eq(self):
+        self.assertNotEqual(
+            Pawn(('a', 2), Color.WHITE),
+            Pawn(('a', 2), Color.BLACK)
         )
 
     def test_pawn_possible_turns_only_short_turn_after_touch(self):
@@ -92,27 +99,27 @@ class ChessFiguresTest(unittest.TestCase):
 
 
 def white_king():
-    return chess_game.King(('c', 3), chess_game.Color.WHITE)
+    return King(('c', 3), Color.WHITE)
 
 
 def white_queen():
-    return chess_game.Queen(('c', 3), chess_game.Color.WHITE)
+    return Queen(('c', 3), Color.WHITE)
 
 
 def white_pawn():
-    return chess_game.Pawn(('a', 2), chess_game.Color.WHITE)
+    return Pawn(('a', 2), Color.WHITE)
 
 
 def white_knight(position=('c', 3)):
-    return chess_game.Knight(position, chess_game.Color.WHITE)
+    return Knight(position, Color.WHITE)
 
 
 def white_bishop():
-    return chess_game.Bishop(('c', 3), chess_game.Color.WHITE)
+    return Bishop(('c', 3), Color.WHITE)
 
 
 def white_rook():
-    return chess_game.Rook(('c', 3), chess_game.Color.WHITE)
+    return Rook(('c', 3), Color.WHITE)
 
 
 if __name__ == '__main__':

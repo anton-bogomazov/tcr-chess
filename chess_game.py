@@ -12,6 +12,7 @@ class ChessGame:
         self.board = ChessBoard(standard_chess_figure_set())
         self.players_move = Color.WHITE
         self.check_to = None
+        self.checkmate = False
 
     def turn(self, fr=None, to=None, figure=None):
         if fr is None:

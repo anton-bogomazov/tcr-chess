@@ -103,5 +103,15 @@ class ChessGameTest(unittest.TestCase):
         game.turn('b5', 'c7', 'knight')
         self.assertEqual(Color.BLACK, game.check_to)
 
+    def test_checkmate_condition(self):
+        game = chess_game.ChessGame()
+        game.turn('b1', 'c3', 'knight')
+        game.turn('a7', 'a6', 'pawn')
+        game.turn('c3', 'b5', 'knight')
+        game.turn('a6', 'a5', 'pawn')
+        game.turn('b5', 'c7', 'knight')
+        game.turn('a5', 'a4', 'pawn')
+        self.assertEqual(False, game.checkmate)
+
 if __name__ == '__main__':
     unittest.main()

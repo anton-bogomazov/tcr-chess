@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+from abc import ABC, abstractmethod
 
 
 class ChessGame:
@@ -82,29 +83,43 @@ class ChessBoard:
 
 
 @dataclass()
-class ChessFigure:
+class ChessFigure(ABC):
     def __init__(self, position, color):
         self.color = color
         self.position = position
+        self.touched = False
+
+    @abstractmethod
+    def turns(self):
+        raise NotImplementedError
+
+    def move(self, to):
+        if to in self.turns():
+            self.position = to
+        self.touched = True
 
     def is_out_of_board(self, literal, numeral):
         return literal not in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') or numeral > 8 or numeral < 0
 
 
 class King(ChessFigure):
-    ...
+    def turns(self):
+        raise NotImplementedError
 
 
 class Queen(ChessFigure):
-    ...
+    def turns(self):
+        raise NotImplementedError
 
 
 class Rook(ChessFigure):
-    ...
+    def turns(self):
+        raise NotImplementedError
 
 
 class Bishop(ChessFigure):
-    ...
+    def turns(self):
+        raise NotImplementedError
 
 
 class Knight(ChessFigure):
@@ -123,27 +138,13 @@ class Knight(ChessFigure):
         ]
         return set(filter(lambda t: not self.is_out_of_board(*t), turns))
 
-    def move(self, to):
-        if to in self.turns():
-            self.position = to
-            self.touched = True
-
 
 class Pawn(ChessFigure):
-    def __init__(self, position, color):
-        super(Pawn, self).__init__(position, color)
-        self.touched = False
-        
     def turns(self):
         literal, numeral = self.position
         short_turn = (literal, numeral + 1)
         long_turn = (literal, numeral + 2)
         return short_turn if self.touched else short_turn, long_turn
-        
-    def move(self, to):
-        if to in self.turns():
-            self.position = to
-            self.touched = True
         
 
 class Color(Enum):

@@ -14,8 +14,9 @@ class ChessFigure(ABC):
         raise NotImplementedError
 
     def move(self, to):
-        if to in self.turns():
-            self.position = to
+        if to not in self.turns():
+            raise ValueError('to lies off the board')
+        self.position = to
         self.touched = True
 
     def is_out_of_board(self, literal, numeral):

@@ -23,7 +23,8 @@ class ChessFiguresTest(unittest.TestCase):
 
     def test_pawn_invlid_move(self):
         pawn = white_pawn()
-        pawn.move(('b', 3))
+        with self.assertRaises(ValueError):
+            pawn.move(('b', 3))
         self.assertEqual(pawn.position, ('a', 2))
 
     def test_knight_possible_turns(self):

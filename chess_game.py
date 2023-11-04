@@ -101,6 +101,9 @@ class ChessFigure:
     def __init__(self, color):
         self.color = color
 
+    def is_out_of_board(self, literal, numeral):
+        return literal not in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') or numeral > 8 or numeral < 0
+
 
 class King(ChessFigure):
     ...

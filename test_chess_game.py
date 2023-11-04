@@ -94,7 +94,9 @@ class ChessGameTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             game.turn('g1', 'f3', 'knight')
 
-
+    def test_check_condition(self):
+        game = chess_game.ChessGame()
+        self.assertEqual(None, game.check_to)
 
 if __name__ == '__main__':
     unittest.main()

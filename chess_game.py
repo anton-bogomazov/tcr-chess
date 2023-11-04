@@ -31,6 +31,12 @@ class ChessGame:
             raise ValueError('it is not your turn')
 
         self.board.move(fr_parsed, to_parsed)
+
+        attacking = self.board.cell(*to_parsed).turns()
+        opponents_king = list(filter(lambda k: k.color != self.players_move, self.board.search_board(King)))[0]
+        if opponents_king.position in attacking:
+            self.check_to = None
+        
         self.players_move = self.next_player()
         return True
 

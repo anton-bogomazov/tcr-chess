@@ -15,6 +15,9 @@ class ChessGame:
         self.checkmate = False
 
     def turn(self, fr=None, to=None, figure=None):
+        if self.checkmate == True:
+            raise RuntimeError('Checkmate! The game is over!')
+
         if fr is None:
             raise TypeError('"from" should be a string')
         if to is None:

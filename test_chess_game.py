@@ -113,5 +113,12 @@ class ChessGameTest(unittest.TestCase):
         game.turn('a5', 'a4', 'pawn')
         self.assertEqual(True, game.checkmate)
 
+    def test_turn_is_not_possible_when_checkmate(self):
+        game = chess_game.ChessGame()
+        game.checkmate = True
+        
+        with self.assertRaises(RuntimeError):
+            game.turn('b1', 'c3', 'knight')
+
 if __name__ == '__main__':
     unittest.main()

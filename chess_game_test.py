@@ -99,6 +99,10 @@ class ChessGameTest(unittest.TestCase):
     def test_bishop_possible_turns(self):
         bishop = chess_game.Bishop(('c', 3), chess_game.Color.WHITE)
         self.assertEqual(len(bishop.turns()), 11)
+        self.assertEqual(bishop.turns(), {
+            ('a', 1), ('b', 2), ('d', 2), ('e', 1), ('f', 6),
+            ('a', 5), ('b', 4), ('d', 4), ('e', 5), ('g', 7), ('h', 8),
+        })
 
     def test_rook_possible_turns(self):
         rook = chess_game.Rook(('c', 3), chess_game.Color.WHITE)

@@ -81,21 +81,24 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(pawn.position, ('a', 2))
 
     def test_knight_possible_turns(self):
-        pawn = chess_game.Knight(('c', 3), chess_game.Color.WHITE)
-        self.assertEqual(len(pawn.turns()), 8)
-        self.assertEqual(pawn.turns(), {
+        knight = chess_game.Knight(('c', 3), chess_game.Color.WHITE)
+        self.assertEqual(len(knight.turns()), 8)
+        self.assertEqual(knight.turns(), {
             ('b', 1), ('d', 1), ('b', 5), ('d', 5),
             ('a', 2), ('a', 4), ('e', 2), ('e', 4),
         })
 
     def test_knight_possible_turns_less_moves_on_the_boards_edge(self):
-        pawn = chess_game.Knight(('a', 3), chess_game.Color.WHITE)
-        self.assertEqual(len(pawn.turns()), 4)
+        knight = chess_game.Knight(('a', 3), chess_game.Color.WHITE)
+        self.assertEqual(len(knight.turns()), 4)
 
     def test_knight_possible_turns_least_possible_turns_in_the_corner(self):
-        pawn = chess_game.Knight(('a', 8), chess_game.Color.WHITE)
-        self.assertEqual(len(pawn.turns()), 2)
+        knight = chess_game.Knight(('a', 8), chess_game.Color.WHITE)
+        self.assertEqual(len(knight.turns()), 2)
 
+    def test_bishop_possible_turns(self):
+        bishop = chess_game.Bishop(('c', 3), chess_game.Color.WHITE)
+        self.assertEqual(len(bishop.turns()), 11)
 
 if __name__ == '__main__':
     unittest.main()

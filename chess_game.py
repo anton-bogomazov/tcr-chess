@@ -99,7 +99,7 @@ class ChessFigure(ABC):
         self.touched = True
 
     def is_out_of_board(self, literal, numeral):
-        return literal not in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') or numeral > 8 or numeral < 0
+        return literal not in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') or numeral > 8 or numeral <= 0
 
 
 class King(ChessFigure):
@@ -119,7 +119,13 @@ class Rook(ChessFigure):
 
 class Bishop(ChessFigure):
     def turns(self):
-        raise NotImplementedError
+        literal, numeral = self.position
+        turns = [(chr(ord(literal) - i), numeral - i) for i in range(1, 8)] +\
+                [(chr(ord(literal) + i), numeral + i) for i in range(1, 8)] +\
+                [(chr(ord(literal) - i), numeral + i) for i in range(1, 8)] +\
+                [(chr(ord(literal) + i), numeral - i) for i in range(1, 8)]
+
+        return set(filter(lambda t: not self.is_out_of_board(*t), turns)) - {self.position}
 
 
 class Knight(ChessFigure):

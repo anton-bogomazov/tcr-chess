@@ -12,10 +12,9 @@ The main purpose of its implementation is to challenge the self in three differe
 
 More about TCR [here](https://www.infoq.com/articles/test-commit-revert/)
 
-Here is an awesome workshop by Kent Beck:
+Here is an awesome workshops by Kent Beck:
 - [Part 0](https://youtu.be/tnO2Mos0RjU?si=yj0RX3lT4aZ8RaSl)
 - [Part 1](https://youtu.be/Aof0F9DvTFg?si=w4O3tstjAyZOsXcr)
 - [Part 2](https://youtu.be/i3TUSxPy32A?si=WynMa-ySVXrMJK9e)
 - [Part 3](https://youtu.be/9BBMj7OF4rc?si=6oi1hcALCPCCAImg)
-
-[](https://youtu.be/FFzHOyFeovE?si=yikGdcIcsBVA8mi9)
+- [Understanding Legacy Code with TCR](https://youtu.be/FFzHOyFeovE?si=yikGdcIcsBVA8mi9)

@@ -17,6 +17,13 @@ class ChessGame:
         if figure is None:
             raise TypeError('"figure" should be a string')
         
+        fr_parsed = (tuple(fr)[0], int(tuple(fr)[1]))
+        to_parsed = (tuple(to)[0], int(tuple(to)[1]))
+
+        if self.board.cell(*fr_parsed).__class__.__name__.lower() != figure:
+            raise ValueError('invalid figure')
+
+        self.board.move(fr_parsed, to_parsed)
         self.players_move = self.next_player()
         return True
 

@@ -7,7 +7,7 @@ from Color import Color
 
 class ChessGameTest(unittest.TestCase):
     def test_from_to_positions_and_figure_type_is_enough_to_make_turn(self):
-        result = chess_game.ChessGame().turn('f3', 'e5', 'knight')
+        result = chess_game.ChessGame().turn('b1', 'c3', 'knight')
         self.assertEqual(result, True)
 
     def test_fail_to_make_turn_if_every_arg_is_not_provided(self):
@@ -82,7 +82,7 @@ class ChessGameTest(unittest.TestCase):
         
     def test_pass_turn(self):
         game = chess_game.ChessGame()
-        game.turn('f3', 'e5', 'knight')
+        game.turn('b1', 'c3', 'knight')
         self.assertEquals(
             game.players_move,
             Color.BLACK

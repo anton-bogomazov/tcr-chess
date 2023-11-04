@@ -1,5 +1,6 @@
 import unittest
 import chess_game
+from chess_board import ChessBoard
 
 
 class ChessGameTest(unittest.TestCase):
@@ -17,8 +18,7 @@ class ChessGameTest(unittest.TestCase):
 
     def test_game_has_chess_board(self):
         result = chess_game.ChessGame().get_board()
-        self.assertEqual(len(result.board), 8)
-        self.assertEqual(len(result.board[0]), 8)
+        self.assertIsInstance(result, ChessBoard)
 
     def test_initially_board_has_standard_figure_set(self):
         board = chess_game.ChessGame().get_board()

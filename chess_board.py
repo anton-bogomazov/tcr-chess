@@ -3,21 +3,14 @@ from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
 
 class ChessBoard:
     def __init__(self, figure_set):
-        self.board = [[None for i in range(8)] for j in range(8)]
-        self.populate_board(figure_set)
-
-    def populate_board(self, figure_set):
-        for figure in figure_set:
-            self.set_cell(*figure.position, figure)
+        self.figures = figure_set
 
     def move(self, fr, to):
         from_literal, from_numeral = fr
-        to_literal, to_numeral = to
         if self.cell(from_literal, from_numeral) is None:
             raise ValueError('fr references empty cell')
         figure_to_move = self.cell(from_literal, from_numeral)
-        self.set_cell(to_literal, to_numeral, figure_to_move)
-        self.set_cell(from_literal, from_numeral, None)
+        figure_to_move.move(to)
 
     def kings(self):
         return self.search_board(King)
@@ -38,16 +31,13 @@ class ChessBoard:
         return self.search_board(Pawn)
 
     def search_board(self, figure_type):
-        return [fig for row in self.board for fig in row if isinstance(fig, figure_type)]
-
-    def literal_to_idx(self, literal):
-        return ord(literal) - ord('a')
-
-    def numeral_to_idx(self, numeral):
-        return numeral-1
+        return [fig for fig in self.figures if isinstance(fig, figure_type)]
 
     def cell(self, literal, numeral):
-        return self.board[self.numeral_to_idx(numeral)][self.literal_to_idx(literal)]
-
-    def set_cell(self, literal, numeral, figure):
-        self.board[self.numeral_to_idx(numeral)][self.literal_to_idx(literal)] = figure
+        found_figures = [fig for fig in self.figures if fig.position == (literal, numeral)]
+        if len(found_figures) == 1:
+            return found_figures[0]
+        elif len(found_figures) == 0:
+            return None
+        else:
+            raise RuntimeError('two figures in the same cell')

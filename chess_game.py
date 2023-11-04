@@ -38,30 +38,27 @@ class ChessBoard:
         self.set_cell(to_literal, to_numeral, figure_to_move)
         self.set_cell(from_literal, from_numeral, None)
 
-    # def kings(self):
-    #     return [King(Color.WHITE), King(Color.BLACK)]
-    # 
-    # def queens(self):
-    #     return [Queen(Color.WHITE), Queen(Color.BLACK)]
-    # 
-    # def rooks(self):
-    #     return [Rook(Color.WHITE), Rook(Color.WHITE),
-    #             Rook(Color.BLACK), Rook(Color.BLACK)]
-    # 
-    # def bishops(self):
-    #     return [Bishop(Color.WHITE), Bishop(Color.WHITE),
-    #             Bishop(Color.BLACK), Bishop(Color.BLACK)]
-    # 
-    # def knights(self):
-    #     return [Knight(Color.WHITE), Knight(Color.WHITE),
-    #             Knight(Color.BLACK), Knight(Color.BLACK)]
-    # 
-    # def pawns(self):
-    #     return [Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE),
-    #             Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE), Pawn(Color.WHITE),
-    #             Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK),
-    #             Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK), Pawn(Color.BLACK)]
+    def kings(self):
+        return self.search_board(King)
 
+    def queens(self):
+        return self.search_board(Queen)
+
+    def rooks(self):
+        return self.search_board(Rook)
+    
+    def bishops(self):
+        return self.search_board(Bishop)
+
+    def knights(self):
+        return self.search_board(Knight)
+
+    def pawns(self):
+        return self.search_board(Pawn)
+
+    def search_board(self, figure_type):
+        return [fig for row in self.board for fig in row if isinstance(fig, figure_type)]
+    
     def literal_to_idx(self, literal):
         return {
             'a': 0,

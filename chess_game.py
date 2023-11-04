@@ -129,10 +129,10 @@ class Pawn(ChessFigure):
         self.touched = False
         
     def turns(self):
-        if self.touched == False:
-            return (self.position[0], self.position[1] + 1), (self.position[0], self.position[1] + 2)
-        else:
-            return (self.position[0], self.position[1] + 1)
+        literal, numeral = self.position
+        short_turn = (literal, numeral + 1)
+        long_turn = (literal, numeral + 2)
+        return short_turn if self.touched else short_turn, long_turn
         
     def move(self, to):
         if to in self.turns():

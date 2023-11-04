@@ -35,7 +35,7 @@ class ChessGame:
         attacking = self.board.cell(*to_parsed).turns()
         opponents_king = list(filter(lambda k: k.color != self.players_move, self.board.search_board(King)))[0]
         if opponents_king.position in attacking:
-            self.check_to = None
+            self.check_to = opponents_king.color
         
         self.players_move = self.next_player()
         return True

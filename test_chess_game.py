@@ -101,7 +101,7 @@ class ChessGameTest(unittest.TestCase):
         game.turn('c3', 'b5', 'knight')
         game.turn('a6', 'a5', 'pawn')
         game.turn('b5', 'c7', 'knight')
-        self.assertEqual(None, game.check_to)
+        self.assertEqual(Color.BLACK, game.check_to)
 
 if __name__ == '__main__':
     unittest.main()

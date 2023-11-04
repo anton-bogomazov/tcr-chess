@@ -2,8 +2,8 @@ from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
 from chess_board import ChessBoard
 from Color import Color
 
-# Allow to move piece of players_move color
-# Check condition
+# How to reset checkmate condition?
+# If checkmate is still True, set Checkmate
 # Checkmate condition
 
 class ChessGame:
@@ -32,7 +32,8 @@ class ChessGame:
             raise ValueError('it is not your turn')
 
         self.board.move(fr_parsed, to_parsed)
-
+    
+        # is attacking figure removed? does king stand on attacking cell?
         attacking = self.board.cell(*to_parsed).turns()
         opponents_king = list(filter(lambda k: k.color != self.players_move, self.board.search_board(King)))[0]
         if opponents_king.position in attacking:

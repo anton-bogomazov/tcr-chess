@@ -1,0 +1,9 @@
+{
+    "configurations": [
+        {
+            "type": "command",
+            "name": "test && commit | revert",
+            "program": "./tcr.sh",
+        },
+    ]
+}

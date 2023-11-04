@@ -104,7 +104,18 @@ class ChessFigure(ABC):
 
 class King(ChessFigure):
     def turns(self):
-        raise NotImplementedError
+        literal, numeral = self.position
+        turns = [
+            (chr(ord(literal) + 1), numeral + 1),
+            (chr(ord(literal) - 1), numeral - 1),
+            (chr(ord(literal) - 1), numeral + 1),
+            (chr(ord(literal) + 1), numeral - 1),
+            (chr(ord(literal)), numeral - 1),
+            (chr(ord(literal)), numeral + 1),
+            (chr(ord(literal) + 1), numeral),
+            (chr(ord(literal) - 1), numeral),
+        ]
+        return turns
 
 
 class Queen(ChessFigure):

@@ -135,5 +135,11 @@ class ChessGameTest(unittest.TestCase):
             }
         ))
 
+    def test_king_possible_turns(self):
+        king = chess_game.King(('c', 3), chess_game.Color.WHITE)
+        self.assertEqual(len(king.turns()), 8)
+
+
+
 if __name__ == '__main__':
     unittest.main()

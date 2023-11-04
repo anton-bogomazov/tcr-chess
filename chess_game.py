@@ -115,7 +115,7 @@ class King(ChessFigure):
             (chr(ord(literal) + 1), numeral),
             (chr(ord(literal) - 1), numeral),
         ]
-        return turns
+        return set(filter(lambda t: not self.is_out_of_board(*t), turns))
 
 
 class Queen(ChessFigure):

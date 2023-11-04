@@ -7,6 +7,7 @@ class ChessGame:
 
     def __init__(self):
         self.board = ChessBoard(standard_chess_figure_set())
+        self.players_move = Color.WHITE
 
     def turn(self, fr=None, to=None, figure=None):
         if fr is None:
@@ -16,7 +17,11 @@ class ChessGame:
         if figure is None:
             raise TypeError('"figure" should be a string')
         
+        self.pass_turn()
         return True
+
+    def pass_turn(self):
+        return Color.BLACK if self.players_move == Color.WHITE else Color.WHITE
 
     def get_board(self):
         return self.board

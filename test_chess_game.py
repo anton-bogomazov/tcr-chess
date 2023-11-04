@@ -2,6 +2,7 @@ import unittest
 import chess_game
 from chess_board import ChessBoard
 from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
+from Color import Color
 
 
 class ChessGameTest(unittest.TestCase):
@@ -72,6 +73,12 @@ class ChessGameTest(unittest.TestCase):
         board.move(('d', 5), ('c', 7))
         self.assertIsInstance(board.cell('c', 7), Knight)
         self.assertEqual(len(board.search_board(Pawn)), 15)
+
+    def test_whites_starts(self):
+        self.assertEquals(
+            chess_game.ChessGame().players_move,
+            Color.WHITE
+        )
 
 
 if __name__ == '__main__':

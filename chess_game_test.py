@@ -75,6 +75,10 @@ class ChessGameTest(unittest.TestCase):
         pawn.move(('b', 3))
         self.assertEqual(pawn.position, ('a', 2))
 
+    def test_knight_possible_turns(self):
+        pawn = chess_game.Knight(('c', 3), chess_game.Color.WHITE)
+        self.assertEqual(len(pawn.turns()), 8)
+
 
 if __name__ == '__main__':
     unittest.main()

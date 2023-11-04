@@ -108,7 +108,25 @@ class Bishop(ChessFigure):
 
 
 class Knight(ChessFigure):
-    ...
+
+    def turns(self):
+        literal, numeral = self.position
+        turns = [
+            (chr(ord(literal) - 2), numeral - 1),
+            (chr(ord(literal) - 2), numeral + 1),
+            (chr(ord(literal) + 2), numeral - 1),
+            (chr(ord(literal) + 2), numeral + 1),
+            (chr(ord(literal) - 1), numeral - 2),
+            (chr(ord(literal) - 1), numeral + 2),
+            (chr(ord(literal) + 1), numeral - 2),
+            (chr(ord(literal) + 1), numeral + 2),
+        ]
+        return list(filter(lambda t: not self.is_out_of_board(*t), turns))
+
+    def move(self, to):
+        if to in self.turns():
+            self.position = to
+            self.touched = True
 
 
 class Pawn(ChessFigure):

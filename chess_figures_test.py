@@ -5,21 +5,21 @@ import chess_game
 class ChessFiguresTest(unittest.TestCase):
     
     def test_pawn_possible_turns(self):
-        pawn = chess_game.Pawn(('a', 2), chess_game.Color.WHITE)
+        pawn = mother_pawn()
         self.assertEqual(len(pawn.turns()), 2)
 
     def test_pawn_possible_turns_only_short_turn_after_touch(self):
-        pawn = chess_game.Pawn(('a', 2), chess_game.Color.WHITE)
+        pawn = mother_pawn()
         pawn.move(('a', 3))
         self.assertEqual(len(pawn.turns()), 1)
 
     def test_pawn_move(self):
-        pawn = chess_game.Pawn(('a', 2), chess_game.Color.WHITE)
+        pawn = mother_pawn()
         pawn.move(('a', 3))
         self.assertEqual(pawn.position, ('a', 3))
 
     def test_pawn_invlid_move(self):
-        pawn = chess_game.Pawn(('a', 2), chess_game.Color.WHITE)
+        pawn = mother_pawn()
         pawn.move(('b', 3))
         self.assertEqual(pawn.position, ('a', 2))
 
@@ -61,7 +61,7 @@ class ChessFiguresTest(unittest.TestCase):
         })
 
     def test_queen_possible_turns_is_a_combination_of_rook_and_bishop_turns(self):
-        rook = chess_game.Queen(('c', 3), chess_game.Color.WHITE)
+        rook = mother_queen()
         self.assertEqual(len(rook.turns()), 25)
         self.assertEqual(rook.turns(), {
             ('a', 3), ('c', 1),
@@ -79,13 +79,22 @@ class ChessFiguresTest(unittest.TestCase):
         ))
 
     def test_king_possible_turns(self):
-        king = chess_game.King(('c', 3), chess_game.Color.WHITE)
+        king = mother_king()
         self.assertEqual(len(king.turns()), 8)
         self.assertEqual(king.turns(), {
             ('b', 3), ('c', 2), ('b', 2), ('d', 4),
             ('d', 3), ('c', 4), ('d', 2), ('b', 4)
         })
 
+
+def mother_king():
+    return chess_game.King(('c', 3), chess_game.Color.WHITE)
+
+def mother_queen():
+    return chess_game.Queen(('c', 3), chess_game.Color.WHITE)
+
+def mother_pawn():
+    return chess_game.Pawn(('a', 2), chess_game.Color.WHITE)
 
 if __name__ == '__main__':
     unittest.main()

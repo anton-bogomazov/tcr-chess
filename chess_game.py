@@ -15,6 +15,7 @@ class ChessGame:
             raise TypeError('"to" should be a string')
         if figure is None:
             raise TypeError('"figure" should be a string')
+        
         return True
 
     def get_board(self):

@@ -1,4 +1,4 @@
-from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
+from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop, ChessFigure
 
 
 class ChessBoard:
@@ -10,7 +10,17 @@ class ChessBoard:
         if self.cell(from_literal, from_numeral) is None:
             raise ValueError('fr references empty cell')
         figure_to_move = self.cell(from_literal, from_numeral)
-        figure_to_move.move(to)
+        dest_cell_cont = self.cell(*to)
+        if dest_cell_cont is None:
+            figure_to_move.move(to)
+        elif isinstance(dest_cell_cont, ChessFigure):
+            if dest_cell_cont.color != figure_to_move.color:
+                self.figures.remove(dest_cell_cont)
+                figure_to_move.move(to)
+            else:
+                raise ValueError('you are trying to take your own figure')
+        else:
+            raise RuntimeError('unexpected error: something else except None or Figure in the cell')
 
     def search_board(self, figure_type):
         return [fig for fig in self.figures if isinstance(fig, figure_type)]

@@ -55,12 +55,23 @@ class ChessGameTest(unittest.TestCase):
         check_if_positioned_well(1, 2, chess_game.Color.WHITE)
         check_if_positioned_well(8, 7, chess_game.Color.BLACK)
 
-    def test_figure_can_be_moved(self):
+    def test_figure_can_be_moved_to_empty_cell(self):
         board = chess_game.ChessGame().get_board()
         self.assertEqual(board.cell('b', 1), chess_game.Knight(('b', 1), chess_game.Color.WHITE))
         board.move(('b', 1), ('c', 3))
         self.assertEqual(board.cell('c', 3), chess_game.Knight(('c', 3), chess_game.Color.WHITE))
         self.assertEqual(board.cell('b', 1), None)
+
+    def test_figure_can_take_opponents_figure(self):
+        board = chess_game.ChessGame().get_board()
+        board.move(('b', 1), ('c', 3))
+        board.move(('c', 3), ('d', 5))
+
+        self.assertIsInstance(board.cell('c', 7), Pawn)
+        self.assertEqual(board.cell('c', 7).color, chess_game.Color.BLACK)
+        board.move(('d', 5), ('c', 7))
+        self.assertIsInstance(board.cell('c', 7), Knight)
+        self.assertEqual(len(board.search_board(Pawn)), 15)
 
 
 if __name__ == '__main__':

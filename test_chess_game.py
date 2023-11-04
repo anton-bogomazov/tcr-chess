@@ -88,6 +88,12 @@ class ChessGameTest(unittest.TestCase):
             Color.BLACK
         )
 
+    def test_cant_move_white_piece_in_the_blacks_turn(self):
+        game = chess_game.ChessGame()
+        game.turn('b1', 'c3', 'knight')
+        with self.assertRaises(ValueError):
+            game.turn('g1', 'f3', 'knight')
+
 
 
 if __name__ == '__main__':

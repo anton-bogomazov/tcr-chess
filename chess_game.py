@@ -23,8 +23,11 @@ class ChessGame:
         fr_parsed = (tuple(fr)[0], int(tuple(fr)[1]))
         to_parsed = (tuple(to)[0], int(tuple(to)[1]))
 
-        if self.board.cell(*fr_parsed).__class__.__name__.lower() != figure:
+        selected_figure = self.board.cell(*fr_parsed)
+        if selected_figure.__class__.__name__.lower() != figure:
             raise ValueError('invalid figure')
+        if selected_figure.color != self.players_move:
+            raise ValueError('it is not your turn')
 
         self.board.move(fr_parsed, to_parsed)
         self.players_move = self.next_player()

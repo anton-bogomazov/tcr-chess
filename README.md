@@ -10,6 +10,9 @@ The main purpose of its implementation is to challenge the self in three differe
 - Python, which I'm still getting familiar with
 - New to me JetBrains Fleet as a code editor
 
+Important notes:
+- Commits are not squashed intentionally
+
 More about TCR [here](https://www.infoq.com/articles/test-commit-revert/)
 
 Here is an awesome workshops by Kent Beck:

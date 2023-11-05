@@ -184,7 +184,8 @@ class ChessGameTest(unittest.TestCase):
         game.turn('f1', 'h3', 'bishop')
         game.turn('a5', 'a4', 'pawn')
         game.turn('e1', 'g1', 'king')
-
+        self.assertEqual(None, game.get_board().cell('e', 1))
+        self.assertEqual(None, game.get_board().cell('h', 1))
 
 
 if __name__ == '__main__':

@@ -15,6 +15,8 @@ class ChessBoard:
         if self.is_castling_move(fr, to):
             self.check_if_castling_possible(figure_to_move, fr, to)
             figure_to_move.castle(to)
+            self.get_castling_rook(to)\
+                .move(self.rook_castling_to(to))
         elif dest_cell_cont is None:
             figure_to_move.move(to)
         elif isinstance(dest_cell_cont, ChessFigure):
@@ -43,6 +45,16 @@ class ChessBoard:
             return self.cell(*('h', 8))
         if to == ('c', 8):
             return self.cell(*('a', 8))
+
+    def rook_castling_to(self, to):
+        if to == ('g', 1):
+            return ('f', 1)
+        if to == ('c', 1):
+            return ('d', 1)
+        if to == ('g', 8):
+            return ('f', 8)
+        if to == ('c', 8):
+            return ('d', 8)
         
     def is_castling_blocked(self, fr, to):
         from_literal, from_numeral = fr

@@ -90,6 +90,20 @@ class Rook(ChessFigure):
 
         return set(filter(lambda t: not self.is_out_of_board(*t), turns)) - {self.position}
 
+    def castle(self, kings_to):
+        self.position = self.rook_castling_to(kings_to)
+        self.touched = True
+        
+    def rook_castling_to(self, to):
+        if to == ('g', 1):
+            return ('f', 1)
+        if to == ('c', 1):
+            return ('d', 1)
+        if to == ('g', 8):
+            return ('f', 8)
+        if to == ('c', 8):
+            return ('d', 8)
+
     def notation(self):
         return 'R'
 

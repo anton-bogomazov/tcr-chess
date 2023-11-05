@@ -14,7 +14,7 @@ class ChessBoard:
         dest_cell_cont = self.cell(*to)
         if dest_cell_cont is None:
             figure_to_move.move(to)
-        elif self.is_castling_move():\
+        elif self.is_castling_move(fr, to):\
             ...
         elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
@@ -25,7 +25,7 @@ class ChessBoard:
         else:
             raise RuntimeError('unexpected error: something else except None or Figure in the cell')
 
-    def is_castling_move(self):
+    def is_castling_move(self, fr, to):
         return False
     
     def checked(self, color):

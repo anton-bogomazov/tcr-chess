@@ -144,7 +144,7 @@ class ChessGameTest(unittest.TestCase):
 
     def test_is_castling_move_blocked_by_figures(self):
         board = chess_game.ChessGame().get_board()
-        self.assertEqual(False, board.is_castling_move())
+        self.assertEqual(False, board.is_castling_move(('e', 1), ('g', 1)))
 
 if __name__ == '__main__':
     unittest.main()

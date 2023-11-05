@@ -151,6 +151,8 @@ class ChessGameTest(unittest.TestCase):
         board = chess_game.ChessGame().get_board()
         with self.assertRaises(ValueError):
             board.move(('e', 1), ('g', 1))
+        with self.assertRaises(ValueError):
+            board.move(('e', 1), ('c', 1))
 
     def test_castling_move_impossible_when_king_touched(self):
         king = King(('e', 1), Color.WHITE)

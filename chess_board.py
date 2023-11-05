@@ -52,6 +52,12 @@ class ChessBoard:
                 if self.cell(to_literal, to_numeral) is not None:
                     return True
                 n += 1
+        if ord(from_literal) > ord(to_literal):
+            n = 0
+            while ord(from_literal) > ord(to_literal)+n:
+                if self.cell(to_literal, to_numeral) is not None:
+                    return True
+                n += 1
 
         return False
     

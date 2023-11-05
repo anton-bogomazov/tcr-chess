@@ -15,12 +15,8 @@ class ChessBoard:
         if dest_cell_cont is None:
             figure_to_move.move(to)
         elif self.is_castling_move(fr, to):
-            if figure_to_move.touched:
-                raise ValueError('king is touched')
-            if self.get_castling_rook(to) is None or self.get_castling_rook(to).touched:
-                raise ValueError('rook is touched or moved')
-            if self.is_castling_blocked(fr, to):
-                raise ValueError('castling blocked by figures')
+            self.check_if_castling_possible(figure_to_move, fr, to)
+            
         elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
                 self.figures.remove(dest_cell_cont)
@@ -29,6 +25,14 @@ class ChessBoard:
                 raise ValueError('you are trying to take your own figure')
         else:
             raise RuntimeError('unexpected error: something else except None or Figure in the cell')
+
+    def check_if_castling_possible(self, figure_to_move, fr, to):
+        if figure_to_move.touched:
+            raise ValueError('king is touched')
+        if self.get_castling_rook(to) is None or self.get_castling_rook(to).touched:
+            raise ValueError('rook is touched or moved')
+        if self.is_castling_blocked(fr, to):
+            raise ValueError('castling blocked by figures')
 
     def get_castling_rook(self, to):
         if to == ('g', 1):

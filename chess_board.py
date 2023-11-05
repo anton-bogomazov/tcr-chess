@@ -14,7 +14,8 @@ class ChessBoard:
         dest_cell_cont = self.cell(*to)
         if dest_cell_cont is None:
             figure_to_move.move(to)
-        #castling here
+        elif self.is_castling_move():\
+            ...
         elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
                 self.figures.remove(dest_cell_cont)
@@ -24,6 +25,9 @@ class ChessBoard:
         else:
             raise RuntimeError('unexpected error: something else except None or Figure in the cell')
 
+    def is_castling_move(self):
+        return False
+    
     def checked(self, color):
         players_king = [king for king in self.search_board(King) if king.color == color][0]
         opponents_figures = [f for f in self.figures if f.color != color]

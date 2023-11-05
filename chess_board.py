@@ -37,9 +37,10 @@ class ChessBoard:
 
     def cell(self, literal, numeral):
         found_figures = [fig for fig in self.figures if fig.position == (literal, numeral)]
-        if len(found_figures) == 1:
-            return found_figures[0]
-        elif len(found_figures) == 0:
-            return None
-        else:
-            raise RuntimeError('two figures in the same cell')
+        match len(found_figures):
+            case 0:
+                return None
+            case 1:
+                return found_figures[0]
+            case _:
+                raise RuntimeError('two figures in the same cell')

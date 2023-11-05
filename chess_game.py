@@ -2,9 +2,6 @@ from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
 from chess_board import ChessBoard
 from Color import Color
 
-# How to reset checkmate condition?
-# If checkmate is still True, set Checkmate
-# Checkmate condition
 
 class ChessGame:
 

@@ -14,12 +14,12 @@ Important notes:
 - Commits are not squashed intentionally
 
 Todo:
-[x] Figures' moves logic
-[x] Game observer
-[x] Castling
-[] Approval tests WIP
-[] Restrict jumping over figures
-[] Game runner and GUI
+- [x] Figures' moves logic
+- [x] Game observer
+- [x] Castling
+- [] Approval tests WIP
+- [] Restrict jumping over figures
+- [] Game runner and GUI
 
 More about TCR [here](https://www.infoq.com/articles/test-commit-revert/)
 

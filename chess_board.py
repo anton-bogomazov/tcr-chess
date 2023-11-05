@@ -113,4 +113,4 @@ class ChessBoard:
             return cell_content.symbol()
 
         return [[resolve(self.cell(literal, numeral)) for literal in literals]
-                                                for numeral in range(1, 9)]
+                                    for numeral in reversed(range(1, 9))]

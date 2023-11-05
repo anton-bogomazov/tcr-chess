@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from Color import Color
 
 # figures can be blocked by other figures. restrict it
+# Modify move method
 
 @dataclass
 class ChessFigure(ABC):

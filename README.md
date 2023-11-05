@@ -17,9 +17,9 @@ Todo:
 - [x] Figures' moves logic
 - [x] Game observer
 - [x] Castling
-- [] Approval tests WIP
-- [] Restrict jumping over figures
-- [] Game runner and GUI
+- [ ] Approval tests WIP
+- [ ] Restrict jumping over figures
+- [ ] Game runner and GUI
 
 More about TCR [here](https://www.infoq.com/articles/test-commit-revert/)
 

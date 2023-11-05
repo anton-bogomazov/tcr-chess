@@ -17,12 +17,16 @@ class ChessBoard:
             self.get_castling_rook(to).castle(to)
         elif dest_cell_cont is None:
             # cant move if blocked by other figure except Knight
+            if to not in figure_to_move.turns():
+                ValueError('invalid move')
             figure_to_move.move(to)
         elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
                 self.figures.remove(dest_cell_cont)
                 # cant take if blocked by other figure except Knight
                 # pawns take figures diagonally
+                if to not in figure_to_move.turns():
+                    ValueError('invalid move')
                 figure_to_move.move(to)
             else:
                 raise ValueError('you are trying to take your own figure')

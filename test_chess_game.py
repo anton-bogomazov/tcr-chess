@@ -152,16 +152,26 @@ class ChessGameTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             board.move(('e', 1), ('g', 1))
 
-    def test_castling_move_impossible_when_rook_or_king_touched(self):
-        board = ChessBoard(test_set())
+    def test_castling_move_impossible_when_king_touched(self):
+        king = King(('e', 1), Color.WHITE)
+        king.touched = True
+        board = ChessBoard((king, Rook(('h', 1), Color.WHITE)))
+
         with self.assertRaises(ValueError):
             board.move(('e', 1), ('g', 1))
 
+    def test_castling_move_impossible_when_rook_touched(self):
+        rook = Rook(('h', 1), Color.WHITE)
+        rook.touched = True
+        board = ChessBoard((King(('e', 1), Color.WHITE), rook))
 
-def test_set():
-    king = King(('e', 1), Color.WHITE)
-    king.touched = True
-    return (king, Rook(('h', 1), Color.WHITE))
+        with self.assertRaises(ValueError):
+            board.move(('e', 1), ('g', 1))
+
+    def test_castling_move_impossible_when_rook_moved(self):
+        board = ChessBoard([King(('e', 1), Color.WHITE)])
+        with self.assertRaises(ValueError):
+            board.move(('e', 1), ('g', 1))
 
 
 if __name__ == '__main__':

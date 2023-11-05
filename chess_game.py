@@ -25,12 +25,8 @@ class ChessGame:
         def parse_position(p: str):
             return tuple(p)[0], int(tuple(p)[1])
 
-        fr_parsed = parse_position(fr)
-        to_parsed = parse_position(to)
-
-        self.validate_parameters(fr_parsed, figure)
-
-        self.board.move(fr_parsed, to_parsed)
+        self.validate_parameters(parse_position(fr), figure)
+        self.board.move(parse_position(fr), parse_position(to))
         self.update_check_condition()
         self.pass_turn()
         return True

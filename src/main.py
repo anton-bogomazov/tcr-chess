@@ -1,9 +1,9 @@
-from chess.game import ChessGame
+from chess.game import standard_chess_game
 import os
 
 
 def main():
-    game = ChessGame()
+    game = standard_chess_game()
     while True:
         print_board(game.get_board().to_string())
         turn = input('> ')

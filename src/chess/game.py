@@ -5,7 +5,7 @@ from src.chess.sets import standard_chess_figure_set
 
 class ChessGame:
 
-    def __init__(self, figure_set=standard_chess_figure_set()):
+    def __init__(self, figure_set):
         self.board = ChessBoard(figure_set)
         self.current_player = Color.WHITE
         self.checked_player = None
@@ -61,3 +61,7 @@ class ChessGame:
 
     def get_board(self):
         return self.board
+
+
+def standard_chess_game():
+    return ChessGame(figure_set=standard_chess_figure_set())

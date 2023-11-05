@@ -12,9 +12,6 @@ class ChessGame:
         self.checkmate = False
 
     def turn(self, fr=None, to=None, figure=None):
-        if self.checkmate:
-            raise RuntimeError('Checkmate! The game is over!')
-
         if fr is None:
             raise TypeError('"from" should be a string')
         if to is None:
@@ -22,20 +19,17 @@ class ChessGame:
         if figure is None:
             raise TypeError('"figure" should be a string')
         
+        if self.checkmate:
+            raise RuntimeError('Checkmate! The game is over!')
+        
         def parse_position(p: str):
             return tuple(p)[0], int(tuple(p)[1])
         
-        def figure_name(instance):
-            return instance.__class__.__name__.lower()
         
         fr_parsed = parse_position(fr)
         to_parsed = parse_position(to)
 
-        selected_figure = self.board.cell(*fr_parsed)
-        if figure_name(selected_figure) != figure:
-            raise ValueError('invalid figure')
-        if selected_figure.color != self.players_move:
-            raise ValueError('it is not your turn')
+        self.validate_parameters(fr_parsed, figure)
 
         self.board.move(fr_parsed, to_parsed)
     
@@ -52,6 +46,15 @@ class ChessGame:
         self.players_move = self.opponent_color()
         return True
 
+    def validate_parameters(self, fr, figure):
+        def figure_name(instance):
+            return instance.__class__.__name__.lower()
+        selected_figure = self.board.cell(*fr)
+        if figure_name(selected_figure) != figure:
+            raise ValueError('invalid figure')
+        if selected_figure.color != self.players_move:
+            raise ValueError('it is not your turn')
+        
     def opponent_color(self):
         return Color.BLACK if self.players_move == Color.WHITE else Color.WHITE
 

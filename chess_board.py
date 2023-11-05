@@ -14,8 +14,9 @@ class ChessBoard:
         dest_cell_cont = self.cell(*to)
         if dest_cell_cont is None:
             figure_to_move.move(to)
-        elif self.is_castling_move(fr, to):\
-            ...
+        elif self.is_castling_move(fr, to):
+            if self.is_castling_blocked(fr, to):
+                raise ValueError('castling blocked by figures')
         elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
                 self.figures.remove(dest_cell_cont)
@@ -25,6 +26,9 @@ class ChessBoard:
         else:
             raise RuntimeError('unexpected error: something else except None or Figure in the cell')
 
+    def is_castling_blocked(self, fr, to):
+        return True
+    
     def is_castling_move(self, fr, to):
         if fr == ('e', 1) and to in {('c', 1), ('g', 1)}:
             return True

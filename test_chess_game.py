@@ -113,6 +113,16 @@ class ChessGameTest(unittest.TestCase):
         game.turn('a5', 'a4', 'pawn')
         self.assertEqual(True, game.checkmate)
 
+    def test_king_can_be_checked(self):
+        game = chess_game.ChessGame()
+        game.turn('b1', 'c3', 'knight')
+        game.turn('a7', 'a6', 'pawn')
+        game.turn('c3', 'b5', 'knight')
+        game.turn('a6', 'a5', 'pawn')
+        game.turn('b5', 'c7', 'knight')
+        game.turn('a5', 'a4', 'pawn')
+        self.assertEqual(game.get_board().checked(Color.BLACK), game.checkmate)
+
     def test_turn_is_not_possible_when_checkmate(self):
         game = chess_game.ChessGame()
         game.checkmate = True

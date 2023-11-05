@@ -18,7 +18,7 @@ class ChessBoard:
             if figure_to_move.touched:
                 raise ValueError('king is touched')
             if self.get_castling_rook(to) is None or self.get_castling_rook(to).touched:
-                raise ValueError('rook is touched')
+                raise ValueError('rook is touched or moved')
             if self.is_castling_blocked(fr, to):
                 raise ValueError('castling blocked by figures')
         elif isinstance(dest_cell_cont, ChessFigure):

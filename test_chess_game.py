@@ -119,6 +119,7 @@ class ChessGameTest(unittest.TestCase):
         game.turn('a7', 'a6', 'pawn')
         game.turn('c3', 'b5', 'knight')
         game.turn('a6', 'a5', 'pawn')
+        self.assertEqual(game.get_board().checked(Color.BLACK), False)
         game.turn('b5', 'c7', 'knight')
         self.assertEqual(game.get_board().checked(Color.BLACK), True)
         game.turn('a5', 'a4', 'pawn')

@@ -17,7 +17,7 @@ class ChessBoard:
         elif self.is_castling_move(fr, to):
             if figure_to_move.touched:
                 raise ValueError('king is touched')
-            if self.get_castling_rook(to) == None or self.get_castling_rook(to).touched:
+            if self.get_castling_rook(to) is None or self.get_castling_rook(to).touched:
                 raise ValueError('rook is touched')
             if self.is_castling_blocked(fr, to):
                 raise ValueError('castling blocked by figures')
@@ -39,6 +39,7 @@ class ChessBoard:
             return self.cell(*('h', 8))
         if to == ('c', 8):
             return self.cell(*('a', 8))
+        
     def is_castling_blocked(self, fr, to):
         return True
     

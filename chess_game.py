@@ -41,10 +41,9 @@ class ChessGame:
         if self.check_to == self.players_move:
             self.checkmate = True
             return 'Checkmate! The game is over!'
-        attacking = self.board.cell(*to_parsed).turns()
-        opponents_king = list(filter(lambda k: k.color != self.players_move, self.board.search_board(King)))[0]
-        if opponents_king.position in attacking:
-            self.check_to = opponents_king.color
+     
+        if self.board.checked(self.opponent_color()):
+            self.check_to = self.opponent_color()
         
         self.players_move = self.opponent_color()
         return True

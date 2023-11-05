@@ -40,11 +40,16 @@ class ChessGame:
             else:
                 self.check_to = None
      
+        self.update_check_condition()
+        self.pass_turn()
+        return True
+
+    def update_check_condition(self):
         if self.board.checked(self.opponent_color()):
             self.check_to = self.opponent_color()
         
+    def pass_turn(self):
         self.players_move = self.opponent_color()
-        return True
 
     def validate_parameters(self, fr, figure):
         def figure_name(instance):

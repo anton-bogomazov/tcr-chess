@@ -26,6 +26,10 @@ class ChessBoard:
             raise RuntimeError('unexpected error: something else except None or Figure in the cell')
 
     def is_castling_move(self, fr, to):
+        if fr == ('e', 1) and to in {('c', 1), ('g', 1)}:
+            return True
+        if fr == ('e', 8) and to in {('c', 8), ('g', 8)}:
+            return True
         return False
     
     def checked(self, color):

@@ -16,7 +16,8 @@ class ChessBoard:
             figure_to_move.move(to)
         elif self.is_castling_move(fr, to):
             self.check_if_castling_possible(figure_to_move, fr, to)
-            
+            figure_to_move.move(to)
+
         elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
                 self.figures.remove(dest_cell_cont)

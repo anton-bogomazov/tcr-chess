@@ -175,6 +175,14 @@ class ChessGameTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             board.move(('e', 1), ('g', 1))
 
+    def test_perform_castling_move(self):
+        game = chess_game.ChessGame()
+        game.turn('g1', 'f3', 'knight')
+        game.turn('a7', 'a6', 'pawn')
+        game.turn('g2', 'g3', 'pawn')
+        game.turn('a6', 'a5', 'pawn')
+        game.turn('f1', 'h3', 'bishop')
+
 
 if __name__ == '__main__':
     unittest.main()

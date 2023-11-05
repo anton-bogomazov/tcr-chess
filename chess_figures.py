@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from Color import Color
 
+# figures can be blocked by other figures. restrict it
 
 @dataclass
 class ChessFigure(ABC):

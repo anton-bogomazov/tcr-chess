@@ -33,18 +33,17 @@ class ChessGame:
 
         self.board.move(fr_parsed, to_parsed)
     
-        if self.players_move == self.check_to:
-            if self.board.checked(self.players_move):
-                self.checkmate = True
-                return 'Checkmate! The game is over!'
-            else:
-                self.check_to = None
-     
+
         self.update_check_condition()
         self.pass_turn()
         return True
 
     def update_check_condition(self):
+        if self.players_move == self.check_to:
+            if self.board.checked(self.players_move):
+                self.checkmate = True
+            else:
+                self.check_to = None
         if self.board.checked(self.opponent_color()):
             self.check_to = self.opponent_color()
         

@@ -1,4 +1,6 @@
-from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop, ChessFigure
+from chess_figures import King, ChessFigure
+
+# is figure a good place to localize block checking logic? (probably yes)
 
 
 class ChessBoard:

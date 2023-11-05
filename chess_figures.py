@@ -125,6 +125,7 @@ class Bishop(ChessFigure):
     def symbol(self):
         return '\u2657' if self.color == Color.WHITE else '\u265D'
 
+
 class Knight(ChessFigure):
 
     def turns(self):

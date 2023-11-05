@@ -76,7 +76,7 @@ class ChessGameTest(unittest.TestCase):
 
     def test_whites_starts(self):
         self.assertEquals(
-            chess_game.ChessGame().players_move,
+            chess_game.ChessGame().current_player,
             Color.WHITE
         )
         
@@ -84,7 +84,7 @@ class ChessGameTest(unittest.TestCase):
         game = chess_game.ChessGame()
         game.turn('b1', 'c3', 'knight')
         self.assertEquals(
-            game.players_move,
+            game.current_player,
             Color.BLACK
         )
 
@@ -101,7 +101,7 @@ class ChessGameTest(unittest.TestCase):
         game.turn('c3', 'b5', 'knight')
         game.turn('a6', 'a5', 'pawn')
         game.turn('b5', 'c7', 'knight')
-        self.assertEqual(Color.BLACK, game.check_to)
+        self.assertEqual(Color.BLACK, game.checked_player)
 
     def test_checkmate_condition(self):
         game = chess_game.ChessGame()
@@ -131,10 +131,10 @@ class ChessGameTest(unittest.TestCase):
         game.turn('a6', 'a5', 'pawn')
         game.turn('b5', 'c7', 'knight')
         self.assertEqual(game.get_board().checked(Color.BLACK), True)
-        self.assertEqual(game.check_to, Color.BLACK)
+        self.assertEqual(game.checked_player, Color.BLACK)
         game.turn('d8', 'c7', 'queen')
         self.assertEqual(game.get_board().checked(Color.BLACK), False)
-        self.assertEqual(game.check_to, None)
+        self.assertEqual(game.checked_player, None)
 
     def test_turn_is_not_possible_when_checkmate(self):
         game = chess_game.ChessGame()

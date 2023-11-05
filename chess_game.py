@@ -46,10 +46,10 @@ class ChessGame:
         if opponents_king.position in attacking:
             self.check_to = opponents_king.color
         
-        self.players_move = self.next_player()
+        self.players_move = self.opponent_color()
         return True
 
-    def next_player(self):
+    def opponent_color(self):
         return Color.BLACK if self.players_move == Color.WHITE else Color.WHITE
 
     def get_board(self):

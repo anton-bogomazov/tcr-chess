@@ -6,10 +6,9 @@ class ChessBoard:
         self.figures = figure_set
 
     def move(self, fr, to):
-        from_literal, from_numeral = fr
-        if self.cell(from_literal, from_numeral) is None:
+        if self.cell(*fr) is None:
             raise ValueError('fr references empty cell')
-        figure_to_move = self.cell(from_literal, from_numeral)
+        figure_to_move = self.cell(*fr)
         dest_cell_cont = self.cell(*to)
         if self.is_castling_move(fr, to):
             self.check_if_castling_possible(figure_to_move, fr, to)

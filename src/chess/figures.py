@@ -1,10 +1,16 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
-from Color import Color
+from enum import Enum
 
 # figures can be blocked by other figures. restrict it
 # Modify move method
 
+
+class Color(Enum):
+    WHITE = 1,
+    BLACK = 2
+    
+    
 @dataclass
 class ChessFigure(ABC):
     position: tuple
@@ -168,4 +174,4 @@ class Pawn(ChessFigure):
 
     def symbol(self):
         return '\u2659' if self.color == Color.WHITE else '\u265F'
-     
+    

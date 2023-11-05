@@ -1,6 +1,5 @@
 import unittest
-from Color import Color
-from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
+from src.chess.figures import *
 
 
 class ChessFiguresTest(unittest.TestCase):

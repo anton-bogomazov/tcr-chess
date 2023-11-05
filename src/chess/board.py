@@ -1,4 +1,4 @@
-from chess_figures import King, ChessFigure
+import src.chess.figures as figures
 
 # is figure a good place to localize block checking logic? (probably yes)
 
@@ -22,7 +22,7 @@ class ChessBoard:
             if to not in figure_to_move.turns():
                 raise ValueError('invalid move')
             figure_to_move.move(to)
-        elif isinstance(dest_cell_cont, ChessFigure):
+        elif isinstance(dest_cell_cont, figures.ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
                 self.figures.remove(dest_cell_cont)
                 # cant take if blocked by other figure except Knight
@@ -82,7 +82,7 @@ class ChessBoard:
         return False
     
     def checked(self, color):
-        players_king = [king for king in self.search_board(King) if king.color == color][0]
+        players_king = [king for king in self.search_board(figures.King) if king.color == color][0]
         opponents_figures = [f for f in self.figures if f.color != color]
         for fig in opponents_figures:
             if players_king.position in fig.turns():

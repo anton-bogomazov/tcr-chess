@@ -1,6 +1,7 @@
 import unittest
-from chess_game import ChessGame
-from Color import Color
+from src.chess.game import ChessGame
+from src.chess.figures import Color
+
 
 class ApprovalTest(unittest.TestCase):
 

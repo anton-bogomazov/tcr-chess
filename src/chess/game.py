@@ -1,6 +1,5 @@
-from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop
-from chess_board import ChessBoard
-from Color import Color
+from src.chess.figures import King, Color, Rook, Knight, Bishop, Queen, Pawn
+from src.chess.board import ChessBoard
 
 
 class ChessGame:

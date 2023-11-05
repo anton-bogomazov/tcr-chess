@@ -122,7 +122,6 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(game.get_board().checked(Color.BLACK), False)
         game.turn('b5', 'c7', 'knight')
         self.assertEqual(game.get_board().checked(Color.BLACK), True)
-        game.turn('a5', 'a4', 'pawn')
 
     def test_turn_is_not_possible_when_checkmate(self):
         game = chess_game.ChessGame()

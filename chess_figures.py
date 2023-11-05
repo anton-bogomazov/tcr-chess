@@ -20,10 +20,6 @@ class ChessFigure(ABC):
         self.position = to
         self.touched = True
 
-    def castle(self, to):
-        self.position = to
-        self.touched = True
-
     def is_out_of_board(self, literal, numeral):
         return literal not in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') or numeral > 8 or numeral <= 0
 
@@ -42,6 +38,10 @@ class King(ChessFigure):
             (chr(ord(literal) - 1), numeral),
         ]
         return set(filter(lambda t: not self.is_out_of_board(*t), turns))
+    
+    def castle(self, to):
+        self.position = to
+        self.touched = True
 
 
 class Queen(ChessFigure):

@@ -1,6 +1,5 @@
 from chess_figures import Pawn, Rook, King, Queen, Knight, Bishop, ChessFigure
 
-# Allow to do castling
 
 class ChessBoard:
     def __init__(self, figure_set):

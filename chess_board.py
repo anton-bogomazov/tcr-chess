@@ -12,12 +12,11 @@ class ChessBoard:
             raise ValueError('fr references empty cell')
         figure_to_move = self.cell(from_literal, from_numeral)
         dest_cell_cont = self.cell(*to)
-        if dest_cell_cont is None:
-            figure_to_move.move(to)
-        elif self.is_castling_move(fr, to):
+        if self.is_castling_move(fr, to):
             self.check_if_castling_possible(figure_to_move, fr, to)
+            figure_to_move.castle(to)
+        elif dest_cell_cont is None:
             figure_to_move.move(to)
-
         elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
                 self.figures.remove(dest_cell_cont)

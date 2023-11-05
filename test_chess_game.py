@@ -182,6 +182,9 @@ class ChessGameTest(unittest.TestCase):
         game.turn('g2', 'g3', 'pawn')
         game.turn('a6', 'a5', 'pawn')
         game.turn('f1', 'h3', 'bishop')
+        game.turn('a5', 'a4', 'pawn')
+        game.turn('e1', 'g1', 'king')
+
 
 
 if __name__ == '__main__':

@@ -36,11 +36,12 @@ class ChessGame:
 
         self.board.move(fr_parsed, to_parsed)
     
-        # is attacking figure removed? does king stand on attacking cell?
-
-        if self.check_to == self.players_move:
-            self.checkmate = True
-            return 'Checkmate! The game is over!'
+        if self.players_move == self.check_to:
+            if self.board.checked(self.players_move):
+                self.checkmate = True
+                return 'Checkmate! The game is over!'
+            else:
+                self.check_to = None
      
         if self.board.checked(self.opponent_color()):
             self.check_to = self.opponent_color()

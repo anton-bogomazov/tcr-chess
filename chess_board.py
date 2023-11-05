@@ -25,10 +25,10 @@ class ChessBoard:
             raise RuntimeError('unexpected error: something else except None or Figure in the cell')
 
     def checked(self, color):
-        kings = [king for king in self.search_board(King) if king.color == color][0]
+        players_king = [king for king in self.search_board(King) if king.color == color][0]
         opponents_figures = [f for f in self.figures if f.color != color]
         for fig in opponents_figures:
-            if kings.position in fig.turns():
+            if players_king.position in fig.turns():
                 return True
         return False
 

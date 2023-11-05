@@ -26,10 +26,13 @@ class ChessGame:
             return tuple(p)[0], int(tuple(p)[1])
 
         self.validate_parameters(parse_position(fr), figure)
-        self.board.move(parse_position(fr), parse_position(to))
+        self.move_figure(parse_position(fr), parse_position(to))
         self.update_check_condition()
         self.pass_turn()
 
+    def move_figure(self, fr, to):
+        self.board.move(fr, to)
+        
     def update_check_condition(self):
         if self.current_player == self.checked_player:
             if self.board.checked(self.current_player):

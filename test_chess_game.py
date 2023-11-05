@@ -142,5 +142,9 @@ class ChessGameTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             game.turn('b1', 'c3', 'knight')
 
+    def test_is_castling_move_blocked_by_figures(self):
+        board = chess_game.ChessGame().get_board()
+        self.assertEqual(False, board.is_castling_move())
+
 if __name__ == '__main__':
     unittest.main()

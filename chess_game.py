@@ -29,7 +29,6 @@ class ChessGame:
         self.board.move(parse_position(fr), parse_position(to))
         self.update_check_condition()
         self.pass_turn()
-        return True
 
     def update_check_condition(self):
         if self.current_player == self.checked_player:

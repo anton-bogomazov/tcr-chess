@@ -12,11 +12,14 @@ class ApprovalTest(unittest.TestCase):
             ("e7", "e5", "pawn"),
             ("g2", "g4", "pawn"),
             ("d8", "h4", "queen"), # checkmate
-            ("f3", "f4", "pawn"),
         ]
         for move in moves:
             game.turn(*move)
 
-        self.assertEqual(True, game.checkmate)
         self.assertEqual(Color.WHITE, game.checked_player)
+        
+        with self.assertRaises(RuntimeError):
+            game.turn("f3", "f4", "pawn")
+
+        self.assertEqual(True, game.checkmate)
         

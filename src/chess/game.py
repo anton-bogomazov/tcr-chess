@@ -18,9 +18,8 @@ class ChessGame:
             raise TypeError('"to" should be a string')
         if figure is None:
             raise TypeError('"figure" should be a string')
-
         if self.checkmate:
-            raise RuntimeError('Checkmate! The game is over!')
+            raise RuntimeError('Create a new game, this one is finished!')
 
         def parse_position(p: str):
             return tuple(p)[0], int(tuple(p)[1])
@@ -28,6 +27,8 @@ class ChessGame:
         self.validate_parameters(parse_position(fr), figure)
         self.move_figure(parse_position(fr), parse_position(to))
         self.update_check_condition()
+        if self.checkmate:
+            raise RuntimeError('Checkmate! The game is over!')
         self.pass_turn()
 
     def move_figure(self, fr, to):

@@ -1,4 +1,5 @@
 from chess.game import ChessGame
+import os
 
 
 def main():
@@ -7,6 +8,7 @@ def main():
         print_board(game.get_board().to_string())
         turn = input('> ')
         game.turn(*turn.split())
+        os.system('clear')
     
 
 def print_board(board):

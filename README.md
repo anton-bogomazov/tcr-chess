@@ -13,9 +13,17 @@ The main purpose of its implementation is to challenge the self in three differe
 Important notes:
 - Commits are not squashed intentionally
 
+Todo:
+[x] Figures' moves logic
+[x] Game observer
+[x] Castling
+[] Approval tests WIP
+[] Restrict jumping over figures
+[] Game runner and GUI
+
 More about TCR [here](https://www.infoq.com/articles/test-commit-revert/)
 
-Here is an awesome workshops by Kent Beck:
+Here are awesome workshops by Kent Beck:
 - [Part 0](https://youtu.be/tnO2Mos0RjU?si=yj0RX3lT4aZ8RaSl)
 - [Part 1](https://youtu.be/Aof0F9DvTFg?si=w4O3tstjAyZOsXcr)
 - [Part 2](https://youtu.be/i3TUSxPy32A?si=WynMa-ySVXrMJK9e)

@@ -41,7 +41,19 @@ class ChessBoard:
             return self.cell(*('a', 8))
         
     def is_castling_blocked(self, fr, to):
-        return True
+        from_literal, from_numeral = fr
+        to_literal, to_numeral = to
+
+        assert from_numeral == to_numeral
+
+        if ord(from_literal) < ord(to_literal):
+            n = 0
+            while ord(from_literal) < ord(to_literal)-n:
+                if self.cell(to_literal, to_numeral) is not None:
+                    return True
+                n += 1
+
+        return False
     
     def is_castling_move(self, fr, to):
         if fr == ('e', 1) and to in {('c', 1), ('g', 1)}:

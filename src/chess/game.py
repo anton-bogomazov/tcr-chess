@@ -1,11 +1,12 @@
-from src.chess.figures import King, Color, Rook, Knight, Bishop, Queen, Pawn
+from src.chess.figures import Color
 from src.chess.board import ChessBoard
+from src.chess.sets import standard_chess_figure_set
 
 
 class ChessGame:
 
-    def __init__(self):
-        self.board = ChessBoard(standard_chess_figure_set())
+    def __init__(self, figure_set=standard_chess_figure_set()):
+        self.board = ChessBoard(figure_set)
         self.current_player = Color.WHITE
         self.checked_player = None
         self.checkmate = False
@@ -59,22 +60,3 @@ class ChessGame:
 
     def get_board(self):
         return self.board
-
-
-def standard_chess_figure_set():
-    literals = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
-
-    def player_set(figures_row, pawns_row, color):
-        rooks = [Rook((lit, figures_row), color) for lit in ('a', 'h')]
-        knights = [Knight((lit, figures_row), color) for lit in ('b', 'g')]
-        bishops = [Bishop((lit, figures_row), color) for lit in ('c', 'f')]
-        figures = [
-                      Queen(('d', figures_row), color),
-                      King(('e', figures_row), color)
-                  ] + rooks + knights + bishops
-        pawns = [Pawn((lit, pawns_row), color) for lit in literals]
-
-        return figures + pawns
-
-    return player_set(1, 2, Color.WHITE) + \
-        player_set(8, 7, Color.BLACK)

@@ -87,11 +87,8 @@ class Queen(ChessFigure):
 
 class Rook(ChessFigure):
 
-    def neighbour(self, figures_in_scope, predicate):
-        found = list(filter(lambda f: predicate(f), figures_in_scope))
-        # left: sorted(found, key=lambda x: x.position[0], reverse=True)
-        # right: sorted(found, key=lambda x: x.position[0])
-        return None if len(found) == 0 else found[0]
+    def neighbours(self, figures_in_scope, predicate):
+        return list(filter(lambda f: predicate(f), figures_in_scope))
 
     # Such a shitty code
     def is_same_literal(self, figure):
@@ -101,17 +98,21 @@ class Rook(ChessFigure):
         return self.position[1] == figure.position[1]
     
     def closest_left(self, figures_in_scope):
-        return self.neighbour(figures_in_scope, lambda f: self.is_same_numeral(f) and self.position[0] > f.position[0])
+        neighbours_on_left = self.neighbours(figures_in_scope, lambda f: self.is_same_numeral(f) and self.position[0] > f.position[0])
+        return None if len(neighbours_on_left) == 0 else sorted(neighbours_on_left, key=lambda x: x.position[0], reverse=True)[0]
 
     def closest_right(self, figures_in_scope):
-        return self.neighbour(figures_in_scope, lambda f: self.is_same_numeral(f) and self.position[0] < f.position[0])
+        neighbours_on_right = self.neighbours(figures_in_scope, lambda f: self.is_same_numeral(f) and self.position[0] < f.position[0])
+        return None if len(neighbours_on_right) == 0 else sorted(neighbours_on_right, key=lambda x: x.position[0])[0]
 
     def closest_top(self, figures_in_scope):
-        return self.neighbour(figures_in_scope, lambda f: self.is_same_literal(f) and self.position[1] < f.position[1])
+        neighbours_on_top = self.neighbours(figures_in_scope, lambda f: self.is_same_literal(f) and self.position[1] < f.position[1])
+        return None if len(neighbours_on_top) == 0 else sorted(neighbours_on_top, key=lambda x: x.position[1])[0]
 
     def closest_bottom(self, figures_in_scope):
-        return self.neighbour(figures_in_scope, lambda f: self.is_same_literal(f) and self.position[1] > f.position[1])
-
+        neighbours_on_bottom = self.neighbours(figures_in_scope, lambda f: self.is_same_literal(f) and self.position[1] > f.position[1])
+        return None if len(neighbours_on_bottom) == 0 else sorted(neighbours_on_bottom, key=lambda x: x.position[1], reverse=True)[0]
+    
     def is_figure_takeable(self, figure):
         return not isinstance(figure, King) and figure.color != self.color
         

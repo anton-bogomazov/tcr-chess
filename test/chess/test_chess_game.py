@@ -216,13 +216,9 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(None, sut.closest_top(figures))
 
     def test_rook_can_be_blocked_by_friendly_figures_no_turns(self):
-        sut = Rook(('h', 1), Color.WHITE)
-        figures = [
-            Pawn(('h', 2), Color.WHITE),
-            Knight(('g', 1), Color.WHITE),
-            sut
-        ]
-        self.assertEqual(set(), sut.possible_moves(figures))
+        game = standard_chess_game()
+        bottom_right_rook = game.get_board().cell('a', 1)
+        self.assertEqual(set(), bottom_right_rook.possible_moves(game.get_board().figures))
 
 
 if __name__ == '__main__':

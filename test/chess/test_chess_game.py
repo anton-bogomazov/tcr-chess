@@ -192,10 +192,19 @@ class ChessGameTest(unittest.TestCase):
         self.assertIsInstance(game.get_board().cell('f', 1), Rook)
         self.assertIsInstance(game.get_board().cell('g', 1), King)
 
-    def knight_cant_be_blocked_by_other_figures(self):
+    def knight_can_jump_over_figures(self):
         sut = Knight(('e', 4), Color.WHITE)
         figures = [
             Pawn(('d', 5), Color.BLACK),
+            sut
+        ]
+        self.assertEqual(len(sut.turns()), len(sut.possible_moves(figures)))
+
+    def rook_can_be_blocked_by_other_figures(self):
+        sut = Rook(('d', 6), Color.WHITE)
+        figures = [
+            Pawn(('d', 5), Color.BLACK),
+            Pawn(('e', 6), Color.BLACK),
             sut
         ]
         self.assertEqual(len(sut.turns()), len(sut.possible_moves(figures)))

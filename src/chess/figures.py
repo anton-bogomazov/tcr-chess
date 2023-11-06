@@ -85,6 +85,10 @@ class Queen(ChessFigure):
 
 
 class Rook(ChessFigure):
+
+    def possible_moves(self, figures):
+        return self.turns()
+    
     def turns(self):
         literal, numeral = self.position
         turns = [(chr(ord(literal) - i), numeral) for i in range(1, 8)] +\

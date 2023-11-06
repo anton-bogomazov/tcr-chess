@@ -87,7 +87,32 @@ class Queen(ChessFigure):
 class Rook(ChessFigure):
 
     def possible_moves(self, figures):
-        return self.turns()
+        literal, numeral = self.position
+        figures_in_scope = list(filter(lambda f: f.position in list(self.turns()), figures))
+
+        result = []
+        for fig in figures_in_scope:
+            f_literal, f_numeral = fig.position
+
+            literal_diff = ord(f_literal) - ord(literal) + 1
+            while literal_diff < 0:
+                result.append((chr(ord(literal) + literal_diff), numeral))
+                literal_diff += 1
+            literal_diff = ord(f_literal) - ord(literal) + 1
+            while literal_diff > 0:
+                result.append((chr(ord(literal) - literal_diff), numeral))
+                literal_diff -= 1
+
+            numeral_diff = f_numeral - numeral + 1
+            while numeral_diff < 0:
+                result.append((literal, numeral + numeral_diff))
+                numeral_diff += 1
+            numeral_diff = f_numeral - numeral + 1
+            while numeral_diff > 0:
+                result.append((literal, numeral - numeral_diff))
+                numeral_diff -= 1
+
+        return result
     
     def turns(self):
         literal, numeral = self.position

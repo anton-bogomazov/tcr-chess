@@ -205,9 +205,10 @@ class ChessGameTest(unittest.TestCase):
         figures = [
             Pawn(('d', 5), Color.BLACK),
             Pawn(('e', 6), Color.BLACK),
+            Pawn(('b', 6), Color.BLACK),
             sut
         ]
-        self.assertEqual(len(sut.turns()), len(sut.possible_moves(figures)))
+        self.assertEqual(len(sut.turns()) - 4 - 3 - 1, len(sut.possible_moves(figures)))
 
 
 if __name__ == '__main__':

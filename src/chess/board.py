@@ -30,7 +30,7 @@ class ChessBoard:
                 # cant take if blocked by other figure except Knight
                 # pawns take figures diagonally
                 if to not in figure_to_move.turns():
-                    raise ValueError('invalid move')
+                    raise InvalidMoveError()
                 figure_to_move.move(to)
             else:
                 raise ValueError('you are trying to take your own figure')

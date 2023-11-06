@@ -33,9 +33,9 @@ class ChessBoard:
                     raise InvalidMoveError()
                 figure_to_move.move(to)
             else:
-                raise ValueError('you are trying to take your own figure')
+                raise InvalidMoveError('you are trying to take your own figure')
         else:
-            raise RuntimeError('unexpected error: something else except None or Figure in the cell')
+            raise InconsistentStateError('something else except None or Figure in the cell')
 
     def check_if_castling_possible(self, figure_to_move, fr, to):
         if figure_to_move.touched:

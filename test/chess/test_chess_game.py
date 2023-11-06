@@ -193,12 +193,12 @@ class ChessGameTest(unittest.TestCase):
         self.assertIsInstance(game.get_board().cell('g', 1), King)
 
     def knight_cant_be_blocked_by_other_figures(self):
+        sut = Knight(('e', 4), Color.WHITE)
         figures = [
             Pawn(('d', 5), Color.BLACK),
-            Knight(('e', 4), Color.WHITE)
+            sut
         ]
-        game = ChessGame(figures)
-        game.turn('e4', 'd6')
+        self.assertEqual(len(sut.turns()), len(sut.possible_moves(figures)))
 
 
 if __name__ == '__main__':

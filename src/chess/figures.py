@@ -134,6 +134,9 @@ class Bishop(ChessFigure):
 
 class Knight(ChessFigure):
 
+    def possible_moves(self, figures):
+        return self.turns()
+        
     def turns(self):
         literal, numeral = self.position
         turns = [

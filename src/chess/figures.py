@@ -91,27 +91,24 @@ class Rook(ChessFigure):
         return None if len(found) == 0 else found[0]
 
     # Such a shitty code
-    def closest_left(self, figures):
-        figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)
+    def closest_left(self, figures_in_scope):
         return self.neighbour(figures_in_scope, lambda f: self.position[1] == f.position[1] and self.position[0] > f.position[0])
 
-    def closest_right(self, figures):
-        figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)
+    def closest_right(self, figures_in_scope):
         return self.neighbour(figures_in_scope, lambda f: self.position[1] == f.position[1] and self.position[0] < f.position[0])
 
-    def closest_top(self, figures):
-        figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)
+    def closest_top(self, figures_in_scope):
         return self.neighbour(figures_in_scope, lambda f: self.position[0] == f.position[0] and self.position[1] < f.position[1])
 
-    def closest_bottom(self, figures):
-        figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)
+    def closest_bottom(self, figures_in_scope):
         return self.neighbour(figures_in_scope, lambda f: self.position[0] == f.position[0] and self.position[1] > f.position[1])
 
     def possible_moves(self, figures):
-        closest_top = self.closest_top(figures)
-        closest_bottom = self.closest_bottom(figures)
-        closest_left = self.closest_left(figures)
-        closest_right = self.closest_right(figures)
+        figures_in_scope = list(filter(lambda f: f.position in list(self.turns()), figures))
+        closest_top = self.closest_top(figures_in_scope)
+        closest_bottom = self.closest_bottom(figures_in_scope)
+        closest_left = self.closest_left(figures_in_scope)
+        closest_right = self.closest_right(figures_in_scope)
 
         def ignore_blocked(turn):
             top = closest_top is None or turn[1] < closest_top.position[1]

@@ -74,6 +74,8 @@ class Gui:
 
                 if self.selected_cell:
                     figure = self.game.get_board().cell(self.selected_cell[0], int(self.selected_cell[1]))
+                    figure_highlight_color = (0, 0, 255)  # Green
+                    pygame.draw.rect(self.screen, figure_highlight_color, rectangle(col, row), 3)
                     if figure and isinstance(figure, Rook):
                         possible_moves = figure.possible_moves(self.game.get_board().figures)
                         print(f'moves {possible_moves}')

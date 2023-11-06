@@ -89,6 +89,8 @@ class Rook(ChessFigure):
 
     def neighbour(self, figures_in_scope, predicate):
         found = list(filter(lambda f: predicate(f), figures_in_scope))
+        # left: sorted(found, key=lambda x: x.position[0], reverse=True)
+        # right: sorted(found, key=lambda x: x.position[0])
         return None if len(found) == 0 else found[0]
 
     # Such a shitty code

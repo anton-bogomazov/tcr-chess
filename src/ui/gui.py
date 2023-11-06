@@ -1,6 +1,7 @@
 import pygame
 import sys
 from src.chess.figures import Color
+from src.chess.figures import Rook
 
 
 class Gui:
@@ -70,6 +71,15 @@ class Gui:
         for row in range(self.board_size):
             for col in range(self.board_size):
                 draw_cell(color(col, row), rectangle(col, row))
+
+                if self.selected_cell:
+                    figure = self.game.get_board().cell(self.selected_cell[0], int(self.selected_cell[1]))
+                    if figure and isinstance(figure, Rook):
+                        possible_moves = figure.possible_moves(self.game.get_board().figures)
+                        print(f'moves {possible_moves}')
+                        if (chr(col + ord('a')), 8 - row) in possible_moves:
+                            highlight_color = (0, 255, 0)  # Green
+                            pygame.draw.rect(self.screen, highlight_color, rectangle(col, row), 3)
 
     def draw_figures(self):
         figure_white = (255, 255, 255)

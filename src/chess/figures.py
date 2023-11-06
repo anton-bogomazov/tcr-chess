@@ -86,14 +86,14 @@ class Queen(ChessFigure):
 
 class Rook(ChessFigure):
 
+    def neighbour(self, figures_in_scope, predicate):
+        found = list(filter(lambda f: predicate(f), figures_in_scope))
+        return None if len(found) == 0 else found[0]
+
     # Such a shitty code
     def closest_left(self, figures):
         figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)
-        left = list(filter(lambda f: self.position[1] == f.position[1] and self.position[0] > f.position[0], figures_in_scope))
-        if len(left) == 0:
-            return None
-        else:
-            return left[0]
+        return self.neighbour(figures_in_scope, lambda f: self.position[1] == f.position[1] and self.position[0] > f.position[0])
 
     def closest_right(self, figures):
         figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)

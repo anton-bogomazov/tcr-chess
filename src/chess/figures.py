@@ -86,33 +86,67 @@ class Queen(ChessFigure):
 
 class Rook(ChessFigure):
 
+    # Such a shitty code
+    def closest_left(self, figures):
+        figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)
+        left = list(filter(lambda f: self.position[1] == f.position[1] and self.position[0] > f.position[0], figures_in_scope))
+        if len(left) == 0:
+            return None
+        else:
+            return left[0]
+
+    def closest_right(self, figures):
+        figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)
+        right = list(filter(lambda f: self.position[1] == f.position[1] and self.position[0] < f.position[0], figures_in_scope))
+        if len(right) == 0:
+            return None
+        else:
+            return right[0]
+
+    def closest_top(self, figures):
+        figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)
+        top = list(filter(lambda f: self.position[0] == f.position[0] and self.position[1] < f.position[1], figures_in_scope))
+        if len(top) == 0:
+            return None
+        else:
+            return top[0]
+
+    def closest_bottom(self, figures):
+        figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)
+        bottom = list(filter(lambda f: self.position[0] == f.position[0] and self.position[1] > f.position[1], figures_in_scope))
+        if len(bottom) == 0:
+            return None
+        else:
+            return bottom[0]
+
     def possible_moves(self, figures):
-        literal, numeral = self.position
-        figures_in_scope = list(filter(lambda f: f.position in list(self.turns()), figures))
+        closest_top = self.closest_top(figures)
+        closest_bottom = self.closest_bottom(figures)
+        closest_left = self.closest_left(figures)
+        closest_right = self.closest_right(figures)
 
-        result = []
-        for fig in figures_in_scope:
-            f_literal, f_numeral = fig.position
+        def ignore_blocked(turn):
+            top = closest_top is None or turn[1] < closest_top.position[1]
+            bottom = closest_bottom is None or turn[1] > closest_bottom.position[1]
+            right = closest_right is None or turn[0] < closest_right.position[0]
+            left = closest_left is None or turn[0] > closest_left.position[0]
 
-            literal_diff = ord(f_literal) - ord(literal) + 1
-            while literal_diff < 0:
-                result.append((chr(ord(literal) + literal_diff), numeral))
-                literal_diff += 1
-            literal_diff = ord(f_literal) - ord(literal) + 1
-            while literal_diff > 0:
-                result.append((chr(ord(literal) - literal_diff), numeral))
-                literal_diff -= 1
+            if top and bottom and right and left:
+                return True
+            return False
 
-            numeral_diff = f_numeral - numeral + 1
-            while numeral_diff < 0:
-                result.append((literal, numeral + numeral_diff))
-                numeral_diff += 1
-            numeral_diff = f_numeral - numeral + 1
-            while numeral_diff > 0:
-                result.append((literal, numeral - numeral_diff))
-                numeral_diff -= 1
+        closest_figs = []
+        if closest_top is not None:
+            closest_figs.append(closest_top)
+        if closest_bottom is not None:
+            closest_figs.append(closest_bottom)
+        if closest_right is not None:
+            closest_figs.append(closest_right)
+        if closest_left is not None:
+            closest_figs.append(closest_left)
+        takeable = list(filter(lambda f: not isinstance(f, King) and f.color != self.color, closest_figs))
 
-        return result
+        return set(list(filter(ignore_blocked, self.turns())) + list(map(lambda f: f.position, takeable)))
     
     def turns(self):
         literal, numeral = self.position

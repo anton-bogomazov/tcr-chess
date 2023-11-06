@@ -200,15 +200,29 @@ class ChessGameTest(unittest.TestCase):
         ]
         self.assertEqual(len(sut.turns()), len(sut.possible_moves(figures)))
 
-    def test_rook_can_be_blocked_by_other_figures(self):
+    def test_rook_can_be_blocked_by_opponents_figures(self):
         sut = Rook(('d', 6), Color.WHITE)
         figures = [
-            Pawn(('d', 5), Color.BLACK),
+            King(('d', 5), Color.WHITE),
             Pawn(('e', 6), Color.BLACK),
-            Pawn(('b', 6), Color.BLACK),
+            Pawn(('b', 6), Color.WHITE),
+            Pawn(('a', 6), Color.BLACK),
             sut
         ]
-        self.assertEqual(len(sut.turns()) - 4 - 3 - 1, len(sut.possible_moves(figures)))
+        self.assertEqual({('d', 8), ('d', 7), ('c', 6), ('e', 6)}, sut.possible_moves(figures))
+        self.assertEqual(Pawn(('b', 6), Color.WHITE), sut.closest_left(figures))
+        self.assertEqual(Pawn(('e', 6), Color.BLACK), sut.closest_right(figures))
+        self.assertEqual(King(('d', 5), Color.WHITE), sut.closest_bottom(figures))
+        self.assertEqual(None, sut.closest_top(figures))
+
+    def test_rook_can_be_blocked_by_friendly_figures_no_turns(self):
+        sut = Rook(('h', 1), Color.WHITE)
+        figures = [
+            Pawn(('h', 2), Color.WHITE),
+            Knight(('g', 1), Color.WHITE),
+            sut
+        ]
+        self.assertEqual(set(), sut.possible_moves(figures))
 
 
 if __name__ == '__main__':

@@ -151,9 +151,9 @@ class ChessGameTest(unittest.TestCase):
 
     def test_castling_move_impossible_when_blocked_by_figures(self):
         board = standard_chess_game().get_board()
-        with self.assertRaises(ValueError):
+        with self.assertRaises(CastlingNotPossibleError):
             board.move(('e', 1), ('g', 1))
-        with self.assertRaises(ValueError):
+        with self.assertRaises(CastlingNotPossibleError):
             board.move(('e', 1), ('c', 1))
 
     def test_castling_move_impossible_when_king_touched(self):
@@ -161,7 +161,7 @@ class ChessGameTest(unittest.TestCase):
         king.touched = True
         board = ChessBoard((king, Rook(('h', 1), Color.WHITE)))
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(CastlingNotPossibleError):
             board.move(('e', 1), ('g', 1))
 
     def test_castling_move_impossible_when_rook_touched(self):
@@ -169,12 +169,12 @@ class ChessGameTest(unittest.TestCase):
         rook.touched = True
         board = ChessBoard((King(('e', 1), Color.WHITE), rook))
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(CastlingNotPossibleError):
             board.move(('e', 1), ('g', 1))
 
     def test_castling_move_impossible_when_rook_moved(self):
         board = ChessBoard([King(('e', 1), Color.WHITE)])
-        with self.assertRaises(ValueError):
+        with self.assertRaises(CastlingNotPossibleError):
             board.move(('e', 1), ('g', 1))
 
     def test_perform_castling_move(self):

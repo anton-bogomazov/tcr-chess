@@ -2,6 +2,7 @@ import unittest
 from src.chess.figures import *
 from src.chess.figures import Color
 from src.chess.game import standard_chess_game
+from src.chess.game import ChessGame
 from src.chess.board import ChessBoard
 from src.chess.error import *
 
@@ -190,6 +191,14 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(None, game.get_board().cell('h', 1))
         self.assertIsInstance(game.get_board().cell('f', 1), Rook)
         self.assertIsInstance(game.get_board().cell('g', 1), King)
+
+    def knight_cant_be_blocked_by_other_figures(self):
+        figures = [
+            Pawn(('d', 5), Color.BLACK),
+            Knight(('e', 4), Color.WHITE)
+        ]
+        game = ChessGame(figures)
+        game.turn('e4', 'd6')
 
 
 if __name__ == '__main__':

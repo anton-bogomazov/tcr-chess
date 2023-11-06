@@ -40,7 +40,7 @@ class Gui:
     def handle_click(self, x, y):
         col = x // self.cell_width
         row = y // self.cell_width
-        clicked_cell = (chr(col + ord('a')), row + 1)
+        clicked_cell = (chr(col + ord('a')), 8 - row)
         print(f'clicked: {clicked_cell}, selected: {self.selected_cell}')
         
         if self.selected_cell is None:
@@ -82,7 +82,7 @@ class Gui:
 
         def cell_coordinates(fig_position):
             pos_literal, pos_numeral = fig_position
-            return ord(pos_literal) - ord('a'), pos_numeral - 1
+            return ord(pos_literal) - ord('a'), 8 - pos_numeral
 
         def cell_center(cell_coordinates):
             cell_x, cell_y = cell_coordinates

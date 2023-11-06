@@ -1,4 +1,6 @@
 import src.chess.figures as figures
+from src.chess.error import InvalidMoveError
+
 
 # is figure a good place to localize block checking logic? (probably yes)
 
@@ -20,7 +22,7 @@ class ChessBoard:
         elif dest_cell_cont is None:
             # cant move if blocked by other figure except Knight
             if to not in figure_to_move.turns():
-                raise ValueError('invalid move')
+                raise InvalidMoveError()
             figure_to_move.move(to)
         elif isinstance(dest_cell_cont, figures.ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:

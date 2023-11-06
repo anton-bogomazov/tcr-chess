@@ -10,3 +10,7 @@ class CheckmateError(Exception):
 class OpponentsTurnError(Exception):
     def __init__(self):
         super().__init__(self, 'it is not your turn')
+
+class InvalidMoveError(Exception):
+    def __init__(self):
+        super().__init__(self, 'this move is not allowed')

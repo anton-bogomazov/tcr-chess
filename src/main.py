@@ -1,6 +1,6 @@
 from chess.game import standard_chess_game
-from cli import Cli
-from gui import Gui
+from src.ui.cli import Cli
+from src.ui.gui import Gui
 
 
 def main():

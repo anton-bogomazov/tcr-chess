@@ -109,6 +109,9 @@ class Rook(ChessFigure):
     def closest_bottom(self, figures_in_scope):
         return self.neighbour(figures_in_scope, lambda f: self.is_same_literal(f) and self.position[1] > f.position[1])
 
+    def is_figure_takeable(self, figure):
+        return not isinstance(figure, King) and figure.color != self.color
+        
     def possible_moves(self, figures):
         figures_in_scope = list(filter(lambda f: f.position in list(self.turns()), figures))
         closest_top = self.closest_top(figures_in_scope)
@@ -125,7 +128,7 @@ class Rook(ChessFigure):
 
         closest_figs = [closest_top, closest_bottom, closest_left, closest_right]
         closest_figs = [f for f in closest_figs if f is not None]
-        takeable = list(filter(lambda f: not isinstance(f, King) and f.color != self.color, closest_figs))
+        takeable = filter(self.is_figure_takeable, closest_figs)
 
         return set(list(filter(is_not_blocked, self.turns())) + list(map(lambda f: f.position, takeable)))
     

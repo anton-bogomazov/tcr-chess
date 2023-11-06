@@ -3,6 +3,7 @@ from src.chess.figures import *
 from src.chess.figures import Color
 from src.chess.game import standard_chess_game
 from src.chess.board import ChessBoard
+from src.chess.error import *
 
 
 class ChessGameTest(unittest.TestCase):
@@ -90,7 +91,7 @@ class ChessGameTest(unittest.TestCase):
     def test_cant_move_white_piece_in_the_blacks_turn(self):
         game = standard_chess_game()
         game.turn('b1', 'c3')
-        with self.assertRaises(ValueError):
+        with self.assertRaises(OpponentsTurnError):
             game.turn('g1', 'f3')
 
     def test_check_condition(self):
@@ -109,7 +110,7 @@ class ChessGameTest(unittest.TestCase):
         game.turn('c3', 'b5')
         game.turn('a6', 'a5')
         game.turn('b5', 'c7')
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises(CheckmateError):
             game.turn('a5', 'a4')
         self.assertEqual(True, game.checkmate)
 
@@ -140,7 +141,7 @@ class ChessGameTest(unittest.TestCase):
         game = standard_chess_game()
         game.checkmate = True
         
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises(CheckmateError):
             game.turn('b1', 'c3')
 
     def test_is_castling_move(self):

@@ -1,6 +1,7 @@
 from src.chess.figures import Color
 from src.chess.board import ChessBoard
 from src.chess.sets import standard_chess_figure_set
+from src.chess.error import CheckmateError, OpponentsTurnError
 
 
 class ChessGame:
@@ -17,7 +18,7 @@ class ChessGame:
         if to is None:
             raise TypeError('"to" should be a string')
         if self.checkmate:
-            raise RuntimeError('Create a new game, this one is finished!')
+            raise CheckmateError()
 
         def parse_position(p: str):
             return tuple(p)[0], int(tuple(p)[1])
@@ -26,7 +27,7 @@ class ChessGame:
         self.move_figure(parse_position(fr), parse_position(to))
         self.update_check_condition()
         if self.checkmate:
-            raise RuntimeError('Checkmate! The game is over!')
+            raise CheckmateError()
         self.pass_turn()
 
     def move_figure(self, fr, to):
@@ -47,7 +48,7 @@ class ChessGame:
     def validate_parameters(self, fr):
         selected_figure = self.board.cell(*fr)
         if selected_figure.color != self.current_player:
-            raise ValueError('it is not your turn')
+            raise OpponentsTurnError()
 
     def opponent_color(self):
         return Color.BLACK if self.current_player == Color.WHITE else Color.WHITE

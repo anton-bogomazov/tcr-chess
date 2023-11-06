@@ -1,6 +1,7 @@
 import unittest
 from src.chess.game import standard_chess_game
 from src.chess.figures import Color
+from src.chess.error import *
 
 
 class ApprovalTest(unittest.TestCase):
@@ -18,7 +19,7 @@ class ApprovalTest(unittest.TestCase):
 
         self.assertEqual(Color.WHITE, game.checked_player)
         
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises(CheckmateError):
             game.turn("f3", "f4")
 
         self.assertEqual(True, game.checkmate)

@@ -5,14 +5,14 @@ from src.chess.figures import Color
 
 class Gui:
     def __init__(self, chess_game):
-        pygame.init()
         self.game = chess_game
-        self.screen = pygame.display.set_mode((400, 400))
-        pygame.display.set_caption('Chess GUI')
         self.cell_width = 50
         self.board_size = 8
         self.selected_cell = None
         self.running = True
+        self.screen = pygame.display.set_mode((400, 400))
+        pygame.init()
+        pygame.display.set_caption('Chess GUI')
 
     def start(self):
         while self.running:
@@ -73,7 +73,7 @@ class Gui:
     def draw_figures(self):
         figure_white = (255, 255, 255)
         figure_black = (0, 0, 0)
-        font_filename = "segoe-ui.ttf"
+        font_filename = "./ui/segoe-ui.ttf"
         font = pygame.font.Font(font_filename, 48)
 
         def color(fig_color):

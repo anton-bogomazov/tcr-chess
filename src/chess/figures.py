@@ -115,10 +115,7 @@ class Rook(ChessFigure):
             bottom = closest_bottom is None or turn[1] > closest_bottom.position[1]
             right = closest_right is None or turn[0] < closest_right.position[0]
             left = closest_left is None or turn[0] > closest_left.position[0]
-
-            if top and bottom and right and left:
-                return True
-            return False
+            return top and bottom and right and left
 
         closest_figs = []
         if closest_top is not None:

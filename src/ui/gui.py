@@ -10,7 +10,8 @@ class Gui:
         self.board_size = 8
         self.selected_cell = None
         self.running = True
-        self.screen = pygame.display.set_mode((400, 400))
+        self.window_width = 400
+        self.screen = pygame.display.set_mode((self.window_width, self.window_width))
         pygame.init()
         pygame.display.set_caption('Chess GUI')
 

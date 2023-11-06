@@ -116,7 +116,7 @@ class Rook(ChessFigure):
         closest_left = self.closest_left(figures_in_scope)
         closest_right = self.closest_right(figures_in_scope)
 
-        def ignore_blocked(turn):
+        def is_not_blocked(turn):
             top = closest_top is None or turn[1] < closest_top.position[1]
             bottom = closest_bottom is None or turn[1] > closest_bottom.position[1]
             right = closest_right is None or turn[0] < closest_right.position[0]
@@ -127,7 +127,7 @@ class Rook(ChessFigure):
         closest_figs = [f for f in closest_figs if f is not None]
         takeable = list(filter(lambda f: not isinstance(f, King) and f.color != self.color, closest_figs))
 
-        return set(list(filter(ignore_blocked, self.turns())) + list(map(lambda f: f.position, takeable)))
+        return set(list(filter(is_not_blocked, self.turns())) + list(map(lambda f: f.position, takeable)))
     
     def turns(self):
         literal, numeral = self.position

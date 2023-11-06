@@ -91,17 +91,23 @@ class Rook(ChessFigure):
         return None if len(found) == 0 else found[0]
 
     # Such a shitty code
+    def is_same_literal(self, figure):
+        return self.position[0] == figure.position[0]
+    
+    def is_same_numeral(self, figure):
+        return self.position[1] == figure.position[1]
+    
     def closest_left(self, figures_in_scope):
-        return self.neighbour(figures_in_scope, lambda f: self.position[1] == f.position[1] and self.position[0] > f.position[0])
+        return self.neighbour(figures_in_scope, lambda f: self.is_same_numeral(f) and self.position[0] > f.position[0])
 
     def closest_right(self, figures_in_scope):
-        return self.neighbour(figures_in_scope, lambda f: self.position[1] == f.position[1] and self.position[0] < f.position[0])
+        return self.neighbour(figures_in_scope, lambda f: self.is_same_numeral(f) and self.position[0] < f.position[0])
 
     def closest_top(self, figures_in_scope):
-        return self.neighbour(figures_in_scope, lambda f: self.position[0] == f.position[0] and self.position[1] < f.position[1])
+        return self.neighbour(figures_in_scope, lambda f: self.is_same_literal(f) and self.position[1] < f.position[1])
 
     def closest_bottom(self, figures_in_scope):
-        return self.neighbour(figures_in_scope, lambda f: self.position[0] == f.position[0] and self.position[1] > f.position[1])
+        return self.neighbour(figures_in_scope, lambda f: self.is_same_literal(f) and self.position[1] > f.position[1])
 
     def possible_moves(self, figures):
         figures_in_scope = list(filter(lambda f: f.position in list(self.turns()), figures))

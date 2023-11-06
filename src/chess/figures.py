@@ -131,10 +131,8 @@ class Rook(ChessFigure):
         closest_figs = [f for f in closest_figs if f is not None]
         takeable = filter(self.is_figure_takeable, closest_figs)
 
-        return set(itertools.chain(
-    filter(is_not_blocked, self.turns()),
-                map(lambda f: f.position, takeable))
-        )
+        return set(itertools.chain(filter(is_not_blocked, self.turns()),
+                            map(lambda f: f.position, takeable)))
     
     def turns(self):
         literal, numeral = self.position

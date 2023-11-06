@@ -19,3 +19,9 @@ class InvalidMoveError(Exception):
 class CastlingNotPossibleError(Exception):
     def __init__(self, reason):
         super().__init__(self, f'Castling is not allowed: ${reason}')
+
+
+class InconsistentStateError(Exception):
+    def __init__(self, reason):
+        super().__init__(self, f'State is broken: ${reason}')
+        

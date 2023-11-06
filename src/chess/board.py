@@ -1,5 +1,5 @@
 import src.chess.figures as figures
-from src.chess.error import InvalidMoveError, CastlingNotPossibleError
+from src.chess.error import InvalidMoveError, CastlingNotPossibleError, InconsistentStateError
 
 
 # is figure a good place to localize block checking logic? (probably yes)
@@ -102,7 +102,7 @@ class ChessBoard:
             case 1:
                 return found_figures[0]
             case _:
-                raise RuntimeError('two figures in the same cell')
+                raise InconsistentStateError('two figures in the same cell')
 
     def to_string(self):
         literals = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')

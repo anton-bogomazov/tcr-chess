@@ -1,5 +1,5 @@
 import src.chess.figures as figures
-from src.chess.error import InvalidMoveError
+from src.chess.error import InvalidMoveError, CastlingNotPossibleError
 
 
 # is figure a good place to localize block checking logic? (probably yes)
@@ -39,11 +39,11 @@ class ChessBoard:
 
     def check_if_castling_possible(self, figure_to_move, fr, to):
         if figure_to_move.touched:
-            raise ValueError('king is touched')
+            raise CastlingNotPossibleError('king is touched')
         if self.get_castling_rook(to) is None or self.get_castling_rook(to).touched:
-            raise ValueError('rook is touched or moved')
+            raise CastlingNotPossibleError('rook is touched or moved')
         if self.is_castling_blocked(fr, to):
-            raise ValueError('castling blocked by figures')
+            raise CastlingNotPossibleError('castling blocked by figures')
 
     def get_castling_rook(self, to):
         if to == ('g', 1):

@@ -101,11 +101,7 @@ class Rook(ChessFigure):
 
     def closest_top(self, figures):
         figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)
-        top = list(filter(lambda f: self.position[0] == f.position[0] and self.position[1] < f.position[1], figures_in_scope))
-        if len(top) == 0:
-            return None
-        else:
-            return top[0]
+        return self.neighbour(figures_in_scope, lambda f: self.position[0] == f.position[0] and self.position[1] < f.position[1])
 
     def closest_bottom(self, figures):
         figures_in_scope = filter(lambda f: f.position in list(self.turns()), figures)

@@ -11,20 +11,18 @@ class ChessGame:
         self.checked_player = None
         self.checkmate = False
 
-    def turn(self, fr=None, to=None, figure=None):
+    def turn(self, fr=None, to=None):
         if fr is None:
             raise TypeError('"from" should be a string')
         if to is None:
             raise TypeError('"to" should be a string')
-        if figure is None:
-            raise TypeError('"figure" should be a string')
         if self.checkmate:
             raise RuntimeError('Create a new game, this one is finished!')
 
         def parse_position(p: str):
             return tuple(p)[0], int(tuple(p)[1])
 
-        self.validate_parameters(parse_position(fr), figure)
+        self.validate_parameters(parse_position(fr))
         self.move_figure(parse_position(fr), parse_position(to))
         self.update_check_condition()
         if self.checkmate:
@@ -46,13 +44,8 @@ class ChessGame:
     def pass_turn(self):
         self.current_player = self.opponent_color()
 
-    def validate_parameters(self, fr, figure):
-        def figure_name(instance):
-            return instance.__class__.__name__.lower()
-
+    def validate_parameters(self, fr):
         selected_figure = self.board.cell(*fr)
-        if figure_name(selected_figure) != figure:
-            raise ValueError('invalid figure')
         if selected_figure.color != self.current_player:
             raise ValueError('it is not your turn')
 

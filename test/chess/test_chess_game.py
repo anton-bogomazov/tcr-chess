@@ -7,11 +7,11 @@ from src.chess.board import ChessBoard
 
 class ChessGameTest(unittest.TestCase):
     def test_from_to_positions_and_figure_type_is_enough_to_make_turn(self):
-        standard_chess_game().turn('b1', 'c3', 'knight')
+        standard_chess_game().turn('b1', 'c3')
 
     def test_fail_to_make_turn_if_every_arg_is_not_provided(self):
         with self.assertRaises(TypeError):
-            standard_chess_game().turn('f3', 'knight')
+            standard_chess_game().turn('f3')
         with self.assertRaises(TypeError):
             standard_chess_game().turn('f3')
         with self.assertRaises(TypeError):
@@ -81,7 +81,7 @@ class ChessGameTest(unittest.TestCase):
         
     def test_pass_turn(self):
         game = standard_chess_game()
-        game.turn('b1', 'c3', 'knight')
+        game.turn('b1', 'c3')
         self.assertEquals(
             game.current_player,
             Color.BLACK
@@ -89,50 +89,50 @@ class ChessGameTest(unittest.TestCase):
 
     def test_cant_move_white_piece_in_the_blacks_turn(self):
         game = standard_chess_game()
-        game.turn('b1', 'c3', 'knight')
+        game.turn('b1', 'c3')
         with self.assertRaises(ValueError):
-            game.turn('g1', 'f3', 'knight')
+            game.turn('g1', 'f3')
 
     def test_check_condition(self):
         game = standard_chess_game()
-        game.turn('b1', 'c3', 'knight')
-        game.turn('a7', 'a6', 'pawn')
-        game.turn('c3', 'b5', 'knight')
-        game.turn('a6', 'a5', 'pawn')
-        game.turn('b5', 'c7', 'knight')
+        game.turn('b1', 'c3')
+        game.turn('a7', 'a6')
+        game.turn('c3', 'b5')
+        game.turn('a6', 'a5')
+        game.turn('b5', 'c7')
         self.assertEqual(Color.BLACK, game.checked_player)
 
     def test_checkmate_condition(self):
         game = standard_chess_game()
-        game.turn('b1', 'c3', 'knight')
-        game.turn('a7', 'a6', 'pawn')
-        game.turn('c3', 'b5', 'knight')
-        game.turn('a6', 'a5', 'pawn')
-        game.turn('b5', 'c7', 'knight')
+        game.turn('b1', 'c3')
+        game.turn('a7', 'a6')
+        game.turn('c3', 'b5')
+        game.turn('a6', 'a5')
+        game.turn('b5', 'c7')
         with self.assertRaises(RuntimeError):
-            game.turn('a5', 'a4', 'pawn')
+            game.turn('a5', 'a4')
         self.assertEqual(True, game.checkmate)
 
     def test_king_can_be_checked(self):
         game = standard_chess_game()
-        game.turn('b1', 'c3', 'knight')
-        game.turn('a7', 'a6', 'pawn')
-        game.turn('c3', 'b5', 'knight')
-        game.turn('a6', 'a5', 'pawn')
+        game.turn('b1', 'c3')
+        game.turn('a7', 'a6')
+        game.turn('c3', 'b5')
+        game.turn('a6', 'a5')
         self.assertEqual(game.get_board().checked(Color.BLACK), False)
-        game.turn('b5', 'c7', 'knight')
+        game.turn('b5', 'c7')
         self.assertEqual(game.get_board().checked(Color.BLACK), True)
 
     def test_taking_attacking_figure_resets_check(self):
         game = standard_chess_game()
-        game.turn('b1', 'c3', 'knight')
-        game.turn('a7', 'a6', 'pawn')
-        game.turn('c3', 'b5', 'knight')
-        game.turn('a6', 'a5', 'pawn')
-        game.turn('b5', 'c7', 'knight')
+        game.turn('b1', 'c3')
+        game.turn('a7', 'a6')
+        game.turn('c3', 'b5')
+        game.turn('a6', 'a5')
+        game.turn('b5', 'c7')
         self.assertEqual(game.get_board().checked(Color.BLACK), True)
         self.assertEqual(game.checked_player, Color.BLACK)
-        game.turn('d8', 'c7', 'queen')
+        game.turn('d8', 'c7')
         self.assertEqual(game.get_board().checked(Color.BLACK), False)
         self.assertEqual(game.checked_player, None)
 
@@ -141,7 +141,7 @@ class ChessGameTest(unittest.TestCase):
         game.checkmate = True
         
         with self.assertRaises(RuntimeError):
-            game.turn('b1', 'c3', 'knight')
+            game.turn('b1', 'c3')
 
     def test_is_castling_move(self):
         board = standard_chess_game().get_board()
@@ -178,13 +178,13 @@ class ChessGameTest(unittest.TestCase):
 
     def test_perform_castling_move(self):
         game = standard_chess_game()
-        game.turn('g1', 'f3', 'knight')
-        game.turn('a7', 'a6', 'pawn')
-        game.turn('g2', 'g3', 'pawn')
-        game.turn('a6', 'a5', 'pawn')
-        game.turn('f1', 'h3', 'bishop')
-        game.turn('a5', 'a4', 'pawn')
-        game.turn('e1', 'g1', 'king')
+        game.turn('g1', 'f3')
+        game.turn('a7', 'a6')
+        game.turn('g2', 'g3')
+        game.turn('a6', 'a5')
+        game.turn('f1', 'h3')
+        game.turn('a5', 'a4')
+        game.turn('e1', 'g1')
         self.assertEqual(None, game.get_board().cell('e', 1))
         self.assertEqual(None, game.get_board().cell('h', 1))
         self.assertIsInstance(game.get_board().cell('f', 1), Rook)

@@ -117,15 +117,8 @@ class Rook(ChessFigure):
             left = closest_left is None or turn[0] > closest_left.position[0]
             return top and bottom and right and left
 
-        closest_figs = []
-        if closest_top is not None:
-            closest_figs.append(closest_top)
-        if closest_bottom is not None:
-            closest_figs.append(closest_bottom)
-        if closest_right is not None:
-            closest_figs.append(closest_right)
-        if closest_left is not None:
-            closest_figs.append(closest_left)
+        closest_figs = [closest_top, closest_bottom, closest_left, closest_right]
+        closest_figs = [f for f in closest_figs if f is not None]
         takeable = list(filter(lambda f: not isinstance(f, King) and f.color != self.color, closest_figs))
 
         return set(list(filter(ignore_blocked, self.turns())) + list(map(lambda f: f.position, takeable)))

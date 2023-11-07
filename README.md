@@ -21,6 +21,10 @@ Todo:
 - [ ] Restrict jumping over figures
 - [ ] Game runner and GUI
 
+Mistakes I've made:
+- Lack of analysis
+- Abusing TCR by big steps (possible_moves)
+
 More about TCR [here](https://www.infoq.com/articles/test-commit-revert/)
 
 Here are awesome workshops by Kent Beck:

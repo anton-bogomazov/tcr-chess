@@ -30,7 +30,7 @@ class Pawn(ChessFigure):
                            if cell(figures, *move) is not None and
                               cell(figures, *move).color != self.color]
 
-        return set([t for t in (moving_turns + attacking_turns) if t is not None])
+        return set(moving_turns + attacking_turns)
 
     def notation(self):
         return 'p'

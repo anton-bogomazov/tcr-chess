@@ -2,7 +2,7 @@ import itertools
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from enum import Enum
-from src.chess.board_utils import increment_numeral, decrement_numeral
+from src.chess.board_utils import inc_num_pos, dec_num_pos
 
 # figures can be blocked by other figures. restrict it
 # Modify move method
@@ -214,12 +214,12 @@ class Knight(ChessFigure):
 class Pawn(ChessFigure):
     def turns(self, figures=''):
         whites = {
-            'short': (increment_numeral),
-            'long': (increment_numeral, increment_numeral)
+            'short': (inc_num_pos),
+            'long': (inc_num_pos, inc_num_pos)
         }
         blacks = {
-            'short': (decrement_numeral),
-            'long': (decrement_numeral, decrement_numeral)
+            'short': (dec_num_pos),
+            'long': (dec_num_pos, dec_num_pos)
         }
         literal, numeral = self.position
         short_diff = 1

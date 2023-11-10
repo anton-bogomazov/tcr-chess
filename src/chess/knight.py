@@ -15,8 +15,9 @@ class Knight(ChessFigure):
             [inc_lit_pos, inc_num_pos, inc_num_pos],
             [inc_lit_pos, dec_num_pos, dec_num_pos],
         )
+        possible_turns = [t for t in [position(self.position, t) for t in turns] if t is not None]
 
-        return set([t for t in [position(self.position, t) for t in turns] if t is not None])
+        return set(possible_turns)
 
     def notation(self):
         return 'N'

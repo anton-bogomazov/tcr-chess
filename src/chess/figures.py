@@ -211,7 +211,7 @@ class Knight(ChessFigure):
 
 
 class Pawn(ChessFigure):
-    def turns(self, board=''):
+    def turns(self, figures=''):
         literal, numeral = self.position
         short_diff = 1
         long_diff = 2

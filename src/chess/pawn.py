@@ -20,10 +20,7 @@ class Pawn(ChessFigure):
         turns = whites if self.color == Color.WHITE else blacks
 
         def position(moves):
-            result = self.position
-            for move in moves:
-                result = move(result)
-            return result
+            return reduce(lambda acc, f: f(acc), moves, self.position)
 
         moving_turns = {position(turns['short'])} if self.touched \
                        else {position(turns['long']), position(turns['short'])}

@@ -53,4 +53,6 @@ class ChessBoardTest(unittest.TestCase):
     def test_error_with_not_board_numeral(self):
         with self.assertRaises(InconsistentStateError):
             decrement_numeral(9)
+        with self.assertRaises(InconsistentStateError):
+            decrement_numeral(0)
 

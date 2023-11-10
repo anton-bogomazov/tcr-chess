@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from enum import Enum
 from src.chess.board_utils import inc_num_pos, dec_num_pos
+from functools import reduce
 
 # figures can be blocked by other figures. restrict it
 # Modify move method
@@ -221,6 +222,10 @@ class Pawn(ChessFigure):
             'short': (dec_num_pos),
             'long': (dec_num_pos, dec_num_pos)
         }
+
+        def make_turn(moves):
+            return reduce(lambda f: f(self.position), moves)
+
         literal, numeral = self.position
         short_diff = 1
         long_diff = 2

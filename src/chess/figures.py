@@ -213,7 +213,7 @@ class Knight(ChessFigure):
 
 
 class Pawn(ChessFigure):
-    def turns(self, figures=''):
+    def turns(self, figures=[]):
         whites = {
             'short': [inc_num_pos],
             'long': [inc_num_pos, inc_num_pos],

@@ -18,3 +18,8 @@ class ChessBoardTest(unittest.TestCase):
         self.assertEqual(
             'a', decrement_literal('b')
         )
+
+    def test_util_decrement_board_literal_do_nothing_if_out_of_bounds(self):
+        self.assertEqual(
+            'a', decrement_literal('a')
+        )

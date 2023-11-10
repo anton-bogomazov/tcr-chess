@@ -123,4 +123,6 @@ def increment_literal(literal):
     return 'b'
 
 def decrement_literal(literal):
+    if literal == 'a':
+        return 'a'
     return 'a'

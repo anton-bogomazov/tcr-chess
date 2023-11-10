@@ -14,6 +14,8 @@ class ChessBoardTest(unittest.TestCase):
     def test_error_with_not_board_literal(self):
         with self.assertRaises(InconsistentStateError):
             increment_literal('i')
+        with self.assertRaises(InconsistentStateError):
+            increment_literal('0')
 
     def test_util_increment_board_literal_do_nothing_if_out_of_bounds(self):
         self.assertEqual(

@@ -215,28 +215,25 @@ class Knight(ChessFigure):
 class Pawn(ChessFigure):
     def turns(self, figures=''):
         whites = {
-            'short': (inc_num_pos),
-            'long': (inc_num_pos, inc_num_pos)
+            'short': [inc_num_pos],
+            'long': [inc_num_pos, inc_num_pos]
         }
         blacks = {
-            'short': (dec_num_pos),
-            'long': (dec_num_pos, dec_num_pos)
+            'short': [dec_num_pos],
+            'long': [dec_num_pos, dec_num_pos]
         }
+        turns = whites if self.color == Color.WHITE else blacks
 
-        def make_turn(moves):
-            return reduce(lambda f: f(self.position), moves)
+        def position(moves):
+            result = self.position
+            for move in moves:
+                result = move(result)
+            return result
 
-        literal, numeral = self.position
-        short_diff = 1
-        long_diff = 2
-
-        if self.color == Color.BLACK:
-            short_diff = -1
-            long_diff = -2
-        
-        short_turn = (literal, numeral + short_diff)
-        long_turn = (literal, numeral + long_diff)
-        return {short_turn} if self.touched else {short_turn, long_turn}
+        if self.touched:
+            return {position(turns['short'])}
+        else:
+            return {position(turns['long']), position(turns['short'])}
 
     def notation(self):
         return 'p'

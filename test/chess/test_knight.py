@@ -2,6 +2,7 @@ import unittest
 from src.chess.knight import Knight
 from src.chess.pawn import Pawn
 from src.chess.figures import Color
+from src.chess.sets import standard_chess_figure_set as std_set
 
 
 class KnightTest(unittest.TestCase):
@@ -12,6 +13,13 @@ class KnightTest(unittest.TestCase):
         self.assertEqual(sut.turns([]), {
             ('b', 1), ('d', 1), ('b', 5), ('d', 5),
             ('a', 2), ('a', 4), ('e', 2), ('e', 4),
+        })
+
+    def test_knight_possible_turns_std(self):
+        sut = _knight(('g', 1))
+
+        self.assertEqual(sut.turns(std_set()), {
+            ('f', 3), ('h', 3),
         })
 
     def test_knight_possible_turns_less_moves_on_the_boards_edge(self):

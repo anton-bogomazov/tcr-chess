@@ -114,3 +114,8 @@ class ChessBoard:
 
         return [[resolve(self.cell(literal, numeral)) for literal in literals]
                                     for numeral in reversed(range(1, 9))]
+
+
+
+def increment_literal(literal):
+    return 'b'

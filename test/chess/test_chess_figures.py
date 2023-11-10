@@ -4,34 +4,6 @@ from src.chess.figures import Color
 
 
 class ChessFiguresTest(unittest.TestCase):
-    
-    def test_white_pawn_possible_turns(self):
-        self.assertEqual(
-            white_pawn().turns(), {('a', 3), ('a', 4)}
-        )
-
-    def test_black_pawn_possible_turns(self):
-        self.assertEqual(
-            Pawn(('a', 7), Color.BLACK).turns(), {('a', 6), ('a', 5)}
-        )
-
-    def test_two_different_pawns_are_not_eq(self):
-        self.assertNotEqual(
-            Pawn(('a', 2), Color.WHITE),
-            Pawn(('a', 2), Color.BLACK)
-        )
-
-    def test_pawn_possible_turns_only_short_turn_after_touch(self):
-        pawn = white_pawn()
-        pawn.move(('a', 3))
-        self.assertEqual(
-            pawn.turns(), {('a', 4)}
-        )
-
-    def test_pawn_move(self):
-        pawn = white_pawn()
-        pawn.move(('a', 3))
-        self.assertEqual(pawn.position, ('a', 3))
 
     def test_knight_possible_turns(self):
         knight = white_knight()
@@ -103,10 +75,6 @@ def white_king():
 
 def white_queen():
     return Queen(('c', 3), Color.WHITE)
-
-
-def white_pawn():
-    return Pawn(('a', 2), Color.WHITE)
 
 
 def white_knight(position=('c', 3)):

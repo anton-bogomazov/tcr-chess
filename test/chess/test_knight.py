@@ -15,11 +15,18 @@ class KnightTest(unittest.TestCase):
             ('a', 2), ('a', 4), ('e', 2), ('e', 4),
         })
 
-    def test_knight_possible_turns_std(self):
+    def test_knight_possible_turns_blocked_by_allies(self):
         sut = _knight(('g', 1))
 
         self.assertEqual(sut.turns(std_set()), {
             ('f', 3), ('h', 3),
+        })
+
+    def test_knight_possible_turns_attack_foe(self):
+        sut = _knight(('h', 6))
+
+        self.assertEqual(sut.turns(std_set()), {
+            ('g', 4), ('f', 5), ('g', 8), ('f', 7),
         })
 
     def test_knight_possible_turns_less_moves_on_the_boards_edge(self):

@@ -116,11 +116,13 @@ class ChessBoard:
                                     for numeral in reversed(range(1, 9))]
 
 
-
+literals = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
 def increment_literal(literal):
+    if literal not in literals:
+        raise InconsistentStateError('literal does not represent position on board')
     if literal == 'h':
         return 'h'
-    return 'b'
+    return chr(ord(literal) + 1)
 
 def decrement_literal(literal):
     if literal == 'a':

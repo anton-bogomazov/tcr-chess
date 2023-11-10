@@ -238,7 +238,12 @@ class Pawn(ChessFigure):
                        else {position(turns['long']), position(turns['short'])}
         moving_turns = [move for move in moving_turns if cell(figures, *move) is None]
 
-        return set(moving_turns)
+        attacking_turns = {position(turns['attack_left']), position(turns['attack_right'])}
+        attacking_turns = [move for move in attacking_turns
+                           if cell(figures, *move) is not None and
+                              cell(figures, *move).color != self.color]
+
+        return set(moving_turns + attacking_turns)
 
     def notation(self):
         return 'p'

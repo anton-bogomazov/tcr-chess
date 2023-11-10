@@ -119,3 +119,6 @@ class ChessBoard:
 
 def increment_literal(literal):
     return 'b'
+
+def decrement_literal(literal):
+    return 'a'

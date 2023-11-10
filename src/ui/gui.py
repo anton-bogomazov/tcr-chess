@@ -77,8 +77,8 @@ class Gui:
                     if (chr(col + ord('a')), 8 - row) == self.selected_cell:
                         figure_highlight_color = (0, 0, 255)  # Green
                         pygame.draw.rect(self.screen, figure_highlight_color, rectangle(col, row), 3)
-                    if figure and isinstance(figure, Rook):
-                        possible_moves = figure.possible_moves(self.game.get_board().figures)
+                    if figure:
+                        possible_moves = figure.turns(self.game.get_board().figures)
                         print(f'moves {possible_moves}')
                         if (chr(col + ord('a')), 8 - row) in possible_moves:
                             highlight_color = (0, 255, 0)  # Green

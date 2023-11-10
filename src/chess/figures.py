@@ -23,7 +23,7 @@ class ChessFigure(ABC):
     touched = False
 
     @abstractmethod
-    def turns(self):
+    def turns(self, figures):
         raise NotImplementedError
 
     @abstractmethod
@@ -43,7 +43,7 @@ class ChessFigure(ABC):
 
 
 class King(ChessFigure):
-    def turns(self):
+    def turns(self, figures=frozenset()):
         literal, numeral = self.position
         turns = [
             (chr(ord(literal) + 1), numeral + 1),
@@ -69,7 +69,7 @@ class King(ChessFigure):
 
 
 class Queen(ChessFigure):
-    def turns(self):
+    def turns(self, figures=frozenset()):
         literal, numeral = self.position
         rook_turns = [(chr(ord(literal) - i), numeral) for i in range(1, 8)] +\
                      [(chr(ord(literal) + i), numeral) for i in range(1, 8)] +\
@@ -141,7 +141,7 @@ class Rook(ChessFigure):
         return set(itertools.chain(filter(is_not_blocked, self.turns()),
                             map(lambda f: f.position, takeable)))
     
-    def turns(self):
+    def turns(self, figures=frozenset()):
         literal, numeral = self.position
         turns = [(chr(ord(literal) - i), numeral) for i in range(1, 8)] +\
                 [(chr(ord(literal) + i), numeral) for i in range(1, 8)] +\
@@ -172,7 +172,7 @@ class Rook(ChessFigure):
 
 
 class Bishop(ChessFigure):
-    def turns(self):
+    def turns(self, figures=frozenset()):
         literal, numeral = self.position
         turns = [(chr(ord(literal) - i), numeral - i) for i in range(1, 8)] +\
                 [(chr(ord(literal) + i), numeral + i) for i in range(1, 8)] +\

@@ -18,6 +18,17 @@ class PawnTest(unittest.TestCase):
             {('a', 6), ('a', 5)}
         )
 
+    def test_only_attacking_turn(self):
+        sut = _pawn(('e', 4))
+        sut.touched = True
+        figures = [
+            sut,
+            _pawn(('e', 5)), # friendly block
+            _pawn(('d', 5), Color.BLACK),
+            King(('f', 5), Color.BLACK),
+        ]
+        self.assertEqual({('e', 5)}, sut.turns(figures))
+
     def test_two_different_pawns_are_not_eq(self):
         self.assertNotEqual(
             _pawn(('a', 2), Color.WHITE),

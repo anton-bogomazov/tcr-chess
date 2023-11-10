@@ -230,10 +230,10 @@ class Pawn(ChessFigure):
                 result = move(result)
             return result
 
-        if self.touched:
-            return {position(turns['short'])}
-        else:
-            return {position(turns['long']), position(turns['short'])}
+        moving_turns = {position(turns['short'])} if self.touched \
+                       else {position(turns['long']), position(turns['short'])}
+        
+        return moving_turns
 
     def notation(self):
         return 'p'

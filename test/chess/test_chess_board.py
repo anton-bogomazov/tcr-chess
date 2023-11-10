@@ -1,5 +1,5 @@
 import unittest
-from src.chess.board import increment_literal, decrement_literal, \
+from src.chess.board_utils import increment_literal, decrement_literal, \
         increment_numeral, decrement_numeral
 from src.chess.error import InconsistentStateError
 

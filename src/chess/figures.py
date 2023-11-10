@@ -2,7 +2,7 @@ import itertools
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from enum import Enum
-from src.chess.board_utils import inc_num_pos, dec_num_pos, cell
+from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell
 from functools import reduce
 
 # figures can be blocked by other figures. restrict it
@@ -216,11 +216,15 @@ class Pawn(ChessFigure):
     def turns(self, figures=''):
         whites = {
             'short': [inc_num_pos],
-            'long': [inc_num_pos, inc_num_pos]
+            'long': [inc_num_pos, inc_num_pos],
+            'attack_left': [inc_num_pos, dec_lit_pos],
+            'attack_right': [inc_num_pos, inc_lit_pos],
         }
         blacks = {
             'short': [dec_num_pos],
-            'long': [dec_num_pos, dec_num_pos]
+            'long': [dec_num_pos, dec_num_pos],
+            'attack_left': [dec_num_pos, dec_lit_pos],
+            'attack_right': [dec_num_pos, inc_lit_pos],
         }
         turns = whites if self.color == Color.WHITE else blacks
 

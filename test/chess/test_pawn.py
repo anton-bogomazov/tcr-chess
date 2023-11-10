@@ -27,7 +27,7 @@ class PawnTest(unittest.TestCase):
             _pawn(('d', 5), Color.BLACK),
             King(('f', 5), Color.BLACK),
         ]
-        self.assertEqual({('e', 5)}, sut.turns(figures))
+        self.assertEqual(set(), sut.turns(figures))
 
     def test_two_different_pawns_are_not_eq(self):
         self.assertNotEqual(

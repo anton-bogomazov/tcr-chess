@@ -54,3 +54,14 @@ def dec_num_pos(position):
 def inc_num_pos(position):
     l, n = position
     return (l, increment_numeral(n))
+ 
+ 
+def cell(figures, literal, numeral):
+    found_figures = [fig for fig in figures if fig.position == (literal, numeral)]
+    match len(found_figures):
+        case 0:
+            return None
+        case 1:
+            return found_figures[0]
+        case _:
+            raise InconsistentStateError('two figures in the same cell')

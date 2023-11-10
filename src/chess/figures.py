@@ -2,7 +2,7 @@ import itertools
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from enum import Enum
-from src.chess.board_utils import inc_num_pos, dec_num_pos
+from src.chess.board_utils import inc_num_pos, dec_num_pos, cell
 from functools import reduce
 
 # figures can be blocked by other figures. restrict it
@@ -233,7 +233,9 @@ class Pawn(ChessFigure):
         moving_turns = {position(turns['short'])} if self.touched \
                        else {position(turns['long']), position(turns['short'])}
         
-        return moving_turns
+        moves = [move for move in moving_turns if cell(figures, *move) is None]
+
+        return set(moves)
 
     def notation(self):
         return 'p'

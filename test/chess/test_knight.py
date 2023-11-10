@@ -18,7 +18,10 @@ class KnightTest(unittest.TestCase):
     def test_knight_possible_turns_less_moves_on_the_boards_edge(self):
         sut = _knight(('a', 3))
         
-        self.assertEqual(len(sut.turns(std_figures())), 4)
+        self.assertEqual({
+            ('b', 1), ('b', 5),
+            ('c', 2), ('c', 4),
+        }, sut.turns(std_figures()))
 
     def test_knight_possible_turns_least_possible_turns_in_the_corner(self):
         sut = _knight(('a', 8))

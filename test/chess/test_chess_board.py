@@ -1,11 +1,16 @@
 import unittest
-from src.chess.board_utils import increment_literal, decrement_literal, \
-        increment_numeral, decrement_numeral
+from src.chess.board_utils import *
 from src.chess.error import InconsistentStateError
 
 
 class ChessBoardTest(unittest.TestCase):
     
+    def test_util_change_position_utils(self):
+        self.assertEqual(('b', 1), inc_lit_pos(('a', 1)))
+        self.assertEqual(('b', 1), dec_lit_pos(('c', 1)))
+        self.assertEqual(('b', 4), inc_num_pos(('b', 3)))
+        self.assertEqual(('b', 2), dec_num_pos(('b', 3)))
+
     def test_util_increment_board_literal(self):
         self.assertEqual(
             'b', increment_literal('a')

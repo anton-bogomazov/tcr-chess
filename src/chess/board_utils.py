@@ -34,3 +34,23 @@ def decrement_numeral(numeral):
     if numeral == 1:
         return 1
     return numeral - 1
+
+
+def dec_lit_pos(position):
+    l, n = position
+    return (decrement_literal(l), n)
+
+
+def inc_lit_pos(position):
+    l, n = position
+    return (increment_literal(l), n)
+
+
+def dec_num_pos(position):
+    l, n = position
+    return (l, decrement_numeral(n))
+
+
+def inc_num_pos(position):
+    l, n = position
+    return (l, increment_numeral(n))

@@ -125,6 +125,8 @@ def increment_literal(literal):
     return chr(ord(literal) + 1)
 
 def decrement_literal(literal):
+    if literal not in literals:
+        raise InconsistentStateError('literal does not represent position on board')
     if literal == 'a':
         return 'a'
-    return 'a'
+    return chr(ord(literal) - 1)

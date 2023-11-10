@@ -10,7 +10,7 @@ class KnightTest(unittest.TestCase):
     def test_knight_possible_turns(self):
         sut = _knight()
         
-        self.assertEqual(sut.turns(std_figures()), {
+        self.assertEqual(sut.turns([]), {
             ('b', 1), ('d', 1), ('b', 5), ('d', 5),
             ('a', 2), ('a', 4), ('e', 2), ('e', 4),
         })
@@ -21,14 +21,14 @@ class KnightTest(unittest.TestCase):
         self.assertEqual({
             ('b', 1), ('b', 5),
             ('c', 2), ('c', 4),
-        }, sut.turns(std_figures()))
+        }, sut.turns([]))
 
     def test_knight_possible_turns_least_possible_turns_in_the_corner(self):
         sut = _knight(('a', 8))
         
         self.assertEqual({
             ('b', 6), ('c', 7),
-        }, sut.turns(std_figures()))
+        }, sut.turns([]))
         
     def test_knight_can_jump_over_figures(self):
         sut = _knight(('e', 4))

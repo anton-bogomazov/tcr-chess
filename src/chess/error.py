@@ -25,3 +25,6 @@ class InconsistentStateError(Exception):
     def __init__(self, reason):
         super().__init__(self, f'State is broken: ${reason}')
         
+
+class OutOfBoardError(Exception):
+    ...

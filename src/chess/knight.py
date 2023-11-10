@@ -1,22 +1,22 @@
-from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell
-from functools import reduce
+from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell, position
 from src.chess.figures import ChessFigure, Color
 
 
 class Knight(ChessFigure):
     def turns(self, figures=frozenset()):
-        literal, numeral = self.position
-        turns = [
-            (chr(ord(literal) - 2), numeral - 1),
-            (chr(ord(literal) - 2), numeral + 1),
-            (chr(ord(literal) + 2), numeral - 1),
-            (chr(ord(literal) + 2), numeral + 1),
-            (chr(ord(literal) - 1), numeral - 2),
-            (chr(ord(literal) - 1), numeral + 2),
-            (chr(ord(literal) + 1), numeral - 2),
-            (chr(ord(literal) + 1), numeral + 2),
-        ]
-        return set(filter(lambda t: not self.is_out_of_board(*t), turns))
+        turns = (
+            [dec_lit_pos, dec_lit_pos, dec_num_pos],
+            [dec_lit_pos, dec_lit_pos, inc_num_pos],
+            [inc_lit_pos, inc_lit_pos, dec_num_pos],
+            [inc_lit_pos, inc_lit_pos, inc_num_pos],
+
+            [dec_lit_pos, inc_num_pos, inc_num_pos],
+            [dec_lit_pos, dec_num_pos, dec_num_pos],
+            [inc_lit_pos, inc_num_pos, inc_num_pos],
+            [inc_lit_pos, dec_num_pos, dec_num_pos],
+        )
+
+        return set([t for t in [position(self.position, t) for t in turns] if t is not None])
 
     def notation(self):
         return 'N'

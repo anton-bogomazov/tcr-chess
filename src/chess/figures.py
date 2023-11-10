@@ -4,6 +4,8 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell
 from functools import reduce
+from src.chess.error import OutOfBoardError
+
 
 # figures can be blocked by other figures. restrict it
 # Modify move method

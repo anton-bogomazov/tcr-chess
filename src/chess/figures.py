@@ -184,30 +184,3 @@ class Bishop(ChessFigure):
 
     def symbol(self):
         return '\u2657' if self.color == Color.WHITE else '\u265D'
-
-
-class Knight(ChessFigure):
-
-    def possible_moves(self, figures):
-        return self.turns()
-        
-    def turns(self):
-        literal, numeral = self.position
-        turns = [
-            (chr(ord(literal) - 2), numeral - 1),
-            (chr(ord(literal) - 2), numeral + 1),
-            (chr(ord(literal) + 2), numeral - 1),
-            (chr(ord(literal) + 2), numeral + 1),
-            (chr(ord(literal) - 1), numeral - 2),
-            (chr(ord(literal) - 1), numeral + 2),
-            (chr(ord(literal) + 1), numeral - 2),
-            (chr(ord(literal) + 1), numeral + 2),
-        ]
-        return set(filter(lambda t: not self.is_out_of_board(*t), turns))
-
-    def notation(self):
-        return 'N'
-
-    def symbol(self):
-        return '\u2658' if self.color == Color.WHITE else '\u265E'
-    

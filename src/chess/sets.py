@@ -1,5 +1,6 @@
 from src.chess.figures import *
 from src.chess.pawn import Pawn
+from src.chess.knight import Knight
 
 
 def standard_chess_figure_set():

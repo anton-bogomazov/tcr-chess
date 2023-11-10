@@ -1,6 +1,7 @@
 import unittest
 from src.chess.figures import *
 from src.chess.pawn import Pawn
+from src.chess.knight import Knight
 from src.chess.figures import Color
 from src.chess.game import standard_chess_game
 from src.chess.game import ChessGame
@@ -192,14 +193,6 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(None, game.get_board().cell('h', 1))
         self.assertIsInstance(game.get_board().cell('f', 1), Rook)
         self.assertIsInstance(game.get_board().cell('g', 1), King)
-
-    def test_knight_can_jump_over_figures(self):
-        sut = Knight(('e', 4), Color.WHITE)
-        figures = [
-            Pawn(('d', 5), Color.BLACK),
-            sut
-        ]
-        self.assertEqual(len(sut.turns()), len(sut.possible_moves(figures)))
 
     def test_rook_can_be_blocked_by_opponents_figures(self):
         sut = Rook(('d', 6), Color.WHITE)

@@ -5,22 +5,6 @@ from src.chess.figures import Color
 
 class ChessFiguresTest(unittest.TestCase):
 
-    def test_knight_possible_turns(self):
-        knight = white_knight()
-        self.assertEqual(len(knight.turns()), 8)
-        self.assertEqual(knight.turns(), {
-            ('b', 1), ('d', 1), ('b', 5), ('d', 5),
-            ('a', 2), ('a', 4), ('e', 2), ('e', 4),
-        })
-
-    def test_knight_possible_turns_less_moves_on_the_boards_edge(self):
-        knight = white_knight(('a', 3))
-        self.assertEqual(len(knight.turns()), 4)
-
-    def test_knight_possible_turns_least_possible_turns_in_the_corner(self):
-        knight = white_knight(('a', 8))
-        self.assertEqual(len(knight.turns()), 2)
-
     def test_bishop_possible_turns(self):
         bishop = white_bishop()
         self.assertEqual(len(bishop.turns()), 11)
@@ -75,10 +59,6 @@ def white_king():
 
 def white_queen():
     return Queen(('c', 3), Color.WHITE)
-
-
-def white_knight(position=('c', 3)):
-    return Knight(position, Color.WHITE)
 
 
 def white_bishop():

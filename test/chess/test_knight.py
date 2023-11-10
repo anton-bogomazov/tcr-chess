@@ -23,7 +23,7 @@ class KnightTest(unittest.TestCase):
         self.assertEqual(len(knight.turns()), 2)
         
     def test_knight_can_jump_over_figures(self):
-        sut = Knight(('e', 4), Color.WHITE)
+        sut = _knight(('e', 4))
         figures = [
             Pawn(('d', 5), Color.BLACK),
             sut

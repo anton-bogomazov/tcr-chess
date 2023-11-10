@@ -34,5 +34,5 @@ class PawnTest(unittest.TestCase):
         self.assertEqual(pawn.position, ('a', 3))
 
 
-def white_pawn():
-    return Pawn(('a', 2), Color.WHITE)
+def white_pawn(position=('a', 2), color=Color.WHITE):
+    return Pawn(position, color)

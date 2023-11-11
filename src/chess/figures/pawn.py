@@ -1,4 +1,4 @@
-from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell, position
+from src.chess.board_utils import inc_num_pos as up, dec_num_pos as down, dec_lit_pos as left, inc_lit_pos as right, position, cell
 from src.chess.figures.chess_figure import ChessFigure
 from src.chess.figures.color import Color
 
@@ -6,16 +6,16 @@ from src.chess.figures.color import Color
 class Pawn(ChessFigure):
     def turns(self, figures=frozenset()):
         whites = {
-            'short': [inc_num_pos],
-            'long': [inc_num_pos, inc_num_pos],
-            'attack_left': [inc_num_pos, dec_lit_pos],
-            'attack_right': [inc_num_pos, inc_lit_pos],
+            'short': [up],
+            'long': [up, up],
+            'attack_left': [up, left],
+            'attack_right': [up, right],
         }
         blacks = {
-            'short': [dec_num_pos],
-            'long': [dec_num_pos, dec_num_pos],
-            'attack_left': [dec_num_pos, dec_lit_pos],
-            'attack_right': [dec_num_pos, inc_lit_pos],
+            'short': [down],
+            'long': [down, down],
+            'attack_left': [down, left],
+            'attack_right': [down, right],
         }
         turns = whites if self.color == Color.WHITE else blacks
 

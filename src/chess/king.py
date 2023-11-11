@@ -12,6 +12,7 @@ class King(ChessFigure):
         possible_turns = [p for p in turns if cell(figures, *p) is None or
                                               cell(figures, *p).color != self.color]
         # exclude attacked by other figures cells
+        # TODO FIXME can be moved under kings attack
         opponent_figures = [f for f in figures if f.color != self.color]
         attacked_cells = [f.turns() for f in opponent_figures]
         possible_turns = [t for t in possible_turns if t not in attacked_cells]

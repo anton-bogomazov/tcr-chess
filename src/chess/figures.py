@@ -2,6 +2,7 @@ import itertools
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from enum import Enum
+
 from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell
 from functools import reduce
 from src.chess.error import OutOfBoardError
@@ -92,7 +93,7 @@ class Rook(ChessFigure):
         return None if len(neighbours_on_bottom) == 0 else sorted(neighbours_on_bottom, key=lambda x: x.position[1], reverse=True)[0]
     
     def is_figure_takeable(self, figure):
-        return not isinstance(figure, King) and figure.color != self.color
+        return False
         
     def possible_moves(self, figures):
         figures_in_scope = list(filter(lambda f: f.position in list(self.turns()), figures))

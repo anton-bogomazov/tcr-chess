@@ -1,4 +1,5 @@
 import src.chess.figures as figures
+from src.chess.king import King
 from src.chess.error import InvalidMoveError, CastlingNotPossibleError, InconsistentStateError
 
 
@@ -84,7 +85,7 @@ class ChessBoard:
         return False
     
     def checked(self, color):
-        players_king = [king for king in self.search_board(figures.King) if king.color == color][0]
+        players_king = [king for king in self.search_board(King) if king.color == color][0]
         opponents_figures = [f for f in self.figures if f.color != color]
         for fig in opponents_figures:
             if players_king.position in fig.turns():

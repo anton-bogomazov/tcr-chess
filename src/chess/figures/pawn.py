@@ -4,7 +4,7 @@ from src.chess.figures.color import Color
 
 
 class Pawn(ChessFigure):
-    def turns(self, figures=frozenset()):
+    def turns(self, figures):
         whites = {
             'short': [up],
             'long': [up, up],

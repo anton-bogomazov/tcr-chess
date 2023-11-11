@@ -40,7 +40,7 @@ class PawnTest(unittest.TestCase):
         pawn = _pawn()
         pawn.move(('a', 3))
         self.assertEqual(
-            pawn.turns(), {('a', 4)}
+            pawn.turns([]), {('a', 4)}
         )
 
     def test_pawn_move(self):

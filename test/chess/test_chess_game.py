@@ -8,7 +8,7 @@ from src.chess.figures.king import King
 from src.chess.game import standard_chess_game
 from src.chess.board import ChessBoard
 from src.chess.error import *
-from src.chess.color import Color
+from src.chess.figures.color import Color
 
 
 class ChessGameTest(unittest.TestCase):

@@ -2,7 +2,7 @@ import unittest
 from src.chess.figures.bishop import Bishop
 from src.chess.figures.queen import Queen
 from src.chess.figures.rook import Rook
-from src.chess.color import Color
+from src.chess.figures.color import Color
 
 
 class ChessFiguresTest(unittest.TestCase):

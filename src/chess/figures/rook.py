@@ -1,5 +1,5 @@
 from src.chess.figures.chess_figure import ChessFigure
-from src.chess.color import Color
+from src.chess.figures.color import Color
 import itertools
 
 

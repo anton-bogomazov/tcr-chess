@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
-from src.chess.color import Color
+from src.chess.figures.color import Color
 
 
 @dataclass

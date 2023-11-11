@@ -1,5 +1,5 @@
 import unittest
-from src.chess.color import Color
+from src.chess.figures.color import Color
 from src.chess.figures.king import King
 from src.chess.figures.pawn import Pawn
 

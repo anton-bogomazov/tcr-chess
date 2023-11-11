@@ -1,6 +1,5 @@
 import pygame
 import sys
-from src.chess.color import Color
 
 
 class Gui:
@@ -90,7 +89,7 @@ class Gui:
         font = pygame.font.Font(font_filename, 48)
 
         def color(fig_color):
-            return figure_white if fig_color is Color.WHITE else figure_black
+            return figure_white if fig_color.name is 'WHITE' else figure_black
 
         def cell_coordinates(fig_position):
             pos_literal, pos_numeral = fig_position

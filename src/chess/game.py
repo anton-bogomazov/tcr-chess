@@ -1,4 +1,4 @@
-from src.chess.figures import Color
+from src.chess.color import Color
 from src.chess.board import ChessBoard
 from src.chess.sets import standard_chess_figure_set
 from src.chess.error import CheckmateError, OpponentsTurnError

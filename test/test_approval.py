@@ -1,6 +1,6 @@
 import unittest
 from src.chess.game import standard_chess_game
-from src.chess.figures import Color
+from src.chess.color import Color
 from src.chess.error import *
 
 

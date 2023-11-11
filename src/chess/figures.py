@@ -1,7 +1,7 @@
 import itertools
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
-from enum import Enum
+from src.chess.color import Color
 
 from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell
 from functools import reduce
@@ -10,12 +10,6 @@ from src.chess.error import OutOfBoardError
 
 # figures can be blocked by other figures. restrict it
 # Modify move method
-
-
-class Color(Enum):
-    WHITE = 1,
-    BLACK = 2
-    
     
 @dataclass
 class ChessFigure(ABC):

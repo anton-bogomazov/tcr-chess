@@ -2,6 +2,7 @@ from src.chess.figures import *
 from src.chess.pawn import Pawn
 from src.chess.knight import Knight
 from src.chess.king import King
+from src.chess.color import Color
 
 
 def standard_chess_figure_set():

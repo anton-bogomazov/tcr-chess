@@ -1,6 +1,6 @@
 import unittest
 from src.chess.figures import *
-from src.chess.figures import Color
+from src.chess.color import Color
 
 
 class ChessFiguresTest(unittest.TestCase):

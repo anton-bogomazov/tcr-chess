@@ -1,6 +1,8 @@
 from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell, position
 from functools import reduce
-from src.chess.figures import ChessFigure, Color
+from src.chess.figures import ChessFigure
+from src.chess.color import Color
+
 
 
 class Pawn(ChessFigure):

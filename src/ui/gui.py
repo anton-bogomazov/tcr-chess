@@ -1,7 +1,6 @@
 import pygame
 import sys
-from src.chess.figures import Color
-from src.chess.figures import Rook
+from src.chess.color import Color
 
 
 class Gui:

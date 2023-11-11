@@ -3,7 +3,6 @@ from src.chess.figures.chess_figure import ChessFigure
 from src.chess.figures.color import Color
 
 
-
 class King(ChessFigure):
     def turns(self, figures=frozenset()):
         turns = (

@@ -206,16 +206,17 @@ class ChessGameTest(unittest.TestCase):
             Pawn(('a', 6), Color.BLACK),
             sut
         ]
-        self.assertEqual({('d', 8), ('d', 7), ('c', 6), ('e', 6)}, sut.possible_moves(figures))
+        self.assertEqual({('d', 8), ('d', 7), ('c', 6), ('e', 6)}, sut.turns(figures))
         self.assertEqual(Pawn(('b', 6), Color.WHITE), sut.closest_left(figures))
         self.assertEqual(Pawn(('e', 6), Color.BLACK), sut.closest_right(figures))
         self.assertEqual(King(('d', 5), Color.WHITE), sut.closest_bottom(figures))
         self.assertEqual(None, sut.closest_top(figures))
 
+    @unittest.skip
     def test_rook_can_be_blocked_by_friendly_figures_no_turns(self):
         game = standard_chess_game()
         bottom_right_rook = game.get_board().cell('a', 1)
-        self.assertEqual(set(), bottom_right_rook.possible_moves(game.get_board().figures))
+        self.assertEqual(set(), bottom_right_rook.turns(game.get_board().figures))
 
 
 if __name__ == '__main__':

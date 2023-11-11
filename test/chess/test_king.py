@@ -7,7 +7,7 @@ from src.chess.king import King
 class KingTest(unittest.TestCase):
     
     def test_king_possible_turns(self):
-        king = white_king()
+        king = _king()
         self.assertEqual(len(king.turns()), 8)
         self.assertEqual(king.turns(), {
             ('b', 3), ('c', 2), ('b', 2), ('d', 4),
@@ -15,5 +15,5 @@ class KingTest(unittest.TestCase):
         })
 
 
-def white_king():
-    return King(('c', 3), Color.WHITE)
+def _king(position=('c', 3), color=Color.WHITE):
+    return King(position, color)

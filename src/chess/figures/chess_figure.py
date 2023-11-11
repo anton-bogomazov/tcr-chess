@@ -31,6 +31,7 @@ class ChessFigure(ABC):
         result = []
         cur_position = position(self.position, m)
         while cur_position is not None and (cell(figures, *cur_position) is None or
+                                            # TODO FIXME it's possible to jump other opponents figures
                                             cell(figures, *cur_position).color != self.color):
             result.append(cur_position)
             cur_position = position(cur_position, m)

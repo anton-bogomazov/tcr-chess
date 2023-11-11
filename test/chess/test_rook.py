@@ -3,7 +3,7 @@ from src.chess.figures.rook import Rook
 from src.chess.figures.color import Color
 
 
-class PawnTest(unittest.TestCase):
+class RookTest(unittest.TestCase):
     
     def test_rook_possible_turns(self):
         self.assertEqual(

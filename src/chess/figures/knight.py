@@ -5,7 +5,7 @@ from src.chess.figures.color import Color
 
 class Knight(ChessFigure):
     def turns(self, figures=frozenset()):
-        turns = (
+        turns = [
             [dec_lit_pos, dec_lit_pos, dec_num_pos],
             [dec_lit_pos, dec_lit_pos, inc_num_pos],
             [inc_lit_pos, inc_lit_pos, dec_num_pos],
@@ -15,11 +15,9 @@ class Knight(ChessFigure):
             [dec_lit_pos, dec_num_pos, dec_num_pos],
             [inc_lit_pos, inc_num_pos, inc_num_pos],
             [inc_lit_pos, dec_num_pos, dec_num_pos],
-        )
-        turns = [t for t in [position(self.position, t) for t in turns] if t is not None]
-        possible_turns = [p for p in turns if cell(figures, *p) is None or
-                                              cell(figures, *p).color != self.color]
-        return set(possible_turns)
+        ]
+
+        return set(self.calc_singly_moves(figures, turns))
 
     def notation(self):
         return 'N'

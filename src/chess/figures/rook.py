@@ -33,7 +33,7 @@ class Rook(ChessFigure):
             ('g', 1): ('f', 1),
             ('c', 1): ('d', 1),
             ('g', 8): ('f', 8),
-            ('c', 8): ('d', 8),
+
         }
         return castling_map[to]
 

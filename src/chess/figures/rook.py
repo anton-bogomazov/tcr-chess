@@ -29,14 +29,13 @@ class Rook(ChessFigure):
         self.touched = True
 
     def rook_castling_to(self, to):
-        if to == ('g', 1):
-            return ('f', 1)
-        if to == ('c', 1):
-            return ('d', 1)
-        if to == ('g', 8):
-            return ('f', 8)
-        if to == ('c', 8):
-            return ('d', 8)
+        castling_map = {
+            ('g', 1): ('f', 1),
+            ('c', 1): ('d', 1),
+            ('g', 8): ('f', 8),
+            ('c', 8): ('d', 8),
+        }
+        return castling_map[to]
 
     def notation(self):
         return 'R'

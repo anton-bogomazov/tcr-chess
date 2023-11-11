@@ -58,4 +58,3 @@ class ChessBoardTest(unittest.TestCase):
             decrement_numeral(9)
         with self.assertRaises(InconsistentStateError):
             decrement_numeral(0)
-

@@ -1,7 +1,6 @@
 from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell, position
-from src.chess.figures import ChessFigure
+from src.chess.chess_figure import ChessFigure
 from src.chess.color import Color
-
 
 
 class Knight(ChessFigure):

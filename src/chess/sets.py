@@ -1,4 +1,6 @@
-from src.chess.figures import *
+from src.chess.bishop import Bishop
+from src.chess.queen import Queen
+from src.chess.rook import Rook
 from src.chess.pawn import Pawn
 from src.chess.knight import Knight
 from src.chess.king import King

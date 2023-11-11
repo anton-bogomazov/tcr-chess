@@ -1,4 +1,4 @@
-import src.chess.figures as figures
+from src.chess.chess_figure import ChessFigure
 from src.chess.king import King
 from src.chess.error import InvalidMoveError, CastlingNotPossibleError, InconsistentStateError
 
@@ -25,7 +25,7 @@ class ChessBoard:
             if to not in figure_to_move.turns():
                 raise InvalidMoveError()
             figure_to_move.move(to)
-        elif isinstance(dest_cell_cont, figures.ChessFigure):
+        elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
                 self.figures.remove(dest_cell_cont)
                 # cant take if blocked by other figure except Knight
@@ -115,4 +115,3 @@ class ChessBoard:
 
         return [[resolve(self.cell(literal, numeral)) for literal in literals]
                                     for numeral in reversed(range(1, 9))]
-

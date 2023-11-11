@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from src.chess.figures.color import Color
+from src.chess.board_utils import cell
+from src.chess.error import OutOfBoardError
 
 
 @dataclass
@@ -24,6 +26,18 @@ class ChessFigure(ABC):
     def move(self, to):
         self.position = to
         self.touched = True
+
+    def calc_moves(self, figures, m):
+        result = []
+        try:
+            cur_position = m(self.position)
+            while cell(figures, *cur_position) is None or \
+                  cell(figures, *cur_position).color != self.color:
+                result.append(cur_position)
+                cur_position = m(cur_position)
+        except OutOfBoardError:
+            pass
+        return result
 
     def is_out_of_board(self, literal, numeral):
         return literal not in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') or numeral > 8 or numeral <= 0

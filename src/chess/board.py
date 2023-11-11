@@ -22,14 +22,14 @@ class ChessBoard:
             self.get_castling_rook(to).castle(to)
         elif dest_cell_cont is None:
             # cant move if blocked by other figure except Knight
-            if to not in figure_to_move.turns():
+            if to not in figure_to_move.turns(self.figures):
                 raise InvalidMoveError()
             figure_to_move.move(to)
         elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
                 # cant take if blocked by other figure except Knight
                 # pawns take figures diagonally
-                if to not in figure_to_move.turns():
+                if to not in figure_to_move.turns(self.figures):
                     raise InvalidMoveError()
                 self.figures.remove(dest_cell_cont)
                 figure_to_move.move(to)
@@ -88,7 +88,7 @@ class ChessBoard:
         players_king = [king for king in self.search_board(King) if king.color == color][0]
         opponents_figures = [f for f in self.figures if f.color != color]
         for fig in opponents_figures:
-            if players_king.position in fig.turns():
+            if players_king.position in fig.turns(self.figures):
                 return True
         return False
 

@@ -16,8 +16,8 @@ class King(ChessFigure):
         # exclude attacked by other figures cells
         # TODO FIXME can be moved under kings attack
         opponent_figures = [f for f in figures if f.color != self.color]
-        attacked_cells = [f.turns(figures) for f in opponent_figures]
-        possible_turns = [t for t in possible_turns if t not in attacked_cells]
+        # attacked_cells = [f.turns(figures) for f in opponent_figures]
+        # possible_turns = [t for t in possible_turns if t not in attacked_cells]
         # TODO FIXME can be moved under pawn attack
         return set(possible_turns)
 

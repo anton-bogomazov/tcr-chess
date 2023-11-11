@@ -36,6 +36,8 @@ class ChessFigure(ABC):
             elif cell(figures, *cur_position).color != self.color:
                 result.append(cur_position)
                 break
+            else: # blocked by ally
+                break
         return result
 
     def is_out_of_board(self, literal, numeral):

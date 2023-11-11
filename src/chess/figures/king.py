@@ -21,19 +21,6 @@ class King(ChessFigure):
         # TODO FIXME can be moved under pawn attack
         return set(possible_turns)
 
-        literal, numeral = self.position
-        turns = [
-            (chr(ord(literal) + 1), numeral + 1),
-            (chr(ord(literal) - 1), numeral - 1),
-            (chr(ord(literal) - 1), numeral + 1),
-            (chr(ord(literal) + 1), numeral - 1),
-            (chr(ord(literal)), numeral - 1),
-            (chr(ord(literal)), numeral + 1),
-            (chr(ord(literal) + 1), numeral),
-            (chr(ord(literal) - 1), numeral),
-        ]
-        return set(filter(lambda t: not self.is_out_of_board(*t), turns))
-
     def castle(self, to):
         self.position = to
         self.touched = True

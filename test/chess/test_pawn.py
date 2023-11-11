@@ -5,7 +5,7 @@ from src.chess.figures.color import Color
 from src.chess.figures.sets import standard_chess_figure_set as std_figures
 
 
-class PawnTest(unittest.TestCase):
+class RookTest(unittest.TestCase):
     
     def test_white_pawn_possible_turns(self):
         self.assertEqual(

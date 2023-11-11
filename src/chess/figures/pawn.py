@@ -4,6 +4,8 @@ from src.chess.figures.color import Color
 
 
 class Pawn(ChessFigure):
+
+    # ugly
     def turns(self, figures):
         whites = {
             'short': [up],

@@ -18,6 +18,24 @@ class RookTest(unittest.TestCase):
             }
         )
         
+    def test_can_take_only_first_encouneterd_opponent(self):
+        sut = _rook(('a', 1), Color.BLACK)
+        figures = [
+            sut,
+            _rook(('a', 4)),
+            _rook(('a', 6)),
+        ]
+        self.assertEqual({
+            ('a', 2), ('a', 3), ('a', 4),
+            ('b', 1),
+            ('c', 1),
+            ('d', 1),
+            ('e', 1),
+            ('f', 1),
+            ('g', 1),
+            ('h', 1),
+        }, sut.turns(figures))
 
-def _rook():
-    return Rook(('c', 3), Color.WHITE)
+
+def _rook(position=('c', 3), color=Color.WHITE):
+    return Rook(position, color)

@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from src.chess.figures.color import Color
 from src.chess.board_utils import cell, position
-from src.chess.error import OutOfBoardError
 
 
 @dataclass
@@ -30,11 +29,13 @@ class ChessFigure(ABC):
     def calc_moves(self, figures, m):
         result = []
         cur_position = position(self.position, m)
-        while cur_position is not None and (cell(figures, *cur_position) is None or
-                                            # TODO FIXME it's possible to jump other opponents figures
-                                            cell(figures, *cur_position).color != self.color):
-            result.append(cur_position)
-            cur_position = position(cur_position, m)
+        while cur_position is not None:
+            if cell(figures, *cur_position) is None:
+                result.append(cur_position)
+                cur_position = position(cur_position, m)
+            elif cell(figures, *cur_position).color != self.color:
+                result.append(cur_position)
+                break
         return result
 
     def is_out_of_board(self, literal, numeral):

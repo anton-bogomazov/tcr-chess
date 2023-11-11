@@ -39,6 +39,3 @@ class ChessFigure(ABC):
             else: # blocked by ally
                 break
         return result
-
-    def is_out_of_board(self, literal, numeral):
-        return literal not in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') or numeral > 8 or numeral <= 0

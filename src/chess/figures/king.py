@@ -1,4 +1,4 @@
-from src.chess.board_utils import inc_num_pos as up, dec_num_pos as down, dec_lit_pos as left, inc_lit_pos as right, cell, position
+from src.chess.board_utils import inc_num_pos as up, dec_num_pos as down, dec_lit_pos as left, inc_lit_pos as right
 from src.chess.figures.chess_figure import ChessFigure
 from src.chess.figures.color import Color
 
@@ -9,11 +9,8 @@ class King(ChessFigure):
             [up], [down], [left], [right],
             [up, right], [up, left], [down, right], [down, left],
         )
-        turns = [t for t in [position(self.position, t) for t in turns] if t is not None]
-        possible_turns = [p for p in turns if cell(figures, *p) is None or
-                                              cell(figures, *p).color != self.color]
 
-        return set(possible_turns)
+        return set(self.calc_singly_moves(figures, turns))
 
     def castle(self, to):
         self.position = to

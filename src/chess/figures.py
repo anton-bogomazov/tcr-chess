@@ -42,32 +42,6 @@ class ChessFigure(ABC):
         return literal not in ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') or numeral > 8 or numeral <= 0
 
 
-class King(ChessFigure):
-    def turns(self, figures=frozenset()):
-        literal, numeral = self.position
-        turns = [
-            (chr(ord(literal) + 1), numeral + 1),
-            (chr(ord(literal) - 1), numeral - 1),
-            (chr(ord(literal) - 1), numeral + 1),
-            (chr(ord(literal) + 1), numeral - 1),
-            (chr(ord(literal)), numeral - 1),
-            (chr(ord(literal)), numeral + 1),
-            (chr(ord(literal) + 1), numeral),
-            (chr(ord(literal) - 1), numeral),
-        ]
-        return set(filter(lambda t: not self.is_out_of_board(*t), turns))
-    
-    def castle(self, to):
-        self.position = to
-        self.touched = True
-
-    def notation(self):
-        return 'K'
-
-    def symbol(self):
-        return '\u2654' if self.color == Color.WHITE else '\u265A'
-
-
 class Queen(ChessFigure):
     def turns(self, figures=frozenset()):
         literal, numeral = self.position

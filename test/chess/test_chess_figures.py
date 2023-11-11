@@ -53,9 +53,6 @@ class ChessFiguresTest(unittest.TestCase):
         })
 
 
-def white_king():
-    return King(('c', 3), Color.WHITE)
-
 
 def white_queen():
     return Queen(('c', 3), Color.WHITE)

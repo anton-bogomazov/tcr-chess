@@ -2,6 +2,7 @@ import unittest
 from src.chess.figures import *
 from src.chess.pawn import Pawn
 from src.chess.knight import Knight
+from src.chess.king import King
 from src.chess.figures import Color
 from src.chess.game import standard_chess_game
 from src.chess.game import ChessGame

@@ -1,7 +1,7 @@
 import unittest
 from src.chess.color import Color
-from src.chess.king import King
-from src.chess.pawn import Pawn
+from src.chess.figures.king import King
+from src.chess.figures.pawn import Pawn
 
 
 class KingTest(unittest.TestCase):

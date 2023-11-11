@@ -1,10 +1,10 @@
 import unittest
-from src.chess.pawn import Pawn
-from src.chess.rook import Rook
-from src.chess.queen import Queen
-from src.chess.bishop import Bishop
-from src.chess.knight import Knight
-from src.chess.king import King
+from src.chess.figures.pawn import Pawn
+from src.chess.figures.rook import Rook
+from src.chess.figures.queen import Queen
+from src.chess.figures.bishop import Bishop
+from src.chess.figures.knight import Knight
+from src.chess.figures.king import King
 from src.chess.game import standard_chess_game
 from src.chess.board import ChessBoard
 from src.chess.error import *

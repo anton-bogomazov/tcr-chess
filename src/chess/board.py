@@ -1,5 +1,5 @@
-from src.chess.chess_figure import ChessFigure
-from src.chess.king import King
+from src.chess.figures.chess_figure import ChessFigure
+from src.chess.figures.king import King
 from src.chess.error import InvalidMoveError, CastlingNotPossibleError, InconsistentStateError
 
 

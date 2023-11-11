@@ -1,7 +1,7 @@
 import unittest
-from src.chess.bishop import Bishop
-from src.chess.queen import Queen
-from src.chess.rook import Rook
+from src.chess.figures.bishop import Bishop
+from src.chess.figures.queen import Queen
+from src.chess.figures.rook import Rook
 from src.chess.color import Color
 
 

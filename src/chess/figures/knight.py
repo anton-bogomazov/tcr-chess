@@ -1,5 +1,5 @@
 from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell, position
-from src.chess.chess_figure import ChessFigure
+from src.chess.figures.chess_figure import ChessFigure
 from src.chess.color import Color
 
 

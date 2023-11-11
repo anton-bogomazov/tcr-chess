@@ -4,7 +4,7 @@ from src.chess.figures.color import Color
 
 
 class Knight(ChessFigure):
-    def turns(self, figures=frozenset()):
+    def turns(self, figures):
         turns = [
             [left, left, down],
             [left, left, up],

@@ -4,7 +4,7 @@ from src.chess.figures.color import Color
 
 
 class Queen(ChessFigure):
-    def turns(self, figures=frozenset()):
+    def turns(self, figures):
         turns = self.calc_moves(figures, [up, left]) + self.calc_moves(figures, [down, left]) +\
                 self.calc_moves(figures, [up, right]) + self.calc_moves(figures, [down, right]) +\
                 self.calc_moves(figures, [up]) + self.calc_moves(figures, [down]) +\

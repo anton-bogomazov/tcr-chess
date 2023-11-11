@@ -7,7 +7,7 @@ class QueenTest(unittest.TestCase):
     
     def test_queen_possible_turns_is_a_combination_of_rook_and_bishop_turns(self):
         rook = _queen()
-        self.assertEqual(rook.turns(), {
+        self.assertEqual(rook.turns([]), {
             ('a', 3), ('c', 1),
             ('b', 3), ('c', 2),
             ('d', 3), ('c', 4),

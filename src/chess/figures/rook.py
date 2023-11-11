@@ -5,8 +5,8 @@ from src.chess.figures.color import Color
 class Rook(ChessFigure):
 
     def turns(self, figures=frozenset()):
-        turns = self.calc_moves(figures, up) + self.calc_moves(figures, down) +\
-                self.calc_moves(figures, left) + self.calc_moves(figures, right)
+        turns = self.calc_moves(figures, [up]) + self.calc_moves(figures, [down]) +\
+                self.calc_moves(figures, [left]) + self.calc_moves(figures, [right])
 
         return set(turns)
 

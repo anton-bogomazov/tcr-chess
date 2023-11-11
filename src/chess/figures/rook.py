@@ -1,18 +1,28 @@
+from src.chess.board_utils import inc_num_pos as up, dec_num_pos as down, dec_lit_pos as left, inc_lit_pos as right, cell, position
 from src.chess.figures.chess_figure import ChessFigure
 from src.chess.figures.color import Color
-import itertools
+from src.chess.error import OutOfBoardError
 
 
 class Rook(ChessFigure):
     
-    def turns(self, figures=frozenset()):
-        literal, numeral = self.position
-        turns = [(chr(ord(literal) - i), numeral) for i in range(1, 8)] +\
-                [(chr(ord(literal) + i), numeral) for i in range(1, 8)] +\
-                [(chr(ord(literal)), numeral + i) for i in range(1, 8)] +\
-                [(chr(ord(literal)), numeral - i) for i in range(1, 8)]
+    def __calc_moves(self, figures, m):
+        result = []
+        try:
+            cur_position = m(self.position)
+            while cell(figures, *cur_position) is None or \
+                  cell(figures, *cur_position).color != self.color:
+                result.append(cur_position)
+                cur_position = m(cur_position)
+        except OutOfBoardError:
+            pass
+        return result
 
-        return set(filter(lambda t: not self.is_out_of_board(*t), turns)) - {self.position}
+    def turns(self, figures=frozenset()):
+        turns = self.__calc_moves(figures, up) + self.__calc_moves(figures, down) +\
+                self.__calc_moves(figures, left) + self.__calc_moves(figures, right)
+
+        return set(turns)
 
     def castle(self, kings_to):
         self.position = self.rook_castling_to(kings_to)

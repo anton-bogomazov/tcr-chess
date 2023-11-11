@@ -2,9 +2,10 @@ from src.chess.board_utils import inc_num_pos as up, dec_num_pos as down, dec_li
 from src.chess.figures.chess_figure import ChessFigure
 from src.chess.figures.color import Color
 
+
 class Rook(ChessFigure):
 
-    def turns(self, figures=frozenset()):
+    def turns(self, figures):
         turns = self.calc_moves(figures, [up]) + self.calc_moves(figures, [down]) +\
                 self.calc_moves(figures, [left]) + self.calc_moves(figures, [right])
 

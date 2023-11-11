@@ -1,9 +1,23 @@
-from src.chess.board_utils import inc_num_pos, dec_num_pos, dec_lit_pos, inc_lit_pos, cell, position
+from src.chess.board_utils import inc_num_pos as up, dec_num_pos as down, dec_lit_pos as left, inc_lit_pos as right, cell, position
 from src.chess.figures import ChessFigure, Color
 
 
 class King(ChessFigure):
     def turns(self, figures=frozenset()):
+        turns = (
+            [up], [down], [left], [right],
+            [up, right], [up, left], [down, right], [down, left],
+        )
+        turns = [t for t in [position(self.position, t) for t in turns] if t is not None]
+        possible_turns = [p for p in turns if cell(figures, *p) is None or
+                                              cell(figures, *p).color != self.color]
+        # exclude attacked by other figures cells
+        opponent_figures = [f for f in figures if f.color != self.color]
+        attacked_cells = [f.turns() for f in opponent_figures]
+        possible_turns = [t for t in possible_turns if t not in attacked_cells]
+        # TODO FIXME can be moved under pawn attack
+        return set(possible_turns)
+
         literal, numeral = self.position
         turns = [
             (chr(ord(literal) + 1), numeral + 1),

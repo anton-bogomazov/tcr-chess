@@ -27,8 +27,7 @@ class ChessBoard:
             figure_to_move.move(to)
         elif isinstance(dest_cell_cont, ChessFigure):
             if dest_cell_cont.color != figure_to_move.color:
-                # cant take if blocked by other figure except Knight
-                # pawns take figures diagonally
+                # if King, check if it is going to stand under attack
                 if to not in figure_to_move.turns(self.figures):
                     raise InvalidMoveError()
                 self.figures.remove(dest_cell_cont)

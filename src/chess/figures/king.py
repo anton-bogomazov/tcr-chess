@@ -12,12 +12,7 @@ class King(ChessFigure):
         turns = [t for t in [position(self.position, t) for t in turns] if t is not None]
         possible_turns = [p for p in turns if cell(figures, *p) is None or
                                               cell(figures, *p).color != self.color]
-        # exclude attacked by other figures cells
-        # TODO FIXME can be moved under kings attack
-        opponent_figures = [f for f in figures if f.color != self.color]
-        # attacked_cells = [f.turns(figures) for f in opponent_figures]
-        # possible_turns = [t for t in possible_turns if t not in attacked_cells]
-        # TODO FIXME can be moved under pawn attack
+
         return set(possible_turns)
 
     def castle(self, to):

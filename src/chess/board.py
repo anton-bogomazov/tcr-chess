@@ -91,14 +91,3 @@ class ChessBoard:
                 return found_figures[0]
             case _:
                 raise InconsistentStateError('two figures in the same cell')
-
-    def to_string(self):
-        literals = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
-
-        def resolve(cell_content):
-            if cell_content is None:
-                return ' '
-            return cell_content.symbol()
-
-        return [[resolve(self.cell(literal, numeral)) for literal in literals]
-                                    for numeral in reversed(range(1, 9))]

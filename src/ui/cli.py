@@ -15,7 +15,7 @@ class Cli:
     def print_board(self):
         print("      a     b     c     d     e     f     g     h")
         print("   " + "+-----" * 8 + "+")
-        for i, row in enumerate(self.game.get_board().to_string()):
+        for i, row in enumerate(to_string(self.game.get_board())):
             print(8 - i, end="  ")
             print("|", end="  ")
             for cell in row:
@@ -25,3 +25,15 @@ class Cli:
             print(8 - i, end="")
             print("\n   " + "+-----" * 8 + "+")
         print("      a     b     c     d     e     f     g     h")
+
+
+def to_string(board):
+    literals = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
+
+    def resolve(cell_content):
+        if cell_content is None:
+            return ' '
+        return cell_content.symbol()
+
+    return [[resolve(board.cell(literal, numeral)) for literal in literals]
+                                    for numeral in reversed(range(1, 9))]

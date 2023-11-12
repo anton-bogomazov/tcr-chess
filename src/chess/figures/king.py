@@ -61,12 +61,12 @@ class King(ChessFigure):
        
             
 def get_castling_rook(figures, to):
-    if to == ('g', 1):
-        return cell(figures, *('h', 1))
-    if to == ('c', 1):
-        return cell(figures, *('a', 1))
-    if to == ('g', 8):
-        return cell(figures, *('h', 8))
-    if to == ('c', 8):
-        return cell(figures, *('a', 8))
+    castling_rook_map = {
+        ('g', 1): cell(figures, *('h', 1)),
+        ('c', 1): cell(figures, *('a', 1)),
+        ('g', 8): cell(figures, *('h', 8)),
+        ('c', 8): cell(figures, *('a', 8)),
+    }
+    
+    return castling_rook_map[to]
     

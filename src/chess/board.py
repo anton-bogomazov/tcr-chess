@@ -9,8 +9,6 @@ class ChessBoard:
         self.figures = figure_set
 
     def move(self, fr, to):
-        if self.cell(*fr) is None:
-            raise ValueError('fr references empty cell')
         figure_to_move = self.cell(*fr)
         dest_cell_content = self.cell(*to)
         

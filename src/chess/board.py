@@ -26,7 +26,6 @@ class ChessBoard:
             raise InconsistentStateError('something else except None or Figure in the cell')
         
     def moving(self, fr, to, figure_to_move):
-        # cant move if blocked by other figure except Knight
         if to not in figure_to_move.turns(self.figures):
             raise InvalidMoveError()
         figure_to_move.move(to)
@@ -35,8 +34,6 @@ class ChessBoard:
         
     def take(self, fr, to, figure_to_move, dest_figure):
         if dest_figure.color != figure_to_move.color:
-            # if King, check if it is going to stand under attack
-            # transform pawn if on the edge
             if to not in figure_to_move.turns(self.figures):
                 raise InvalidMoveError()
             self.figures.remove(dest_figure)

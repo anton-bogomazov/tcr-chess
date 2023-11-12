@@ -41,13 +41,11 @@ class Gui:
         col = x // self.cell_width
         row = y // self.cell_width
         clicked_cell = (chr(col + ord('a')), 8 - row)
-        print(f'clicked: {clicked_cell}, selected: {self.selected_cell}')
         
         if self.selected_cell is None:
             self.selected_cell = clicked_cell
         else:
             if clicked_cell != self.selected_cell:
-                print(f'moving piece from {clicked_cell} to {self.selected_cell}')
                 try:
                     self.game.turn(self.selected_cell, clicked_cell)
                 except Exception:
@@ -58,9 +56,6 @@ class Gui:
         
         
     def draw_board(self):
-        def rectangle(col, row):
-            return col * self.cell_width, row * self.cell_width, \
-                self.cell_width, self.cell_width
 
         def color(col, row):
             cell_white = (216, 216, 216)
@@ -72,18 +67,26 @@ class Gui:
 
         for row in range(self.board_size):
             for col in range(self.board_size):
-                draw_cell(color(col, row), rectangle(col, row))
+                draw_cell(color(col, row), self.rectangle(col, row))
 
+                figure_highlight_color = (0, 0, 255)  # Green
+                move_highlight_color = (0, 255, 0)  # Blue
+                check_highlight_color = (255, 0, 0)  # Red
                 if self.selected_cell:
                     figure = self.game.get_board().cell(self.selected_cell[0], int(self.selected_cell[1]))
-                    if (chr(col + ord('a')), 8 - row) == self.selected_cell:
-                        figure_highlight_color = (0, 0, 255)  # Green
-                        pygame.draw.rect(self.screen, figure_highlight_color, rectangle(col, row), 3)
+                    self.highlight_in(figure_highlight_color, col, row, [self.selected_cell])
                     if figure:
-                        possible_moves = figure.turns(self.game.get_board().figures)
-                        if (chr(col + ord('a')), 8 - row) in possible_moves:
-                            highlight_color = (0, 255, 0)  # Green
-                            pygame.draw.rect(self.screen, highlight_color, rectangle(col, row), 3)
+                        self.highlight_in(move_highlight_color, col, row, figure.turns(self.game.get_board().figures))
+                if self.game.checked_player is not None:
+                    self.highlight_in(check_highlight_color, col, row, [self.game.checked_king().position])
+
+    def rectangle(self, col, row):
+        return col * self.cell_width, row * self.cell_width, \
+            self.cell_width, self.cell_width
+
+    def highlight_in(self, color, col, row, in_collection):
+        if (chr(col + ord('a')), 8 - row) in in_collection:
+            pygame.draw.rect(self.screen, color, self.rectangle(col, row), 3)
 
     def draw_figures(self):
         figure_white = (255, 255, 255)

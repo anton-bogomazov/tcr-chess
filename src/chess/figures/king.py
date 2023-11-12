@@ -28,8 +28,7 @@ class King(ChessFigure):
         if self.is_castling_blocked(figures, to):
             raise CastlingNotPossibleError('castling blocked by figures')
         
-        self.position = to
-        self.touched = True
+        self.move(to)
         self.get_castling_rook(figures, to).castle(to)
 
     def is_castling_blocked(self, figures, to):

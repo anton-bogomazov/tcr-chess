@@ -31,8 +31,7 @@ class ChessBoard:
             raise InvalidMoveError()
         figure_to_move.move(to)
         if figure_to_move.is_transformable_pawn():
-            self.figures.append(figure_to_move.transform_to())
-            self.figures.remove(figure_to_move)
+            self.transform_pawn(figure_to_move)
         
     def take(self, fr, to, figure_to_move, dest_figure):
         if dest_figure.color != figure_to_move.color:
@@ -43,11 +42,14 @@ class ChessBoard:
             self.figures.remove(dest_figure)
             figure_to_move.move(to)
             if figure_to_move.is_transformable_pawn():
-                self.figures.append(figure_to_move.transform_to())
-                self.figures.remove(figure_to_move)
+                self.transform_pawn(figure_to_move)
         else:
             raise InvalidMoveError('you are trying to take your own figure')
 
+    def transform_pawn(self, pawn):
+        self.figures.append(pawn.transform_to())
+        self.figures.remove(pawn)
+        
     def is_castling_move(self, fr, to):
         if fr == ('e', 1) and to in {('c', 1), ('g', 1)}:
             return True

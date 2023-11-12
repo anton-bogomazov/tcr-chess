@@ -28,6 +28,12 @@ class ChessGame:
     def get_board(self):
         return self.__board
     
+    def checked_player(self):
+        return self.__checked_player
+
+    def finished(self):
+        return self.__checkmate
+
     def __validate_parameters(self, fr):
         selected_figure = self.__board.cell(*fr)
         if selected_figure.color != self.current_player:

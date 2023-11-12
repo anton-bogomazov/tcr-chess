@@ -1,7 +1,6 @@
 import pygame
 import sys
-
-# highlight checked King
+from src.chess.error import CheckmateError
 
 class Gui:
     def __init__(self, chess_game):
@@ -29,6 +28,8 @@ class Gui:
         self.screen.fill(white)
         self.draw_board()
         self.draw_figures()
+        if self.game.checkmate:
+            pygame.draw.rect(self.screen, (255, 255, 0), (0, 0, self.window_width, self.window_width))
         pygame.display.flip()
         
     def handle_event(self, event):
@@ -56,7 +57,6 @@ class Gui:
         
         
     def draw_board(self):
-
         def color(col, row):
             cell_white = (216, 216, 216)
             cell_black = (64, 64, 64)

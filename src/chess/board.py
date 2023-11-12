@@ -3,10 +3,6 @@ from src.chess.figures.king import King
 from src.chess.error import InvalidMoveError, UnsafeTurnError, InconsistentStateError
 
 
-# TODO FIXME it's possible to move fig and init check
-# TODO FIXME it's possible to move fig and init check
-
-
 class ChessBoard:
     def __init__(self, figure_set):
         self.figures = figure_set
@@ -57,7 +53,7 @@ class ChessBoard:
             init_position = king.position
             king.move(to)
             if king.checked(self.figures):
-                king.move(to)
+                king.move(init_position)
                 return False
             king.move(init_position)
         # figure is not opening king for attack
@@ -66,7 +62,7 @@ class ChessBoard:
             ally_king = [k for k in self.search_board(King) if k.color == figure.color][0]
             figure.move(to)
             if ally_king.checked(self.figures):
-                figure.move(to)
+                figure.move(init_position)
                 return False
             figure.move(init_position)
 

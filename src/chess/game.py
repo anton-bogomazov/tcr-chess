@@ -46,7 +46,7 @@ class ChessGame:
         except UnsafeTurnError:
             # if there is no turn (aka checkmate) make any turn to finish the game
             if self.current_player == self.checked_player:
-                self.checkmate = True
+                ...
             else:
                 raise UnsafeTurnError
         

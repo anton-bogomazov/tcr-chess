@@ -27,23 +27,6 @@ class ChessGameTest(unittest.TestCase):
         result = standard_chess_game().get_board()
         self.assertIsInstance(result, ChessBoard)
 
-    def test_initially_board_has_standard_figure_set(self):
-        board = standard_chess_game().get_board()
-
-        def count_figs(figure_set, color):
-            return sum(f.color == color for f in figure_set)
-
-        def whites_eq_blacks(figure_set, n):
-            self.assertEqual(count_figs(figure_set, Color.WHITE), n)
-            self.assertEqual(count_figs(figure_set, Color.BLACK), n)
-
-        # whites_eq_blacks(board.search_board(King), 1)
-        # whites_eq_blacks(board.search_board(Queen), 1)
-        # whites_eq_blacks(board.search_board(Knight), 2)
-        # whites_eq_blacks(board.search_board(Bishop), 2)
-        # whites_eq_blacks(board.search_board(Rook), 2)
-        # whites_eq_blacks(board.search_board(Pawn), 8)
-
     def test_figures_initially_placed_at_standard_cells(self):
         board = standard_chess_game().get_board()
         def check_if_positioned_well(fig_row, pawn_row, color):
@@ -77,7 +60,6 @@ class ChessGameTest(unittest.TestCase):
         self.assertEqual(board.cell('c', 7).color, Color.BLACK)
         board.move(('d', 5), ('c', 7))
         self.assertIsInstance(board.cell('c', 7), Knight)
-        # self.assertEqual(len(board.search_board(Pawn)), 15)
 
     def test_whites_starts(self):
         self.assertEquals(

@@ -221,6 +221,15 @@ class ChessGameTest(unittest.TestCase):
         self.assertFalse(pawn in board.figures)
         self.assertEqual(board.cell(*('a', 8)), Queen(('a', 8), Color.WHITE))
 
+    def test_only_pawn_is_transformable(self):
+        queen = Queen(('a', 7), Color.WHITE)
+        board = ChessBoard([queen, King(('a', 1), Color.WHITE)])
+
+        board.move(('a', 7), ('a', 8))
+
+        self.assertTrue(queen in board.figures)
+        self.assertEqual(board.cell(*('a', 8)), Queen(('a', 8), Color.WHITE))
+
     def test_cant_move_to_attacked_cell(self):
         king = King(('c', 3), color=Color.BLACK)
         figs = [

@@ -55,8 +55,4 @@ class ChessFigure(ABC):
         return [m for m in [self.calc_move(figures, m) for m in ms] if m is not None]
 
     def is_transformable_pawn(self):
-        blacks_edge = 8
-        whites_edge = 1
-
-        return self.color == Color.WHITE and self.position[1] == blacks_edge or \
-               self.color == Color.BLACK and self.position[1] == whites_edge
+        return False

@@ -47,6 +47,16 @@ class Pawn(ChessFigure):
         
         return fig_class(self.position, self.color)
 
+    def is_transformable_pawn(self):
+        return self.is_on_the_edge()
+    
+    def is_on_the_edge(self):
+        blacks_edge = 8
+        whites_edge = 1
+    
+        return self.color == Color.WHITE and self.position[1] == blacks_edge or \
+               self.color == Color.BLACK and self.position[1] == whites_edge
+
     def notation(self):
         return 'p'
 

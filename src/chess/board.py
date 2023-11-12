@@ -53,7 +53,7 @@ class ChessBoard:
             raise CastlingNotPossibleError('king is touched')
         if self.get_castling_rook(to) is None or self.get_castling_rook(to).touched:
             raise CastlingNotPossibleError('rook is touched or moved')
-        if self.is_castling_blocked(fr, to):
+        if king.is_castling_blocked(self.figures, to):
             raise CastlingNotPossibleError('castling blocked by figures')
 
     def get_castling_rook(self, to):

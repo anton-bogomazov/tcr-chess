@@ -49,11 +49,14 @@ class ChessGame:
                 raise UnsafeTurnError
         
     def update_check_condition(self):
+        # if current_player was checked last turn
         if self.current_player == self.checked_player:
+            # and still checked, declare checkmate
             if self.board.checked(self.current_player):
                 self.checkmate = True
             else:
                 self.checked_player = None
+        # current_player checks opponent
         if self.board.checked(self.__opponent_color()):
             self.checked_player = self.__opponent_color()
 

@@ -12,7 +12,7 @@ class ChessBoard:
         figure_to_move = self.cell(*fr)
         dest_cell_content = self.cell(*to)
         
-        if self.is_castling_move(fr, to):
+        if is_castling_move(fr, to):
             figure_to_move.castle(self.figures, to)
         elif dest_cell_content is None:
             self.moving(to, figure_to_move)
@@ -56,13 +56,6 @@ class ChessBoard:
         figure.move(init_position)
 
         return True
-
-    def is_castling_move(self, fr, to):
-        if fr == ('e', 1) and to in {('c', 1), ('g', 1)}:
-            return True
-        if fr == ('e', 8) and to in {('c', 8), ('g', 8)}:
-            return True
-        return False
     
     def checked(self, color):
         return self.king(color).checked(self.figures)
@@ -78,3 +71,10 @@ class ChessBoard:
 
     def cell(self, literal, numeral):
         return cell(self.figures, literal, numeral)
+
+def is_castling_move(fr, to):
+    if fr == ('e', 1) and to in {('c', 1), ('g', 1)}:
+        return True
+    if fr == ('e', 8) and to in {('c', 8), ('g', 8)}:
+        return True
+    return False

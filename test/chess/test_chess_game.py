@@ -6,7 +6,7 @@ from src.chess.figures.bishop import Bishop
 from src.chess.figures.knight import Knight
 from src.chess.figures.king import King
 from src.chess.game import standard_chess_game
-from src.chess.board import ChessBoard
+from src.chess.board import ChessBoard, is_castling_move
 from src.chess.error import *
 from src.chess.figures.color import Color
 
@@ -124,8 +124,8 @@ class ChessGameTest(unittest.TestCase):
 
     def test_is_castling_move(self):
         board = standard_chess_game().get_board()
-        self.assertEqual(True, board.is_castling_move(('e', 1), ('g', 1)))
-        self.assertEqual(True, board.is_castling_move(('e', 8), ('c', 8)))
+        self.assertEqual(True, is_castling_move(('e', 1), ('g', 1)))
+        self.assertEqual(True, is_castling_move(('e', 8), ('c', 8)))
 
     def test_castling_move_impossible_when_blocked_by_figures(self):
         board = standard_chess_game().get_board()

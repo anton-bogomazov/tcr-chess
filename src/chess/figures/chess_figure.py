@@ -26,6 +26,9 @@ class ChessFigure(ABC):
         self.position = to
         self.touched = True
 
+    def is_transformable_pawn(self):
+        return False
+
     def calc_repeatable_moves(self, figures, m):
         result = []
         cur_position = position(self.position, m)
@@ -53,6 +56,4 @@ class ChessFigure(ABC):
             return None
         
         return [m for m in [calc_move(m) for m in ms] if m is not None]
-
-    def is_transformable_pawn(self):
-        return False
+    

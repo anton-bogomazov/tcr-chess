@@ -13,6 +13,13 @@ class King(ChessFigure):
 
         return set(self.calc_singly_moves(figures, turns))
 
+    def checked(self, figures):
+        opponents_figures = [f for f in figures if f.color != self.color]
+        for fig in opponents_figures:
+            if self.position in fig.turns(figures):
+                return True
+        return False
+
     def castle(self, figures, to):
         if self.touched:
             raise CastlingNotPossibleError('king is touched')

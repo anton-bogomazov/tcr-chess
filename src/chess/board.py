@@ -55,12 +55,8 @@ class ChessBoard:
         return False
     
     def checked(self, color):
-        players_king = [king for king in self.search_board(King) if king.color == color][0]
-        opponents_figures = [f for f in self.figures if f.color != color]
-        for fig in opponents_figures:
-            if players_king.position in fig.turns(self.figures):
-                return True
-        return False
+        kings = [king for king in self.search_board(King) if king.color == color]
+        return len([king for king in kings if king.checked(self.figures)]) > 0
 
     def search_board(self, figure_type):
         return [fig for fig in self.figures if isinstance(fig, figure_type)]

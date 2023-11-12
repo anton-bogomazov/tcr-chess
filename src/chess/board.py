@@ -48,8 +48,8 @@ class ChessBoard:
         else:
             raise InvalidMoveError('you are trying to take your own figure')
 
-    def check_if_castling_possible(self, figure_to_move, fr, to):
-        if figure_to_move.touched:
+    def check_if_castling_possible(self, king, fr, to):
+        if king.touched:
             raise CastlingNotPossibleError('king is touched')
         if self.get_castling_rook(to) is None or self.get_castling_rook(to).touched:
             raise CastlingNotPossibleError('rook is touched or moved')

@@ -22,9 +22,9 @@ class ChessBoard:
             raise InconsistentStateError('something else except None or Figure in the cell')
         
     def checked(self, color):
-        return self.king(color).checked(self.figures)
+        return self.get_king(color).checked(self.figures)
 
-    def king(self, color):
+    def get_king(self, color):
         def search_board(figure_type):
             return [fig for fig in self.figures if isinstance(fig, figure_type)]
         kings = [king for king in search_board(King) if king.color == color]
@@ -63,7 +63,7 @@ class ChessBoard:
         
     def __is_safe_for_king(self, figure, to):
         init_position = figure.position
-        ally_king = self.king(figure.color)
+        ally_king = self.get_king(figure.color)
         figure.move(to)
         if ally_king.checked(self.figures):
             figure.move(init_position)

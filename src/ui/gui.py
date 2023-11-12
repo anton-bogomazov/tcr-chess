@@ -119,7 +119,7 @@ class Gui:
 
 def checked_king(board):
     checked_kings = [king for king in
-                     [board.king(Color.BLACK), board.king(Color.WHITE)]
+                     [board.get_king(Color.BLACK), board.get_king(Color.WHITE)]
                      if king.checked(board.figures)]
     if len(checked_kings) == 2:
         raise InconsistentStateError(' it is not legal for both Kings to be checked at the same time')

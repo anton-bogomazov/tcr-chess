@@ -8,7 +8,7 @@ class Rook(ChessFigure):
 
     def turns(self, figures):
         turns = [up], [down], [right], [left]
-        return set(reduce(lambda acc, m: acc + self.calc_moves(figures, m), turns, []))
+        return set(reduce(lambda acc, m: acc + self.calc_repeatable_moves(figures, m), turns, []))
 
     def castle(self, kings_to):
         self.move(rook_castling_to(kings_to))

@@ -7,7 +7,7 @@ from functools import reduce
 class Bishop(ChessFigure):
     def turns(self, figures):
         turns = [up, left], [down, left], [up, right], [down, right]
-        return set(reduce(lambda acc, m: acc + self.calc_moves(figures, m), turns, []))
+        return set(reduce(lambda acc, m: acc + self.calc_repeatable_moves(figures, m), turns, []))
 
     def notation(self):
         return 'B'

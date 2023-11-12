@@ -26,7 +26,7 @@ class ChessFigure(ABC):
         self.position = to
         self.touched = True
 
-    def calc_moves(self, figures, m):
+    def calc_repeatable_moves(self, figures, m):
         result = []
         cur_position = position(self.position, m)
         while cur_position is not None:

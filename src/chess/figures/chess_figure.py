@@ -40,19 +40,19 @@ class ChessFigure(ABC):
                 break
         return result
 
-    def calc_move(self, figures, m):
-        cur_position = position(self.position, m)
-        if cur_position is None:
-            return None
-
-        if cell(figures, *cur_position) is None or \
-           cell(figures, *cur_position).color != self.color:
-            return cur_position
-
-        return None
-
     def calc_singly_moves(self, figures, ms):
-        return [m for m in [self.calc_move(figures, m) for m in ms] if m is not None]
+        def calc_move(figures, m):
+            cur_position = position(self.position, m)
+            if cur_position is None:
+                return None
+    
+            if cell(figures, *cur_position) is None or \
+               cell(figures, *cur_position).color != self.color:
+                return cur_position
+    
+            return None
+        
+        return [m for m in [calc_move(figures, m) for m in ms] if m is not None]
 
     def is_transformable_pawn(self):
         return False

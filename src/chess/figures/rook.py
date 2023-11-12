@@ -12,8 +12,7 @@ class Rook(ChessFigure):
         return set(turns)
 
     def castle(self, kings_to):
-        self.position = self.rook_castling_to(kings_to)
-        self.touched = True
+        self.move(self.rook_castling_to(kings_to))
 
     def rook_castling_to(self, to):
         castling_map = {

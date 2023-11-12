@@ -1,15 +1,14 @@
 from src.chess.board_utils import inc_num_pos as up, dec_num_pos as down, dec_lit_pos as left, inc_lit_pos as right, cell, position
 from src.chess.figures.chess_figure import ChessFigure
 from src.chess.figures.color import Color
+from functools import reduce
 
 
 class Rook(ChessFigure):
 
     def turns(self, figures):
-        turns = self.calc_moves(figures, [up]) + self.calc_moves(figures, [down]) +\
-                self.calc_moves(figures, [left]) + self.calc_moves(figures, [right])
-
-        return set(turns)
+        turns = [up], [down], [right], [left]
+        return set(reduce(lambda acc, m: acc + self.calc_moves(figures, m), turns, []))
 
     def castle(self, kings_to):
         self.move(rook_castling_to(kings_to))

@@ -70,14 +70,13 @@ class ChessBoard:
         return self.king(color).checked(self.figures)
 
     def king(self, color):
-        kings = [king for king in self.search_board(King) if king.color == color]
+        def search_board(figure_type):
+            return [fig for fig in self.figures if isinstance(fig, figure_type)]
+        kings = [king for king in search_board(King) if king.color == color]
         if len(kings) == 1:
             return kings[0]
         else:
             raise InconsistentStateError('No or more than one kings on the same color on the board')
-        
-    def search_board(self, figure_type):
-        return [fig for fig in self.figures if isinstance(fig, figure_type)]
 
     def cell(self, literal, numeral):
         return cell(self.figures, literal, numeral)

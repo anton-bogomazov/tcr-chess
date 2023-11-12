@@ -37,25 +37,19 @@ class Pawn(ChessFigure):
         return set(moving_turns + attacking_turns)
 
     def transform_to(self, fig_class=Queen):
-        blacks_edge = 8
-        whites_edge = 1
-
-        if self.color == Color.WHITE and self.position[1] != blacks_edge:
+        if not self.is_transformable_pawn():
             raise InconsistentStateError('transformation error: Pawn not on the boards edge')
-        elif self.color == Color.BLACK and self.position[1] != whites_edge:
-            raise InconsistentStateError('transformation error: Pawn not on the boards edge')
-        
+    
         return fig_class(self.position, self.color)
 
     def is_transformable_pawn(self):
-        return self.is_on_the_edge()
-    
-    def is_on_the_edge(self):
-        blacks_edge = 8
-        whites_edge = 1
-    
-        return self.color == Color.WHITE and self.position[1] == blacks_edge or \
-               self.color == Color.BLACK and self.position[1] == whites_edge
+        def is_on_the_edge():
+            blacks_edge = 8
+            whites_edge = 1
+            return self.color == Color.WHITE and self.position[1] == blacks_edge or \
+                   self.color == Color.BLACK and self.position[1] == whites_edge
+        
+        return is_on_the_edge()
 
     def notation(self):
         return 'p'

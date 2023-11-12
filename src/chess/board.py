@@ -28,7 +28,7 @@ class ChessBoard:
             raise UnsafeTurnError()
         figure_to_move.move(to)
         if figure_to_move.is_transformable_pawn():
-            self.transform_pawn(figure_to_move)
+            self.__transform_pawn(figure_to_move)
         
     def __take(self, to, figure_to_move):
         dest_figure = self.cell(*to)
@@ -38,11 +38,11 @@ class ChessBoard:
             self.figures.remove(dest_figure)
             figure_to_move.move(to)
             if figure_to_move.is_transformable_pawn():
-                self.transform_pawn(figure_to_move)
+                self.__transform_pawn(figure_to_move)
         else:
             raise InvalidMoveError('you are trying to take your own figure')
 
-    def transform_pawn(self, pawn):
+    def __transform_pawn(self, pawn):
         self.figures.append(pawn.transform_to())
         self.figures.remove(pawn)
         

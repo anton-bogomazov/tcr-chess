@@ -17,11 +17,11 @@ class ChessGame:
             raise TypeError('"from" should be a string')
         if to is None:
             raise TypeError('"to" should be a string')
-        self.validate_parameters(parse_position(fr))
+        self.__validate_parameters(parse_position(fr))
         self.__finish_if_checkmate()
         
         print(f'Moving figure from {fr} to {to}')
-        self.move_figure(parse_position(fr), parse_position(to))
+        self.__make_turn(parse_position(fr), parse_position(to))
         
         self.update_check_condition()
         print(f'{self.checked_player} player is checked')
@@ -30,15 +30,21 @@ class ChessGame:
         print(f'{self.current_player} is passing turn')
         self.pass_turn()
 
+    def __validate_parameters(self, fr):
+        selected_figure = self.board.cell(*fr)
+        if selected_figure.color != self.current_player:
+            raise OpponentsTurnError()
+        
     def __finish_if_checkmate(self):
         if self.checkmate:
             print(f'Checkmate! The game is over!')
             raise CheckmateError()
         
-    def move_figure(self, fr, to):
+    def __make_turn(self, fr, to):
         try:
             self.board.move(fr, to)
         except UnsafeTurnError:
+            # if there is no turn (aka checkmate) make any turn to finish the game
             if self.current_player == self.checked_player:
                 self.checkmate = True
             else:
@@ -56,10 +62,6 @@ class ChessGame:
     def pass_turn(self):
         self.current_player = self.opponent_color()
 
-    def validate_parameters(self, fr):
-        selected_figure = self.board.cell(*fr)
-        if selected_figure.color != self.current_player:
-            raise OpponentsTurnError()
 
     def opponent_color(self):
         return Color.BLACK if self.current_player == Color.WHITE else Color.WHITE
@@ -76,6 +78,7 @@ class ChessGame:
 
 def standard_chess_game():
     return ChessGame(figure_set=standard_chess_figure_set())
+
 
 def parse_position(p: str):
     return tuple(p)[0], int(tuple(p)[1])

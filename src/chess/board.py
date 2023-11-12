@@ -21,7 +21,7 @@ class ChessBoard:
         else:
             raise InconsistentStateError('something else except None or Figure in the cell')
         
-    def checked(self, color):
+    def is_checked(self, color):
         return self.get_king(color).checked(self.figures)
 
     def get_king(self, color):

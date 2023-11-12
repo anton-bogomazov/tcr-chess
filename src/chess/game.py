@@ -57,12 +57,12 @@ class ChessGame:
         # if current_player was checked last turn
         if self.current_player == self.__checked_player:
             # and still checked, declare checkmate
-            if self.__board.checked(self.current_player):
+            if self.__board.is_checked(self.current_player):
                 self.__checkmate = True
             else:
                 self.__checked_player = None
         # current_player checks opponent
-        if self.__board.checked(self.__opponent_color()):
+        if self.__board.is_checked(self.__opponent_color()):
             print(f'{self.__checked_player} player is checked')
             self.__checked_player = self.__opponent_color()
 

@@ -23,8 +23,10 @@ class Pawn(ChessFigure):
         }
         turns = whites if self.color == Color.WHITE else blacks
 
-        moving_turns = {position(self.position, turns['short'])} if self.touched \
-                       else {position(self.position, turns['long']), position(self.position, turns['short'])}
+        def turn(schema):
+            return position(self.position, schema)
+
+        moving_turns = {turn(turns['short'])} if self.touched else {turn(turns['long']), turn(turns['short'])}
         moving_turns = [t for t in moving_turns if t is not None]
         moving_turns = [move for move in moving_turns if cell(figures, *move) is None]
 

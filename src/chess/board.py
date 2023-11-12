@@ -17,18 +17,13 @@ class ChessBoard:
         dest_cell_content = self.cell(*to)
         
         if self.is_castling_move(fr, to):
-            self.castle(fr, to, figure_to_move)
+            figure_to_move.castle(self.figures, to)
         elif dest_cell_content is None:
             self.moving(fr, to, figure_to_move)
         elif isinstance(dest_cell_content, ChessFigure):
             self.take(fr, to, figure_to_move, dest_cell_content)
         else:
             raise InconsistentStateError('something else except None or Figure in the cell')
-
-    def castle(self, fr, to, figure_to_move):
-        self.check_if_castling_possible(figure_to_move, fr, to)
-        figure_to_move.castle(to)
-        self.get_castling_rook(to).castle(to)
         
     def moving(self, fr, to, figure_to_move):
         # cant move if blocked by other figure except Knight
@@ -48,45 +43,6 @@ class ChessBoard:
         else:
             raise InvalidMoveError('you are trying to take your own figure')
 
-    def check_if_castling_possible(self, king, fr, to):
-        if king.touched:
-            raise CastlingNotPossibleError('king is touched')
-        if self.get_castling_rook(to) is None or self.get_castling_rook(to).touched:
-            raise CastlingNotPossibleError('rook is touched or moved')
-        if king.is_castling_blocked(self.figures, to):
-            raise CastlingNotPossibleError('castling blocked by figures')
-
-    def get_castling_rook(self, to):
-        if to == ('g', 1):
-            return self.cell(*('h', 1))
-        if to == ('c', 1):
-            return self.cell(*('a', 1))
-        if to == ('g', 8):
-            return self.cell(*('h', 8))
-        if to == ('c', 8):
-            return self.cell(*('a', 8))
-        
-    def is_castling_blocked(self, fr, to):
-        from_literal, from_numeral = fr
-        to_literal, to_numeral = to
-
-        assert from_numeral == to_numeral
-
-        if ord(from_literal) < ord(to_literal):
-            n = 0
-            while ord(from_literal) < ord(to_literal)-n:
-                if self.cell(to_literal, to_numeral) is not None:
-                    return True
-                n += 1
-        if ord(from_literal) > ord(to_literal):
-            n = 0
-            while ord(from_literal) > ord(to_literal)+n:
-                if self.cell(to_literal, to_numeral) is not None:
-                    return True
-                n += 1
-
-        return False
-    
     def is_castling_move(self, fr, to):
         if fr == ('e', 1) and to in {('c', 1), ('g', 1)}:
             return True

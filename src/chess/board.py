@@ -17,13 +17,13 @@ class ChessBoard:
         if self.is_castling_move(fr, to):
             figure_to_move.castle(self.figures, to)
         elif dest_cell_content is None:
-            self.moving(fr, to, figure_to_move)
+            self.moving(to, figure_to_move)
         elif isinstance(dest_cell_content, ChessFigure):
-            self.take(fr, to, figure_to_move, dest_cell_content)
+            self.take(to, figure_to_move, dest_cell_content)
         else:
             raise InconsistentStateError('something else except None or Figure in the cell')
         
-    def moving(self, fr, to, figure_to_move):
+    def moving(self, to, figure_to_move):
         if to not in figure_to_move.turns(self.figures):
             raise InvalidMoveError()
         if not self.is_safe_move(figure_to_move, to):
@@ -32,7 +32,7 @@ class ChessBoard:
         if figure_to_move.is_transformable_pawn():
             self.transform_pawn(figure_to_move)
         
-    def take(self, fr, to, figure_to_move, dest_figure):
+    def take(self, to, figure_to_move, dest_figure):
         if dest_figure.color != figure_to_move.color:
             if to not in figure_to_move.turns(self.figures):
                 raise InvalidMoveError()

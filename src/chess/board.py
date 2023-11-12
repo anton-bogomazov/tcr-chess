@@ -14,29 +14,39 @@ class ChessBoard:
         if self.cell(*fr) is None:
             raise ValueError('fr references empty cell')
         figure_to_move = self.cell(*fr)
-        dest_cell_cont = self.cell(*to)
+        dest_cell_content = self.cell(*to)
         
         if self.is_castling_move(fr, to):
-            self.check_if_castling_possible(figure_to_move, fr, to)
-            figure_to_move.castle(to)
-            self.get_castling_rook(to).castle(to)
-        elif dest_cell_cont is None:
-            # cant move if blocked by other figure except Knight
+            self.castle(fr, to, figure_to_move)
+        elif dest_cell_content is None:
+            self.moving(fr, to, figure_to_move)
+        elif isinstance(dest_cell_content, ChessFigure):
+            self.take(fr, to, figure_to_move, dest_cell_content)
+        else:
+            raise InconsistentStateError('something else except None or Figure in the cell')
+
+    def castle(self, fr, to, figure_to_move):
+        self.check_if_castling_possible(figure_to_move, fr, to)
+        figure_to_move.castle(to)
+        self.get_castling_rook(to).castle(to)
+        
+    def moving(self, fr, to, figure_to_move):
+        # cant move if blocked by other figure except Knight
+        # transform pawn if on the edge
+        if to not in figure_to_move.turns(self.figures):
+            raise InvalidMoveError()
+        figure_to_move.move(to)
+        
+    def take(self, fr, to, figure_to_move, dest_figure):
+        if dest_figure.color != figure_to_move.color:
+            # if King, check if it is going to stand under attack
             # transform pawn if on the edge
             if to not in figure_to_move.turns(self.figures):
                 raise InvalidMoveError()
+            self.figures.remove(dest_figure)
             figure_to_move.move(to)
-        elif isinstance(dest_cell_cont, ChessFigure):
-            if dest_cell_cont.color != figure_to_move.color:
-                # if King, check if it is going to stand under attack
-                if to not in figure_to_move.turns(self.figures):
-                    raise InvalidMoveError()
-                self.figures.remove(dest_cell_cont)
-                figure_to_move.move(to)
-            else:
-                raise InvalidMoveError('you are trying to take your own figure')
         else:
-            raise InconsistentStateError('something else except None or Figure in the cell')
+            raise InvalidMoveError('you are trying to take your own figure')
 
     def check_if_castling_possible(self, figure_to_move, fr, to):
         if figure_to_move.touched:

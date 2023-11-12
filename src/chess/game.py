@@ -69,7 +69,9 @@ class ChessGame:
         return Color.BLACK if self.current_player == Color.WHITE else Color.WHITE
 
     def checked_king(self):
-        found = [king for king in self.board.search_board(King) if king.checked(self.board.figures)]
+        found = [king for king in
+                 [self.board.king(Color.BLACK), self.board.king(Color.WHITE)]
+                 if king.checked(self.board.figures)]
         return None if len(found) == 0 else found[0]
 
     def get_board(self):

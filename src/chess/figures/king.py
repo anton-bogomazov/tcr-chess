@@ -26,32 +26,11 @@ class King(ChessFigure):
         castling_rook = get_castling_rook(figures, to)
         if castling_rook is None or castling_rook.touched:
             raise CastlingNotPossibleError('rook is touched or moved')
-        if self.is_castling_blocked(figures, to):
+        if is_castling_blocked(self.position, figures, to):
             raise CastlingNotPossibleError('castling blocked by figures')
         
         self.move(to)
         castling_rook.castle(to)
-
-    def is_castling_blocked(self, figures, to):
-        from_literal, from_numeral = self.position
-        to_literal, to_numeral = to
-
-        assert from_numeral == to_numeral
-
-        if ord(from_literal) < ord(to_literal):
-            n = 0
-            while ord(from_literal) < ord(to_literal)-n:
-                if cell(figures, to_literal, to_numeral) is not None:
-                    return True
-                n += 1
-        if ord(from_literal) > ord(to_literal):
-            n = 0
-            while ord(from_literal) > ord(to_literal)+n:
-                if cell(figures, to_literal, to_numeral) is not None:
-                    return True
-                n += 1
-
-        return False
 
     def notation(self):
         return 'K'
@@ -70,3 +49,24 @@ def get_castling_rook(figures, to):
     
     return castling_rook_map[to]
     
+    
+def is_castling_blocked(position, figures, to):
+    from_literal, from_numeral = position
+    to_literal, to_numeral = to
+
+    assert from_numeral == to_numeral
+
+    if ord(from_literal) < ord(to_literal):
+        n = 0
+        while ord(from_literal) < ord(to_literal)-n:
+            if cell(figures, to_literal, to_numeral) is not None:
+                return True
+            n += 1
+    if ord(from_literal) > ord(to_literal):
+        n = 0
+        while ord(from_literal) > ord(to_literal)+n:
+            if cell(figures, to_literal, to_numeral) is not None:
+                return True
+            n += 1
+
+    return False

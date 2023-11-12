@@ -41,7 +41,7 @@ class ChessFigure(ABC):
         return result
 
     def calc_singly_moves(self, figures, ms):
-        def calc_move(figures, m):
+        def calc_move(m):
             cur_position = position(self.position, m)
             if cur_position is None:
                 return None
@@ -52,7 +52,7 @@ class ChessFigure(ABC):
     
             return None
         
-        return [m for m in [calc_move(figures, m) for m in ms] if m is not None]
+        return [m for m in [calc_move(m) for m in ms] if m is not None]
 
     def is_transformable_pawn(self):
         return False

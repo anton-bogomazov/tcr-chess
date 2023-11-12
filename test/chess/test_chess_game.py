@@ -218,6 +218,14 @@ class ChessGameTest(unittest.TestCase):
         bottom_right_rook = game.get_board().cell('a', 1)
         self.assertEqual(set(), bottom_right_rook.turns(game.get_board().figures))
 
-
+    def test_transform_pawn(self):
+        pawn = Pawn(('a', 7), Color.WHITE)
+        board = ChessBoard([pawn])
+        
+        board.move(('a', 7), ('a', 8))
+        
+        self.assertFalse(pawn in board.figures)
+        self.assertEqual(board.cell(*('a', 8)), Queen(('a', 8), Color.WHITE))
+        
 if __name__ == '__main__':
     unittest.main()

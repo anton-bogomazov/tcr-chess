@@ -27,10 +27,12 @@ class ChessBoard:
         
     def moving(self, fr, to, figure_to_move):
         # cant move if blocked by other figure except Knight
-        # transform pawn if on the edge
         if to not in figure_to_move.turns(self.figures):
             raise InvalidMoveError()
         figure_to_move.move(to)
+        if figure_to_move.is_transformable_pawn():
+            self.figures.append(figure_to_move.transform_to())
+            self.figures.remove(figure_to_move)
         
     def take(self, fr, to, figure_to_move, dest_figure):
         if dest_figure.color != figure_to_move.color:
@@ -40,6 +42,9 @@ class ChessBoard:
                 raise InvalidMoveError()
             self.figures.remove(dest_figure)
             figure_to_move.move(to)
+            if figure_to_move.is_transformable_pawn():
+                self.figures.append(figure_to_move.transform_to())
+                self.figures.remove(figure_to_move)
         else:
             raise InvalidMoveError('you are trying to take your own figure')
 

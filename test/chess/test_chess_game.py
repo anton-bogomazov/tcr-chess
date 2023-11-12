@@ -12,6 +12,7 @@ from src.chess.figures.color import Color
 
 
 class ChessGameTest(unittest.TestCase):
+    
     def test_from_to_positions_and_figure_type_is_enough_to_make_turn(self):
         standard_chess_game().turn('b1', 'c3')
 
@@ -99,7 +100,6 @@ class ChessGameTest(unittest.TestCase):
         game.turn('b5', 'c7')
         with self.assertRaises(CheckmateError):
             game.turn('a5', 'a4')
-        self.assertEqual(True, game.checkmate)
 
     def test_king_can_be_checked(self):
         game = standard_chess_game()
@@ -123,13 +123,6 @@ class ChessGameTest(unittest.TestCase):
         game.turn('d8', 'c7')
         self.assertEqual(game.get_board().checked(Color.BLACK), False)
         self.assertEqual(game.checked_player, None)
-
-    def test_turn_is_not_possible_when_checkmate(self):
-        game = standard_chess_game()
-        game.checkmate = True
-        
-        with self.assertRaises(CheckmateError):
-            game.turn('b1', 'c3')
 
     def test_is_castling_move(self):
         board = standard_chess_game().get_board()

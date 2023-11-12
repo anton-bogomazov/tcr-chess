@@ -10,7 +10,7 @@ class ChessGame:
         self.__board = ChessBoard(figure_set)
         self.current_player = Color.WHITE
         self.checked_player = None
-        self.checkmate = False
+        self.__checkmate = False
 
     def turn(self, fr=None, to=None):
         if fr is None:
@@ -34,7 +34,7 @@ class ChessGame:
             raise OpponentsTurnError()
         
     def __finish_if_checkmate(self):
-        if self.checkmate:
+        if self.__checkmate:
             print(f'Checkmate! The game is over!')
             raise CheckmateError()
         
@@ -52,7 +52,7 @@ class ChessGame:
         if self.current_player == self.checked_player:
             # and still checked, declare checkmate
             if self.__board.checked(self.current_player):
-                self.checkmate = True
+                self.__checkmate = True
             else:
                 self.checked_player = None
         # current_player checks opponent

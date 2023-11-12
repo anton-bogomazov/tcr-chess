@@ -29,7 +29,7 @@ class Gui:
         self.screen.fill(white)
         self.draw_board()
         self.draw_figures()
-        if self.game.checkmate:
+        if self.game.__checkmate:
             pygame.draw.rect(self.screen, (255, 255, 0), (0, 0, self.window_width, self.window_width))
         pygame.display.flip()
         

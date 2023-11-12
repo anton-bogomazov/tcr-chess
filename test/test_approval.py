@@ -22,5 +22,5 @@ class ApprovalTest(unittest.TestCase):
         with self.assertRaises(CheckmateError):
             game.turn("f3", "f4")
 
-        self.assertEqual(True, game.checkmate)
+        self.assertEqual(True, game.__checkmate)
         

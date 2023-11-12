@@ -23,13 +23,16 @@ class ChessGame:
         print(f'Moving figure from {fr} to {to}')
         self.__make_turn(parse_position(fr), parse_position(to))
         
-        self.update_check_condition()
+        self.__update_check_condition()
         print(f'{self.checked_player} player is checked')
         self.__finish_if_checkmate()
         
         print(f'{self.current_player} is passing turn')
         self.__pass_turn()
 
+    def get_board(self):
+        return self.board
+    
     def __validate_parameters(self, fr):
         selected_figure = self.board.cell(*fr)
         if selected_figure.color != self.current_player:
@@ -47,8 +50,8 @@ class ChessGame:
             # if there is no turn (aka checkmate) make any turn to finish the game
             if self.current_player != self.checked_player:
                 raise UnsafeTurnError
-        
-    def update_check_condition(self):
+            
+    def __update_check_condition(self):
         # if current_player was checked last turn
         if self.current_player == self.checked_player:
             # and still checked, declare checkmate
@@ -59,9 +62,6 @@ class ChessGame:
         # current_player checks opponent
         if self.board.checked(self.__opponent_color()):
             self.checked_player = self.__opponent_color()
-
-    def get_board(self):
-        return self.board
 
     def __pass_turn(self):
         self.current_player = self.__opponent_color()

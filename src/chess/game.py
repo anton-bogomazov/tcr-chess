@@ -8,9 +8,9 @@ class ChessGame:
 
     def __init__(self, figure_set):
         self.__board = ChessBoard(figure_set)
-        self.current_player = Color.WHITE
         self.__checked_player = None
         self.__checkmate = False
+        self.current_player = Color.WHITE
 
     def turn(self, fr=None, to=None):
         if fr is None:

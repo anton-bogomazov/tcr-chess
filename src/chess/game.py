@@ -2,7 +2,7 @@ from src.chess.figures.color import Color
 from src.chess.figures.king import King
 from src.chess.board import ChessBoard
 from src.chess.figures.sets import standard_chess_figure_set
-from src.chess.error import CheckmateError, OpponentsTurnError
+from src.chess.error import CheckmateError, OpponentsTurnError, UnsafeTurnError
 
 
 class ChessGame:
@@ -37,6 +37,7 @@ class ChessGame:
 
     def move_figure(self, fr, to):
         self.board.move(fr, to)
+
         
     def update_check_condition(self):
         if self.current_player == self.checked_player:

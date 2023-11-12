@@ -1,6 +1,6 @@
 from src.chess.figures.chess_figure import ChessFigure
 from src.chess.figures.king import King
-from src.chess.error import InvalidMoveError, CastlingNotPossibleError, InconsistentStateError
+from src.chess.error import InvalidMoveError, UnsafeTurnError, InconsistentStateError
 
 
 # TODO FIXME it's possible to move fig and init check
@@ -29,8 +29,8 @@ class ChessBoard:
     def moving(self, fr, to, figure_to_move):
         if to not in figure_to_move.turns(self.figures):
             raise InvalidMoveError()
-        if isinstance(figure_to_move, King) and not self.is_safe_move(figure_to_move, to):
-            raise InvalidMoveError()
+        if not self.is_safe_move(figure_to_move, to):
+            raise UnsafeTurnError()
         figure_to_move.move(to)
         if figure_to_move.is_transformable_pawn():
             self.transform_pawn(figure_to_move)
@@ -50,13 +50,26 @@ class ChessBoard:
         self.figures.append(pawn.transform_to())
         self.figures.remove(pawn)
         
-    def is_safe_move(self, king, to):
-        init_position = king.position
-        king.move(to)
-        if king.checked(self.figures):
+    def is_safe_move(self, figure, to):
+        # king is not going to stand under attack
+        if isinstance(figure, King):
+            king = figure
+            init_position = king.position
             king.move(to)
-            return False
-        king.move(init_position)
+            if king.checked(self.figures):
+                king.move(to)
+                return False
+            king.move(init_position)
+        # figure is not opening king for attack
+        else:
+            init_position = figure.position
+            ally_king = [k for k in self.search_board(King) if k.color == figure.color][0]
+            figure.move(to)
+            if ally_king.checked(self.figures):
+                figure.move(to)
+                return False
+            figure.move(init_position)
+
         return True
 
     def is_castling_move(self, fr, to):

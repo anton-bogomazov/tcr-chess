@@ -28,3 +28,6 @@ class InconsistentStateError(Exception):
 
 class OutOfBoardError(Exception):
     ...
+
+class UnsafeTurnError(Exception):
+    ...

@@ -115,9 +115,9 @@ class ChessGameTest(unittest.TestCase):
         game.turn('c3', 'b5')
         game.turn('a6', 'a5')
         game.turn('b5', 'c7')
-        with self.assertRaises(CheckmateError):
+        with self.assertRaises(UnsafeTurnError):
             game.turn('a5', 'a4')
-        self.assertEqual(True, game.checkmate)
+        self.assertEqual(Color.BLACK, game.checked_player)
 
     def test_king_can_be_checked(self):
         game = standard_chess_game()
@@ -214,7 +214,7 @@ class ChessGameTest(unittest.TestCase):
 
     def test_transform_pawn(self):
         pawn = Pawn(('a', 7), Color.WHITE)
-        board = ChessBoard([pawn])
+        board = ChessBoard([pawn, King(('a', 1), Color.WHITE)])
         
         board.move(('a', 7), ('a', 8))
         
@@ -230,5 +230,14 @@ class ChessGameTest(unittest.TestCase):
         ]
         board = ChessBoard(figs)
         
-        with self.assertRaises(InvalidMoveError):
+        with self.assertRaises(UnsafeTurnError):
             board.move(('c', 3), ('c', 4))
+
+    def test_it_is_not_allowed_to_open_ally_king_for_attack(self):
+        game = standard_chess_game()
+        game.turn('e2', 'e4')
+        game.turn('e7', 'e5')
+        game.turn('f1', 'b5')
+
+        with self.assertRaises(UnsafeTurnError):
+            game.turn('d7', 'd6')

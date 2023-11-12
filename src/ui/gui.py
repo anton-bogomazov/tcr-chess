@@ -1,6 +1,7 @@
 import pygame
 import sys
 
+# highlight checked King
 
 class Gui:
     def __init__(self, chess_game):
@@ -47,7 +48,10 @@ class Gui:
         else:
             if clicked_cell != self.selected_cell:
                 print(f'moving piece from {clicked_cell} to {self.selected_cell}')
-                self.game.turn(self.selected_cell, clicked_cell)
+                try:
+                    self.game.turn(self.selected_cell, clicked_cell)
+                except Exception:
+                    ...
                 self.selected_cell = clicked_cell
 
             self.selected_cell = None
@@ -77,7 +81,6 @@ class Gui:
                         pygame.draw.rect(self.screen, figure_highlight_color, rectangle(col, row), 3)
                     if figure:
                         possible_moves = figure.turns(self.game.get_board().figures)
-                        print(f'moves {possible_moves}')
                         if (chr(col + ord('a')), 8 - row) in possible_moves:
                             highlight_color = (0, 255, 0)  # Green
                             pygame.draw.rect(self.screen, highlight_color, rectangle(col, row), 3)

@@ -3,7 +3,8 @@ from src.chess.figures.king import King
 from src.chess.error import InvalidMoveError, CastlingNotPossibleError, InconsistentStateError
 
 
-# is figure a good place to localize block checking logic? (probably yes)
+# TODO FIXME it's possible to move fig and init check
+# TODO FIXME it's possible to move fig and init check
 
 
 class ChessBoard:

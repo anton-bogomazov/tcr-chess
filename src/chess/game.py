@@ -7,7 +7,7 @@ from src.chess.error import CheckmateError, OpponentsTurnError, UnsafeTurnError,
 class ChessGame:
 
     def __init__(self, figure_set):
-        self.board = ChessBoard(figure_set)
+        self.__board = ChessBoard(figure_set)
         self.current_player = Color.WHITE
         self.checked_player = None
         self.checkmate = False
@@ -31,10 +31,10 @@ class ChessGame:
         self.__pass_turn()
 
     def get_board(self):
-        return self.board
+        return self.__board
     
     def __validate_parameters(self, fr):
-        selected_figure = self.board.cell(*fr)
+        selected_figure = self.__board.cell(*fr)
         if selected_figure.color != self.current_player:
             raise OpponentsTurnError()
         
@@ -45,7 +45,7 @@ class ChessGame:
         
     def __make_turn(self, fr, to):
         try:
-            self.board.move(fr, to)
+            self.__board.move(fr, to)
         except UnsafeTurnError:
             # if there is no turn (aka checkmate) make any turn to finish the game
             if self.current_player != self.checked_player:
@@ -55,12 +55,12 @@ class ChessGame:
         # if current_player was checked last turn
         if self.current_player == self.checked_player:
             # and still checked, declare checkmate
-            if self.board.checked(self.current_player):
+            if self.__board.checked(self.current_player):
                 self.checkmate = True
             else:
                 self.checked_player = None
         # current_player checks opponent
-        if self.board.checked(self.__opponent_color()):
+        if self.__board.checked(self.__opponent_color()):
             self.checked_player = self.__opponent_color()
 
     def __pass_turn(self):

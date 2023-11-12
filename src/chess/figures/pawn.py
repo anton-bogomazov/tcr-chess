@@ -43,7 +43,7 @@ class Pawn(ChessFigure):
             ...
         elif self.color == Color.BLACK and self.position[1] == whites_edge:
             ...
-        return Queen(self.position, self.color)
+        return fig_class(self.position, self.color)
 
     def notation(self):
         return 'p'

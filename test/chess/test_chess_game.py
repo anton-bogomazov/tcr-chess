@@ -220,6 +220,3 @@ class ChessGameTest(unittest.TestCase):
         
         self.assertFalse(pawn in board.figures)
         self.assertEqual(board.cell(*('a', 8)), Queen(('a', 8), Color.WHITE))
-        
-if __name__ == '__main__':
-    unittest.main()

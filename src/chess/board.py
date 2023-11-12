@@ -22,6 +22,7 @@ class ChessBoard:
             self.get_castling_rook(to).castle(to)
         elif dest_cell_cont is None:
             # cant move if blocked by other figure except Knight
+            # transform pawn if on the edge
             if to not in figure_to_move.turns(self.figures):
                 raise InvalidMoveError()
             figure_to_move.move(to)

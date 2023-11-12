@@ -5,7 +5,7 @@ from src.ui.gui import Gui
 
 def main():
     game = standard_chess_game()
-    mode = 'cli'
+    mode = 'gui'
     match mode:
         case 'gui':
             Gui(game).start()

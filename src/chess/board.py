@@ -24,7 +24,7 @@ class ChessBoard:
     def __moving(self, to, figure_to_move):
         if to not in figure_to_move.turns(self.figures):
             raise InvalidMoveError()
-        if not self.is_safe_move(figure_to_move, to):
+        if not self.__is_safe_for_king(figure_to_move, to):
             raise UnsafeTurnError()
         figure_to_move.move(to)
         if figure_to_move.is_transformable_pawn():
@@ -46,7 +46,7 @@ class ChessBoard:
         self.figures.append(pawn.transform_to())
         self.figures.remove(pawn)
         
-    def is_safe_move(self, figure, to):
+    def __is_safe_for_king(self, figure, to):
         init_position = figure.position
         ally_king = self.king(figure.color)
         figure.move(to)

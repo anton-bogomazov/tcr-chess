@@ -1,6 +1,7 @@
 from src.chess.figures.chess_figure import ChessFigure
 from src.chess.figures.king import King
 from src.chess.error import InvalidMoveError, UnsafeTurnError, InconsistentStateError
+from src.chess.board_utils import cell
 
 
 class ChessBoard:
@@ -83,11 +84,4 @@ class ChessBoard:
         return [fig for fig in self.figures if isinstance(fig, figure_type)]
 
     def cell(self, literal, numeral):
-        found_figures = [fig for fig in self.figures if fig.position == (literal, numeral)]
-        match len(found_figures):
-            case 0:
-                return None
-            case 1:
-                return found_figures[0]
-            case _:
-                raise InconsistentStateError('two figures in the same cell')
+        return cell(self.figures, literal, numeral)

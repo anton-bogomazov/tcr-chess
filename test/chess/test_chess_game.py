@@ -220,3 +220,15 @@ class ChessGameTest(unittest.TestCase):
         
         self.assertFalse(pawn in board.figures)
         self.assertEqual(board.cell(*('a', 8)), Queen(('a', 8), Color.WHITE))
+
+    def test_cant_move_to_attacked_cell(self):
+        king = King(('c', 3), color=Color.BLACK)
+        figs = [
+            king,
+            King(('c', 5), color=Color.WHITE),
+            King(('d', 1), color=Color.WHITE),
+        ]
+        board = ChessBoard(figs)
+        
+        with self.assertRaises(InvalidMoveError):
+            board.move(('c', 3), ('c', 4))

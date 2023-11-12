@@ -28,6 +28,8 @@ class ChessBoard:
     def moving(self, fr, to, figure_to_move):
         if to not in figure_to_move.turns(self.figures):
             raise InvalidMoveError()
+        if isinstance(figure_to_move, King) and not self.is_safe_move(figure_to_move, to):
+            raise InvalidMoveError()
         figure_to_move.move(to)
         if figure_to_move.is_transformable_pawn():
             self.transform_pawn(figure_to_move)
@@ -47,6 +49,15 @@ class ChessBoard:
         self.figures.append(pawn.transform_to())
         self.figures.remove(pawn)
         
+    def is_safe_move(self, king, to):
+        init_position = king.position
+        king.move(to)
+        if king.checked(self.figures):
+            king.move(to)
+            return False
+        king.move(init_position)
+        return True
+
     def is_castling_move(self, fr, to):
         if fr == ('e', 1) and to in {('c', 1), ('g', 1)}:
             return True

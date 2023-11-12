@@ -27,19 +27,6 @@ class KingTest(unittest.TestCase):
             ('d', 3), ('d', 2), ('b', 4)
         }, king.turns(figs))
 
-    @unittest.skip('probably should be managed on upper level')
-    def test_cant_move_to_attacked_cell(self):
-        king = _king()
-
-        figs = [
-            king,
-            _king(('c', 5)),
-            _king(('d', 1)),
-        ]
-        self.assertEqual({
-            ('b', 2), ('b', 3), ('d', 3),
-        }, king.turns(figs))
-
 
 def _king(position=('c', 3), color=Color.WHITE):
     return King(position, color)

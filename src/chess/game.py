@@ -59,14 +59,6 @@ class ChessGame:
         if self.board.checked(self.__opponent_color()):
             self.checked_player = self.__opponent_color()
 
-    def checked_king(self):
-        checked_kings = [king for king in
-                         [self.board.king(Color.BLACK), self.board.king(Color.WHITE)]
-                         if king.checked(self.board.figures)]
-        if len(checked_kings) == 2:
-            raise InconsistentStateError(' it is not legal for both Kings to be checked at the same time')
-        return None if len(checked_kings) == 0 else checked_kings[0]
-
     def get_board(self):
         return self.board
 
@@ -75,6 +67,7 @@ class ChessGame:
 
     def __opponent_color(self):
         return Color.BLACK if self.current_player == Color.WHITE else Color.WHITE
+
 
 def standard_chess_game():
     return ChessGame(figure_set=standard_chess_figure_set())

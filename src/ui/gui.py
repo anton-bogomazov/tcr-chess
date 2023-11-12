@@ -1,6 +1,7 @@
 import pygame
 import sys
-from src.chess.error import CheckmateError
+from src.chess.error import InconsistentStateError
+from src.chess.figures.color import Color
 
 class Gui:
     def __init__(self, chess_game):
@@ -78,7 +79,7 @@ class Gui:
                     if figure:
                         self.highlight_in(move_highlight_color, col, row, figure.turns(self.game.get_board().figures))
                 if self.game.checked_player is not None:
-                    self.highlight_in(check_highlight_color, col, row, [self.game.checked_king().position])
+                    self.highlight_in(check_highlight_color, col, row, [checked_king(self.game.get_board()).position])
 
     def rectangle(self, col, row):
         return col * self.cell_width, row * self.cell_width, \
@@ -114,3 +115,12 @@ class Gui:
 
         for figure in self.game.get_board().figures:
             draw_figure(figure)
+
+
+def checked_king(board):
+    checked_kings = [king for king in
+                     [board.king(Color.BLACK), board.king(Color.WHITE)]
+                     if king.checked(board.figures)]
+    if len(checked_kings) == 2:
+        raise InconsistentStateError(' it is not legal for both Kings to be checked at the same time')
+    return None if len(checked_kings) == 0 else checked_kings[0]

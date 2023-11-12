@@ -8,7 +8,7 @@ class ChessBoard:
     def __init__(self, figure_set):
         self.figures = figure_set
 
-    def move(self, fr, to):
+    def move_figure(self, fr, to):
         figure_to_move = self.cell(*fr)
         dest_cell_content = self.cell(*to)
         

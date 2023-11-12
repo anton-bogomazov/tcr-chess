@@ -48,18 +48,18 @@ class ChessGameTest(unittest.TestCase):
     def test_figure_can_be_moved_to_empty_cell(self):
         board = standard_chess_game().get_board()
         self.assertEqual(board.cell('b', 1), Knight(('b', 1), Color.WHITE))
-        board.move(('b', 1), ('c', 3))
+        board.move_figure(('b', 1), ('c', 3))
         self.assertEqual(board.cell('c', 3), Knight(('c', 3), Color.WHITE))
         self.assertEqual(board.cell('b', 1), None)
 
     def test_figure_can_take_opponents_figure(self):
         board = standard_chess_game().get_board()
-        board.move(('b', 1), ('c', 3))
-        board.move(('c', 3), ('d', 5))
+        board.move_figure(('b', 1), ('c', 3))
+        board.move_figure(('c', 3), ('d', 5))
 
         self.assertIsInstance(board.cell('c', 7), Pawn)
         self.assertEqual(board.cell('c', 7).color, Color.BLACK)
-        board.move(('d', 5), ('c', 7))
+        board.move_figure(('d', 5), ('c', 7))
         self.assertIsInstance(board.cell('c', 7), Knight)
 
     def test_whites_starts(self):
@@ -130,9 +130,9 @@ class ChessGameTest(unittest.TestCase):
     def test_castling_move_impossible_when_blocked_by_figures(self):
         board = standard_chess_game().get_board()
         with self.assertRaises(CastlingNotPossibleError):
-            board.move(('e', 1), ('g', 1))
+            board.move_figure(('e', 1), ('g', 1))
         with self.assertRaises(CastlingNotPossibleError):
-            board.move(('e', 1), ('c', 1))
+            board.move_figure(('e', 1), ('c', 1))
 
     def test_castling_move_impossible_when_king_touched(self):
         king = King(('e', 1), Color.WHITE)
@@ -140,7 +140,7 @@ class ChessGameTest(unittest.TestCase):
         board = ChessBoard((king, Rook(('h', 1), Color.WHITE)))
 
         with self.assertRaises(CastlingNotPossibleError):
-            board.move(('e', 1), ('g', 1))
+            board.move_figure(('e', 1), ('g', 1))
 
     def test_castling_move_impossible_when_rook_touched(self):
         rook = Rook(('h', 1), Color.WHITE)
@@ -148,12 +148,12 @@ class ChessGameTest(unittest.TestCase):
         board = ChessBoard((King(('e', 1), Color.WHITE), rook))
 
         with self.assertRaises(CastlingNotPossibleError):
-            board.move(('e', 1), ('g', 1))
+            board.move_figure(('e', 1), ('g', 1))
 
     def test_castling_move_impossible_when_rook_moved(self):
         board = ChessBoard([King(('e', 1), Color.WHITE)])
         with self.assertRaises(CastlingNotPossibleError):
-            board.move(('e', 1), ('g', 1))
+            board.move_figure(('e', 1), ('g', 1))
 
     def test_perform_castling_move(self):
         game = standard_chess_game()
@@ -189,7 +189,7 @@ class ChessGameTest(unittest.TestCase):
         pawn = Pawn(('a', 7), Color.WHITE)
         board = ChessBoard([pawn, King(('a', 1), Color.WHITE)])
         
-        board.move(('a', 7), ('a', 8))
+        board.move_figure(('a', 7), ('a', 8))
         
         self.assertFalse(pawn in board.figures)
         self.assertEqual(board.cell(*('a', 8)), Queen(('a', 8), Color.WHITE))
@@ -198,7 +198,7 @@ class ChessGameTest(unittest.TestCase):
         queen = Queen(('a', 7), Color.WHITE)
         board = ChessBoard([queen, King(('a', 1), Color.WHITE)])
 
-        board.move(('a', 7), ('a', 8))
+        board.move_figure(('a', 7), ('a', 8))
 
         self.assertTrue(queen in board.figures)
         self.assertEqual(board.cell(*('a', 8)), Queen(('a', 8), Color.WHITE))
@@ -213,7 +213,7 @@ class ChessGameTest(unittest.TestCase):
         board = ChessBoard(figs)
         
         with self.assertRaises(UnsafeTurnError):
-            board.move(('c', 3), ('c', 4))
+            board.move_figure(('c', 3), ('c', 4))
 
     def test_it_is_not_allowed_to_open_ally_king_for_attack(self):
         game = standard_chess_game()

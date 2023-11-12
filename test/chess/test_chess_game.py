@@ -89,7 +89,7 @@ class ChessGameTest(unittest.TestCase):
         game.turn('c3', 'b5')
         game.turn('a6', 'a5')
         game.turn('b5', 'c7')
-        self.assertEqual(Color.BLACK, game.checked_player)
+        self.assertTrue(game.get_board().checked(Color.BLACK))
 
     def test_checkmate_condition(self):
         game = standard_chess_game()
@@ -119,10 +119,8 @@ class ChessGameTest(unittest.TestCase):
         game.turn('a6', 'a5')
         game.turn('b5', 'c7')
         self.assertEqual(game.get_board().checked(Color.BLACK), True)
-        self.assertEqual(game.checked_player, Color.BLACK)
         game.turn('d8', 'c7')
         self.assertEqual(game.get_board().checked(Color.BLACK), False)
-        self.assertEqual(game.checked_player, None)
 
     def test_is_castling_move(self):
         board = standard_chess_game().get_board()

@@ -78,7 +78,7 @@ class Gui:
                     self.highlight_in(figure_highlight_color, col, row, [self.selected_cell])
                     if figure:
                         self.highlight_in(move_highlight_color, col, row, figure.turns(self.game.get_board().figures))
-                if self.game.checked_player is not None:
+                if self.game.__checked_player is not None:
                     self.highlight_in(check_highlight_color, col, row, [checked_king(self.game.get_board()).position])
 
     def rectangle(self, col, row):

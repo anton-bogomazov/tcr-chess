@@ -17,7 +17,7 @@ class ApprovalTest(unittest.TestCase):
         for move in moves:
             game.turn(*move)
 
-        self.assertEqual(Color.WHITE, game.checked_player)
+        self.assertEqual(Color.WHITE, game.__checked_player)
         
         with self.assertRaises(CheckmateError):
             game.turn("f3", "f4")

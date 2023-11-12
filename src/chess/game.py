@@ -1,7 +1,7 @@
 from src.chess.figures.color import Color
 from src.chess.board import ChessBoard
 from src.chess.figures.sets import standard_chess_figure_set
-from src.chess.error import CheckmateError, OpponentsTurnError, UnsafeTurnError, InconsistentStateError
+from src.chess.error import CheckmateError, OpponentsTurnError, UnsafeTurnError
 
 
 class ChessGame:

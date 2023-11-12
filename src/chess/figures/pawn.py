@@ -1,5 +1,6 @@
 from src.chess.board_utils import inc_num_pos as up, dec_num_pos as down, dec_lit_pos as left, inc_lit_pos as right, position, cell
 from src.chess.figures.chess_figure import ChessFigure
+from src.chess.figures.queen import Queen
 from src.chess.figures.color import Color
 
 
@@ -33,6 +34,16 @@ class Pawn(ChessFigure):
                               cell(figures, *move).color != self.color]
 
         return set(moving_turns + attacking_turns)
+
+    def transaform_to(self, fig_class=Queen):
+        blacks_edge = 8
+        whites_edge = 1
+
+        if self.color == Color.WHITE and self.position[1] == blacks_edge:
+            ...
+        elif self.color == Color.BLACK and self.position[1] == whites_edge:
+            ...
+        return Queen(self.position, self.color)
 
     def notation(self):
         return 'p'

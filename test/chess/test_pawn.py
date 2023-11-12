@@ -1,6 +1,7 @@
 import unittest
 from src.chess.figures.king import King
 from src.chess.figures.pawn import Pawn
+from src.chess.figures.queen import Queen
 from src.chess.figures.color import Color
 from src.chess.figures.sets import standard_chess_figure_set as std_figures
 
@@ -47,6 +48,10 @@ class PawnTest(unittest.TestCase):
         pawn = _pawn()
         pawn.move(('a', 3))
         self.assertEqual(pawn.position, ('a', 3))
+
+    def test_transform(self):
+        pawn = _pawn(('a', 8))
+        self.assertIsInstance(pawn.transaform_to(Queen), Queen)
 
 
 def _pawn(position=('a', 2), color=Color.WHITE):

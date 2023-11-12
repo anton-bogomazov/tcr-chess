@@ -21,6 +21,21 @@ class ChessBoard:
         else:
             raise InconsistentStateError('something else except None or Figure in the cell')
         
+    def checked(self, color):
+        return self.king(color).checked(self.figures)
+
+    def king(self, color):
+        def search_board(figure_type):
+            return [fig for fig in self.figures if isinstance(fig, figure_type)]
+        kings = [king for king in search_board(King) if king.color == color]
+        if len(kings) == 1:
+            return kings[0]
+        else:
+            raise InconsistentStateError('No or more than one kings on the same color on the board')
+
+    def cell(self, literal, numeral):
+        return cell(self.figures, literal, numeral)
+
     def __moving(self, to, figure_to_move):
         if to not in figure_to_move.turns(self.figures):
             raise InvalidMoveError()
@@ -56,21 +71,7 @@ class ChessBoard:
         figure.move(init_position)
 
         return True
-    
-    def checked(self, color):
-        return self.king(color).checked(self.figures)
 
-    def king(self, color):
-        def search_board(figure_type):
-            return [fig for fig in self.figures if isinstance(fig, figure_type)]
-        kings = [king for king in search_board(King) if king.color == color]
-        if len(kings) == 1:
-            return kings[0]
-        else:
-            raise InconsistentStateError('No or more than one kings on the same color on the board')
-
-    def cell(self, literal, numeral):
-        return cell(self.figures, literal, numeral)
 
 def is_castling_move(fr, to):
     if fr == ('e', 1) and to in {('c', 1), ('g', 1)}:

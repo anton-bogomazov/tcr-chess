@@ -52,12 +52,12 @@ class PawnTest(unittest.TestCase):
 
     def test_transform(self):
         pawn = _pawn(('a', 8))
-        self.assertIsInstance(pawn.transaform_to(Queen), Queen)
+        self.assertIsInstance(pawn.transform_to(Queen), Queen)
 
     def test_transform_raise_error_when_pawn_is_not_on_the_edge(self):
         pawn = _pawn(('a', 5))
         with self.assertRaises(InconsistentStateError):
-            pawn.transaform_to(Queen)
+            pawn.transform_to(Queen)
 
 
 def _pawn(position=('a', 2), color=Color.WHITE):

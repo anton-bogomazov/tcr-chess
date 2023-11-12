@@ -36,7 +36,7 @@ class Pawn(ChessFigure):
 
         return set(moving_turns + attacking_turns)
 
-    def transaform_to(self, fig_class=Queen):
+    def transform_to(self, fig_class=Queen):
         blacks_edge = 8
         whites_edge = 1
 

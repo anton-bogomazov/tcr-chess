@@ -17,23 +17,24 @@ class ChessGame:
             raise TypeError('"from" should be a string')
         if to is None:
             raise TypeError('"to" should be a string')
-        if self.checkmate:
-            print(f'Checkmate! The game is over!')
-            raise CheckmateError()
-
-        def parse_position(p: str):
-            return tuple(p)[0], int(tuple(p)[1])
-
         self.validate_parameters(parse_position(fr))
+        self.__finish_if_checkmate()
+        
         print(f'Moving figure from {fr} to {to}')
         self.move_figure(parse_position(fr), parse_position(to))
+        
         self.update_check_condition()
         print(f'{self.checked_player} player is checked')
-        if self.checkmate:
-            raise CheckmateError()
+        self.__finish_if_checkmate()
+        
         print(f'{self.current_player} is passing turn')
         self.pass_turn()
 
+    def __finish_if_checkmate(self):
+        if self.checkmate:
+            print(f'Checkmate! The game is over!')
+            raise CheckmateError()
+        
     def move_figure(self, fr, to):
         try:
             self.board.move(fr, to)
@@ -42,10 +43,6 @@ class ChessGame:
                 self.checkmate = True
             else:
                 raise UnsafeTurnError
-
-    def checkmate(self):
-        self.checkmate = True
-        raise CheckmateError()
         
     def update_check_condition(self):
         if self.current_player == self.checked_player:
@@ -79,3 +76,6 @@ class ChessGame:
 
 def standard_chess_game():
     return ChessGame(figure_set=standard_chess_figure_set())
+
+def parse_position(p: str):
+    return tuple(p)[0], int(tuple(p)[1])

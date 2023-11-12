@@ -26,15 +26,20 @@ class Pawn(ChessFigure):
         def turn(schema):
             return position(self.position, schema)
 
-        moving_turns = {turn(turns['short'])} if self.touched else {turn(turns['long']), turn(turns['short'])}
-        moving_turns = [t for t in moving_turns if t is not None]
-        moving_turns = [move for move in moving_turns if cell(figures, *move) is None]
+        def non_none(xs):
+            return [x for x in xs if x is not None]
 
-        attacking_turns = [position(self.position, turns['attack_left']), position(self.position, turns['attack_right'])]
-        attacking_turns = [t for t in attacking_turns if t is not None]
-        attacking_turns = [move for move in attacking_turns
-                           if cell(figures, *move) is not None and
-                              cell(figures, *move).color != self.color]
+        def free_cell(pos):
+            return cell(figures, *pos) is None
+        
+        def opponent_occupied(pos):
+            return cell(figures, *pos) is not None and cell(figures, *pos).color != self.color
+
+        moving_turns = turn(turns['short']) if self.touched else turn(turns['long']), turn(turns['short'])
+        moving_turns = [pos for pos in non_none(moving_turns) if free_cell(pos)]
+
+        attacking_turns = turn(turns['attack_left']), turn(turns['attack_right'])
+        attacking_turns = [move for move in non_none(attacking_turns) if opponent_occupied(move)]
 
         return set(moving_turns + attacking_turns)
 

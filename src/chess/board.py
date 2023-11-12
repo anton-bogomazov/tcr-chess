@@ -61,7 +61,7 @@ class ChessBoard:
         # figure is not opening king for attack
         else:
             init_position = figure.position
-            ally_king = [k for k in self.search_board(King) if k.color == figure.color][0]
+            ally_king = self.king(figure.color)
             figure.move(to)
             if ally_king.checked(self.figures):
                 figure.move(init_position)
@@ -78,11 +78,14 @@ class ChessBoard:
         return False
     
     def checked(self, color):
-        kings = self.king(color)
-        return len([king for king in kings if king.checked(self.figures)]) > 0
+        return self.king(color).checked(self.figures)
 
     def king(self, color):
-        return [king for king in self.search_board(King) if king.color == color]
+        kings = [king for king in self.search_board(King) if king.color == color]
+        if len(kings) == 1:
+            return kings[0]
+        else:
+            raise InconsistentStateError('No or more than one kings on the same color on the board')
         
     def search_board(self, figure_type):
         return [fig for fig in self.figures if isinstance(fig, figure_type)]

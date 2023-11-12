@@ -3,6 +3,7 @@ from src.chess.figures.king import King
 from src.chess.figures.pawn import Pawn
 from src.chess.figures.queen import Queen
 from src.chess.figures.color import Color
+from src.chess.error import InconsistentStateError
 from src.chess.figures.sets import standard_chess_figure_set as std_figures
 
 
@@ -52,6 +53,11 @@ class PawnTest(unittest.TestCase):
     def test_transform(self):
         pawn = _pawn(('a', 8))
         self.assertIsInstance(pawn.transaform_to(Queen), Queen)
+
+    def test_transform_raise_error_when_pawn_is_not_on_the_edge(self):
+        pawn = _pawn(('a', 5))
+        with self.assertRaises(InconsistentStateError):
+            pawn.transaform_to(Queen)
 
 
 def _pawn(position=('a', 2), color=Color.WHITE):

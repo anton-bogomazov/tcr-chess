@@ -2,6 +2,7 @@ from src.chess.board_utils import inc_num_pos as up, dec_num_pos as down, dec_li
 from src.chess.figures.chess_figure import ChessFigure
 from src.chess.figures.queen import Queen
 from src.chess.figures.color import Color
+from src.chess.error import InconsistentStateError
 
 
 class Pawn(ChessFigure):
@@ -39,10 +40,11 @@ class Pawn(ChessFigure):
         blacks_edge = 8
         whites_edge = 1
 
-        if self.color == Color.WHITE and self.position[1] == blacks_edge:
-            ...
-        elif self.color == Color.BLACK and self.position[1] == whites_edge:
-            ...
+        if self.color == Color.WHITE and self.position[1] != blacks_edge:
+            raise InconsistentStateError('transformation error: Pawn not on the boards edge')
+        elif self.color == Color.BLACK and self.position[1] != whites_edge:
+            raise InconsistentStateError('transformation error: Pawn not on the boards edge')
+        
         return fig_class(self.position, self.color)
 
     def notation(self):

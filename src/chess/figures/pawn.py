@@ -36,12 +36,10 @@ class Pawn(ChessFigure):
             return cell(figures, *pos) is not None and cell(figures, *pos).color != self.color
 
         moving_turns = turn(turns['short']) if self.touched else turn(turns['long']), turn(turns['short'])
-        moving_turns = [pos for pos in non_none(moving_turns) if free_cell(pos)]
-
         attacking_turns = turn(turns['attack_left']), turn(turns['attack_right'])
-        attacking_turns = [move for move in non_none(attacking_turns) if opponent_occupied(move)]
 
-        return set(moving_turns + attacking_turns)
+        return set(list(filter(free_cell, non_none(moving_turns))) +\
+                list(filter(opponent_occupied, non_none(attacking_turns))))
 
     def transform_to(self, fig_class=Queen):
         if not self.is_transformable_pawn():

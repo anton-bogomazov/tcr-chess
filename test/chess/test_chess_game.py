@@ -241,3 +241,19 @@ class ChessGameTest(unittest.TestCase):
 
         with self.assertRaises(UnsafeTurnError):
             game.turn('d7', 'd6')
+
+    def test_player_doesnt_pass_turn_when_unsafe_or_invalid(self):
+        game = standard_chess_game()
+        self.assertEqual(Color.WHITE, game.current_player)
+        game.turn('e2', 'e4')
+        self.assertEqual(Color.BLACK, game.current_player)
+        game.turn('e7', 'e5')
+        self.assertEqual(Color.WHITE, game.current_player)
+        game.turn('f1', 'b5')
+        self.assertEqual(Color.BLACK, game.current_player)
+        with self.assertRaises(InvalidMoveError):
+            game.turn('a8', 'a5')
+        self.assertEqual(Color.BLACK, game.current_player)
+        with self.assertRaises(UnsafeTurnError):
+            game.turn('d7', 'd6')
+        self.assertEqual(Color.BLACK, game.current_player)

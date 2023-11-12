@@ -49,24 +49,13 @@ class ChessBoard:
         self.figures.remove(pawn)
         
     def is_safe_move(self, figure, to):
-        # king is not going to stand under attack
-        if isinstance(figure, King):
-            king = figure
-            init_position = king.position
-            king.move(to)
-            if king.checked(self.figures):
-                king.move(init_position)
-                return False
-            king.move(init_position)
-        # figure is not opening king for attack
-        else:
-            init_position = figure.position
-            ally_king = self.king(figure.color)
-            figure.move(to)
-            if ally_king.checked(self.figures):
-                figure.move(init_position)
-                return False
+        init_position = figure.position
+        ally_king = self.king(figure.color)
+        figure.move(to)
+        if ally_king.checked(self.figures):
             figure.move(init_position)
+            return False
+        figure.move(init_position)
 
         return True
 

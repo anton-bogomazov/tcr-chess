@@ -23,13 +23,14 @@ class King(ChessFigure):
     def castle(self, figures, to):
         if self.touched:
             raise CastlingNotPossibleError('king is touched')
-        if self.get_castling_rook(figures, to) is None or self.get_castling_rook(figures, to).touched:
+        castling_rook = get_castling_rook(figures, to)
+        if castling_rook is None or castling_rook.touched:
             raise CastlingNotPossibleError('rook is touched or moved')
         if self.is_castling_blocked(figures, to):
             raise CastlingNotPossibleError('castling blocked by figures')
         
         self.move(to)
-        self.get_castling_rook(figures, to).castle(to)
+        castling_rook.castle(to)
 
     def is_castling_blocked(self, figures, to):
         from_literal, from_numeral = self.position
@@ -52,19 +53,20 @@ class King(ChessFigure):
 
         return False
 
-    def get_castling_rook(self, figures, to):
-        if to == ('g', 1):
-            return cell(figures, *('h', 1))
-        if to == ('c', 1):
-            return cell(figures, *('a', 1))
-        if to == ('g', 8):
-            return cell(figures, *('h', 8))
-        if to == ('c', 8):
-            return cell(figures, *('a', 8))
-
     def notation(self):
         return 'K'
 
     def symbol(self):
         return '\u2654' if self.color == Color.WHITE else '\u265A'
+       
             
+def get_castling_rook(figures, to):
+    if to == ('g', 1):
+        return cell(figures, *('h', 1))
+    if to == ('c', 1):
+        return cell(figures, *('a', 1))
+    if to == ('g', 8):
+        return cell(figures, *('h', 8))
+    if to == ('c', 8):
+        return cell(figures, *('a', 8))
+    

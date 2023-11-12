@@ -27,7 +27,10 @@ class InconsistentStateError(Exception):
         
 
 class OutOfBoardError(Exception):
-    ...
+    def __init__(self):
+        super().__init__(self, 'Position is out of the board')
+
 
 class UnsafeTurnError(Exception):
-    ...
+    def __init__(self):
+        super().__init__(self, 'That turn is putting your king under attack')

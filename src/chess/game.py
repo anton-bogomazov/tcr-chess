@@ -36,8 +36,17 @@ class ChessGame:
         self.pass_turn()
 
     def move_figure(self, fr, to):
-        self.board.move(fr, to)
+        try:
+            self.board.move(fr, to)
+        except UnsafeTurnError:
+            if self.current_player == self.checked_player:
+                self.checkmate = True
+            else:
+                raise UnsafeTurnError
 
+    def checkmate(self):
+        self.checkmate = True
+        raise CheckmateError()
         
     def update_check_condition(self):
         if self.current_player == self.checked_player:

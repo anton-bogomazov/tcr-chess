@@ -48,8 +48,8 @@ class Gui:
             if clicked_cell != self.selected_cell:
                 try:
                     self.game.turn(self.selected_cell, clicked_cell)
-                except Exception:
-                    ...
+                except Exception as e:
+                    print(f'Error: {e}')
                 self.selected_cell = clicked_cell
 
             self.selected_cell = None

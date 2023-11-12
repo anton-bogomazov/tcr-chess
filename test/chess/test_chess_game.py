@@ -115,9 +115,9 @@ class ChessGameTest(unittest.TestCase):
         game.turn('c3', 'b5')
         game.turn('a6', 'a5')
         game.turn('b5', 'c7')
-        with self.assertRaises(UnsafeTurnError):
+        with self.assertRaises(CheckmateError):
             game.turn('a5', 'a4')
-        self.assertEqual(Color.BLACK, game.checked_player)
+        self.assertEqual(True, game.checkmate)
 
     def test_king_can_be_checked(self):
         game = standard_chess_game()

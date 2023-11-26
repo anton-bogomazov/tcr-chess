@@ -4,8 +4,6 @@ from src.ui.gui import Gui
 from src.ui.gui_driver import GuiDriver
 
 
-# once checked king cant castle
-# implement en passant capturing
 def main():
     game = standard_chess_game()
     mode = 'gui'

@@ -17,10 +17,11 @@ Todo:
 - [x] Figures' moves logic
 - [x] Game observer
 - [x] Castling
-- [ ] Approval tests
+- [x] Approval tests
 - [x] Restrict jumping over figures
 - [x] Game runner and GUI
-- [ ] Better GUI
+- [x] More informative GUI
+- [] <Rules> Implement en passant capturing
 
 What I like about TCR:
 - Although rolling back the changes was frustrating, it provided a sense of safety.

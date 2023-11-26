@@ -24,7 +24,9 @@ class Gui:
     def frame(self):
         for event in pygame.event.get():
             self.handle_event(event)
+        self.refresh()
 
+    def refresh(self):
         white = (255, 255, 255)
         self.screen.fill(white)
         self.draw_board()

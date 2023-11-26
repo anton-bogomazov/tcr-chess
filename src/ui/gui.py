@@ -3,6 +3,7 @@ import sys
 from src.chess.error import InconsistentStateError
 from src.chess.figures.color import Color
 
+
 class Gui:
     def __init__(self, chess_game):
         self.game = chess_game
@@ -10,7 +11,7 @@ class Gui:
         self.board_size = 8
         self.selected_cell = None
         self.running = True
-        self.window_width = 400
+        self.window_width = 440
         self.screen = pygame.display.set_mode((self.window_width, self.window_width))
         pygame.init()
         pygame.display.set_caption('Chess GUI')
@@ -32,20 +33,26 @@ class Gui:
         self.draw_board()
         self.draw_figures()
         if self.game.finished():
-            pygame.draw.rect(self.screen, (255, 255, 0), (0, 0, self.window_width, self.window_width))
+            self.draw_checkmate_sign()
         pygame.display.flip()
-        
+
+    def draw_checkmate_sign(self):
+        font = pygame.font.Font(None, 72)
+        text = font.render("Checkmate!", True, (255, 0, 0))  # Red text
+        text_rect = text.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
+        self.screen.blit(text, text_rect)
+
     def handle_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             self.handle_click(*event.pos)
-                
+
     def handle_click(self, x, y):
         col = x // self.cell_width
         row = y // self.cell_width
         clicked_cell = (chr(col + ord('a')), 8 - row)
-        
+
         if self.selected_cell is None:
             self.selected_cell = clicked_cell
         else:
@@ -57,8 +64,7 @@ class Gui:
                 self.selected_cell = clicked_cell
 
             self.selected_cell = None
-        
-        
+
     def draw_board(self):
         def color(col, row):
             cell_white = (216, 216, 216)
@@ -68,9 +74,29 @@ class Gui:
         def draw_cell(color, rectangle_props):
             pygame.draw.rect(self.screen, color, rectangle_props)
 
+        # Define the characters for column labels
+        column_labels = "ABCDEFGH"
+
         for row in range(self.board_size):
             for col in range(self.board_size):
+                # Draw the cell color
                 draw_cell(color(col, row), self.rectangle(col, row))
+
+                # Draw the column labels
+                if row == 0:
+                    font = pygame.font.Font(None, 36)
+                    text = font.render(column_labels[col], True, (0, 0, 0))
+                    text_rect = text.get_rect(center=(self.cell_width * (col + 0.5), self.cell_width * 0.5))
+                    text_rect.top += self.cell_width * self.board_size - 10
+                    self.screen.blit(text, text_rect)
+
+                # Draw the row labels
+                if col == 0:
+                    font = pygame.font.Font(None, 36)
+                    text = font.render(str(self.board_size - row), True, (0, 0, 0))
+                    text_rect = text.get_rect(center=(self.cell_width * 0.5, self.cell_width * (row + 0.5)))
+                    text_rect.left += self.cell_width * self.board_size - 10
+                    self.screen.blit(text, text_rect)
 
                 figure_highlight_color = (0, 0, 255)  # Green
                 move_highlight_color = (0, 255, 0)  # Blue

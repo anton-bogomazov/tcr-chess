@@ -11,8 +11,10 @@ class ChessBoard:
     def move_figure(self, fr, to):
         figure_to_move = self.cell(*fr)
         dest_cell_content = self.cell(*to)
+
+        print(f'Moving {type(figure_to_move).__name__} from {fr} to {to}')
         
-        if is_castling_move(fr, to):
+        if isinstance(figure_to_move, King) and is_castling_move(fr, to):
             figure_to_move.castle(self.figures, to)
         elif dest_cell_content is None:
             self.__moving(to, figure_to_move)
@@ -38,7 +40,7 @@ class ChessBoard:
 
     def __moving(self, to, figure_to_move):
         if to not in figure_to_move.turns(self.figures):
-            raise InvalidMoveError()
+            raise InvalidMoveError(f'Cannot move {figure_to_move} to {to} occupied by {cell(self.figures, *to)}')
         if not self.__is_safe_for_king(figure_to_move, to):
             raise UnsafeTurnError()
         figure_to_move.move(to)
@@ -49,7 +51,7 @@ class ChessBoard:
         dest_figure = self.cell(*to)
         if dest_figure.color != figure_to_move.color:
             if to not in figure_to_move.turns(self.figures):
-                raise InvalidMoveError()
+                raise InvalidMoveError(f'Cannot move {figure_to_move} to {to} occupied by {cell(self.figures, *to)}')
             self.figures.remove(dest_figure)
             figure_to_move.move(to)
             if figure_to_move.is_transformable_pawn():

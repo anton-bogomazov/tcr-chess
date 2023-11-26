@@ -47,7 +47,6 @@ class ChessGame:
     def __make_turn(self, fr, to):
         try:
             self.__board.move_figure(fr, to)
-            print(f'Moving figure from {fr} to {to}')
         except UnsafeTurnError:
             # if there is no turn (aka checkmate) make any turn to finish the game
             if self.current_player != self.__checked_player:

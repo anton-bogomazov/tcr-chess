@@ -11,9 +11,10 @@ class OpponentsTurnError(Exception):
     def __init__(self):
         super().__init__(self, 'it is not your turn')
 
+
 class InvalidMoveError(Exception):
     def __init__(self, reason=''):
-        super().__init__(self, f'this move is not allowed ${reason}')
+        super().__init__(self, f'this move is not allowed {reason}')
 
 
 class CastlingNotPossibleError(Exception):

@@ -21,7 +21,7 @@ Todo:
 - [x] Restrict jumping over figures
 - [x] Game runner and GUI
 - [x] More informative GUI
-- [ ] <Rules> Implement en passant capturing
+- [x] Rules: Implement en passant capturing
 
 What I like about TCR:
 - Although rolling back the changes was frustrating, it provided a sense of safety.

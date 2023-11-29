@@ -1,5 +1,6 @@
 from src.chess.figures.chess_figure import ChessFigure
 from src.chess.figures.king import King
+from src.chess.figures.pawn import Pawn
 from src.chess.error import InvalidMoveError, UnsafeTurnError, InconsistentStateError
 from src.chess.board_utils import cell
 
@@ -16,6 +17,8 @@ class ChessBoard:
         
         if isinstance(figure_to_move, King) and is_castling_move(fr, to):
             figure_to_move.castle(self.figures, to)
+        elif isinstance(figure_to_move, Pawn) and figure_to_move.has_en_passant(self.figures, to):
+            self.__en_passant_take(to, figure_to_move)
         elif dest_cell_content is None:
             self.__moving(to, figure_to_move)
         elif isinstance(dest_cell_content, ChessFigure):
@@ -46,7 +49,12 @@ class ChessBoard:
         figure_to_move.move(to)
         if figure_to_move.is_transformable_pawn():
             self.__transform_pawn(figure_to_move)
-        
+
+    def __en_passant_take(self, to, figure_to_move):
+        dest_figure = figure_to_move.get_en_passant(self.figures, to)
+        self.figures.remove(dest_figure)
+        figure_to_move.move(to)
+
     def __take(self, to, figure_to_move):
         dest_figure = self.cell(*to)
         if dest_figure.color != figure_to_move.color:

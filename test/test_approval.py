@@ -35,7 +35,7 @@ class ApprovalTest(unittest.TestCase):
     def test_play_game(self):
         game_provider = ChessGameProvider()
 
-        for (game_moves, winner) in game_provider.get_n(10):
+        for (game_moves, winner) in game_provider.get_n(100):
             game = standard_chess_game()
             print(game_moves)
             for move in game_moves:

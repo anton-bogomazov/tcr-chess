@@ -7,6 +7,15 @@ from src.chess.error import InconsistentStateError
 
 class Pawn(ChessFigure):
 
+    long_turn = False
+
+    def move(self, to):
+        if self.long_turn:
+            self.long_turn = False
+        if abs(self.position[1] - to[1]) == 2:
+            self.long_turn = True
+        super(Pawn, self).move(to)
+
     # ugly
     def turns(self, figures):
         whites = {
@@ -40,6 +49,45 @@ class Pawn(ChessFigure):
 
         return set(list(filter(free_cell, non_none(moving_turns))) +\
                 list(filter(opponent_occupied, non_none(attacking_turns))))
+
+    def has_en_passant(self, figures, to):
+        return self.get_en_passant(figures, to) is not None
+
+    # pile of shi~
+    def get_en_passant(self, figures, to):
+        def is_passant_fig(fig):
+            if fig is None or fig.color == self.color or not isinstance(fig, Pawn):
+                return False
+            return fig.long_turn
+
+        r_passant_pos = position(self.position, [right])
+        l_passant_pos = position(self.position, [left])
+        right_passant = None
+        try:
+            right_passant = cell(figures, *r_passant_pos)
+        except:
+            ...
+        left_passant = None
+        try:
+            left_passant = cell(figures, *l_passant_pos)
+        except:
+            ...
+        def non_none(xs):
+            return [x for x in xs if x is not None]
+
+        diff = ord(self.position[0]) - ord(to[0])
+        passants = []
+        if diff < 0:
+            passants.append(right_passant)
+        elif diff > 0:
+            passants.append(left_passant)
+
+        passants = list(filter(is_passant_fig, non_none(passants)))
+        if len(passants) == 2:
+            raise InconsistentStateError('cannot exists 2 passants')
+        if len(passants) == 0:
+            return None
+        return passants[0]
 
     def transform_to(self, fig_class=Queen):
         if not self.is_transformable_pawn():
